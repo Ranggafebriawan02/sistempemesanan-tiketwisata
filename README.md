@@ -1,39 +1,48 @@
-# SISTEM PEMESANAN PAKET WISATA BERBASIS WEB — PT. PUMA STAR JAYA
-> **Tugas Ujian Tengah Semester (UTS) — Basis Data Lanjut**  
-> Program Studi S1 Ilmu Komputer — Universitas Muhammadiyah Metro  
-> Pengembang: **Rangga Febriawan**
+<p align="center">
+  <img src="public/docs_images/image1.png" width="180" alt="Logo UM Metro">
+</p>
 
----
+<h1 align="center">LAPORAN UJIAN TENGAH SEMESTER (UTS)<br>MATA KULIAH: BASIS DATA LANJUT</h1>
 
-## 📑 LAPORAN UJIAN TENGAH SEMESTER (UTS)
+<p align="center">
+  <strong>JUDUL TUGAS:</strong><br>
+  <strong>PERANCANGAN SISTEM INFORMASI PEMESANAN PAKET WISATA PADA PT. PUMA STAR JAYA BERBASIS WEBSITE</strong>
+</p>
 
-### **JUDUL TUGAS:**
-**IMPLEMENTASI DAN PERANCANGAN SISTEM INFORMASI PEMESANAN PAKET WISATA BERBASIS WEB PADA PT. PUMA STAR JAYA MENGGUNAKAN BASIS DATA RELASIONAL**
+<p align="center">
+  <strong>Disusun Oleh:</strong> Rangga Febriawan<br>
+  <strong>Mata Kuliah:</strong> Basis Data Lanjut<br>
+  <strong>Program Studi:</strong> S1 Ilmu Komputer<br>
+  <strong>Dosen Pengampu:</strong> Dedi Irawan S.Kom M.Kom<br><br>
+  <strong>PROGRAM STUDI ILMU KOMPUTER</strong><br>
+  <strong>FAKULTAS ILMU KOMPUTER</strong><br>
+  <strong>UNIVERSITAS MUHAMMADIYAH METRO</strong><br>
+  <strong>TAHUN 2026/2027</strong>
+</p>
 
 ---
 
 ## BAB I: PENDAHULUAN
 
 ### 1.1 Latar Belakang Masalah
-PT. Puma Star Jaya merupakan biro perjalanan wisata (*tour & travel*) yang berdiri sejak 10 Agustus 2016 di Kota Metro, Lampung. Perusahaan ini melayani perjalanan wisata nusantara, *study tour*, kunjungan industri, KKL, hingga ziarah Wali Songo dengan armada bus pariwisata.
+PT. Puma Star Jaya merupakan biro perjalanan wisata (*tour & travel*) yang berdiri sejak 10 Agustus 2016 di Kota Metro, Lampung. Perusahaan ini melayani perjalanan wisata nusantara, *study tour*, kunjungan industri, KKL, hingga ziarah Wali Songo dengan armada bus pariwisata. Dalam sistem operasional sebelumnya, PT. Puma Star Jaya menghadapi sejumlah kendala terkait pengelolaan data:
 
-Dalam sistem operasional sebelumnya, PT. Puma Star Jaya menghadapi sejumlah kendala terkait pengelolaan data:
 1. **Pemesanan Manual:** Calon konsumen harus memesan melalui pesan singkat (WhatsApp) atau datang langsung ke kantor, menyebabkan antrean dan risiko salah pencatatan jadwal.
-2. **Pengelolaan Data Tercecer:** Data calon pelanggan, paket wisata, dan riwayat pesanan dicatat terpisah menggunakan spreadsheet Microsoft Excel, yang rentan terhadap kehilangan data, redundansi, dan inkonsistensi.
-3. **Pencatatan Pembayaran:** Bukti pembayaran tunai maupun transfer diverifikasi secara konvensional tanpa adanya validasi data terpusat.
+2. **Pengelolaan data tercecer:** Data calon pelanggan, paket wisata, dan riwayat pesanan dicatat terpisah menggunakan spreadsheet Microsoft Excel, yang rentan terhadap kehilangan data, redundansi, dan inkonsistensi.
+3. **Pencatatan Pembayaran:** Bukti pembayaran tunai maupun transfer diverifikasi secara konvensional tanpa adanya validasi data terpusat, menyulitkan pembuatan rekap kuitansi.
 4. **Keterlambatan Pelaporan:** Pembuatan laporan pemesanan dan laporan keuangan berkala untuk Direktur memerlukan rekapitulasi manual yang memakan waktu dan berisiko salah hitung.
 
-Oleh karena itu, dibangun **Sistem Informasi Pemesanan Paket Wisata Berbasis Website** yang memanfaatkan basis data relasional (RDBMS) terstruktur agar integrasi data dari pemesanan hingga transaksi keuangan berjalan efisien, aman, dan transparan.
+Oleh karena itu, diperlukan perancangan dan implementasi Sistem Informasi Pemesanan Paket Wisata Berbasis Website yang memanfaatkan basis data relasional (RDBMS) terstruktur agar integrasi data dari pemesanan hingga transaksi keuangan berjalan efisien, aman, dan transparan.
 
 ### 1.2 Rumusan Masalah
-1. Bagaimana merancang skema basis data relasional yang mampu mengelola data master paket wisata, pemesanan, dan transaksi keuangan secara terintegrasi?
-2. Bagaimana mengimplementasikan hak akses bertingkat (*Role-Based Access Control*) untuk 4 aktor (Admin, Bendahara, Direktur, dan Konsumen)?
-3. Bagaimana mengintegrasikan sistem pemesanan website dengan mekanisme pembayaran online otomatis (Payment Gateway Midtrans)?
+Bagaimana merancang sistem informasi pemesanan paket wisata pada PT. Puma Star Jaya berbasis website?
 
 ### 1.3 Tujuan Proyek
-1. Merancang basis data relasional yang ternormalisasi untuk sistem pemesanan tiket wisata.
-2. Membangun aplikasi web menggunakan framework Laravel dan MySQL yang mencakup proses CRUD paket, reservasi tiket, validasi pembayaran otomatis, pencetakan kuitansi, dan rekapitulasi laporan.
-3. Mengurangi redundansi data dan meningkatkan integritas data transaksi pada PT. Puma Star Jaya.
+Tujuan dilakukan penelitian ini untuk merancang sistem informasi pemesanan paket wisata pada PT. Puma Star Jaya berbasis web.
+
+### 1.4 Pembatasan Masalah
+* User yang terlibat adalah staff admin, konsumen, bendahara, dan direktur.
+* Sistem informasi dibangun menggunakan Bahasa pemrograman PHP dengan Framework Laravel untuk mengelola database menggunakan MySQL dan phpMyAdmin. XAMPP digunakan untuk web server, teks editor menggunakan Visual Studio Code, dan Google Chrome untuk menampilkan hasil sistem.
 
 ---
 
@@ -41,11 +50,11 @@ Oleh karena itu, dibangun **Sistem Informasi Pemesanan Paket Wisata Berbasis Web
 
 ### 2.1 Entitas dan Atribut
 Sistem memiliki 5 entitas data utama:
-1. **`users`** : Menyimpan identitas pengguna dan level hak akses (*Admin, Bendahara, Direktur, Konsumen*).
-2. **`paket`** : Menyimpan katalog perjalanan wisata (judul, deskripsi, destinasi, fasilitas, jenis bus, harga, foto).
-3. **`pemesanan`** : Menyimpan data reservasi tiket (kode pemesanan, relasi pengguna, relasi paket, tanggal keberangkatan, jumlah peserta/pax, harga total, snap token).
-4. **`transaksi`** : Menyimpan catatan pembayaran (relasi pemesanan, status *menunggu/valid/ditolak*, metode bayar, bukti transfer, catatan bendahara).
-5. **`kupon`** : Menyimpan voucher potongan harga promosi.
+* **`users`** : Menyimpan identitas pengguna dan level hak akses (Admin, Bendahara, Direktur, Konsumen).
+* **`paket`** : Menyimpan katalog perjalanan wisata (judul, deskripsi, destinasi, fasilitas, jenis bus, harga, foto).
+* **`pemesanan`** : Menyimpan data reservasi tiket (kode pemesanan, relasi pengguna, relasi paket, tanggal keberangkatan, jumlah peserta/pax, harga total, snap token).
+* **`transaksi`** : Menyimpan catatan pembayaran (relasi pemesanan, status menunggu/valid/ditolak, metode bayar, bukti transfer, catatan bendahara).
+* **`kupon`** : Menyimpan voucher potongan harga promosi.
 
 ### 2.2 Relasi Antar Tabel (Entity Relationship)
 * **One-to-Many (`users` &rarr; `pemesanan`)**: Satu konsumen dapat membuat banyak pemesanan tiket wisata.
@@ -54,7 +63,6 @@ Sistem memiliki 5 entitas data utama:
 * **One-to-Many (`users` &rarr; `kupon`) & Many-to-One (`pemesanan` &rarr; `kupon`)**: Satu kupon dapat digunakan untuk memotong total biaya pemesanan.
 
 ### 2.3 Skema Tabel Database (DDL MySQL)
-
 ```sql
 -- 1. Tabel Users
 CREATE TABLE `users` (
@@ -146,91 +154,150 @@ CREATE TABLE `transaksi` (
 ## BAB III: IMPLEMENTASI SISTEM DAN FITUR
 
 ### 3.1 Arsitektur Sistem
-* **Backend:** PHP 8.2+ / PHP 8.5 + Framework Laravel 12 (Arsitektur Model-View-Controller / MVC).
-* **Database:** MySQL 8.0 dengan *Foreign Key Constraints* (Integritas referensial `CASCADE` dan `SET NULL`).
+Sistem Informasi Pemesanan Paket Wisata pada PT. Puma Star Jaya dikembangkan menggunakan teknologi berbasis web. Sistem ini dirancang untuk mengintegrasikan proses pengelolaan paket wisata, pemesanan, pembayaran, hingga penyajian laporan dalam satu aplikasi.
+
+Dalam proses pengembangannya, sistem menggunakan arsitektur Model-View-Controller (MVC) dengan framework Laravel. Adapun teknologi yang digunakan meliputi:
+* **Backend:** PHP 8.2 + Framework Laravel 12 (Arsitektur Model-View-Controller / MVC).
+* **Database:** MySQL 8.0 dengan Foreign Key Constraints (Integritas referensial `CASCADE` dan `SET NULL`).
 * **Frontend:** Blade Templating Engine + Vanilla CSS Modern + JavaScript Responsif.
 * **Payment Gateway:** Midtrans Snap SDK (QRIS, GoPay, ShopeePay, Virtual Account BCA/Mandiri/BRI/BNI).
 
 ### 3.2 Pembagian Hak Akses Pengguna (RBAC)
+Sistem menerapkan pembagian hak akses berdasarkan *Role-Based Access Control* (RBAC). Pembagian ini bertujuan agar setiap pengguna dapat mengakses fitur sesuai dengan tugas dan tanggung jawabnya.
 
-1. **Staff Admin (Pengelola Master Data):**
-   * Mengelola katalog paket wisata (Create, Read, Update, Delete data paket & foto).
-   * Manajemen akun pengguna (mengaktifkan/menonaktifkan akun, reset password).
-   * Memantau seluruh pemesanan yang masuk beserta rekap laporan.
+Adapun pembagian hak akses dalam sistem adalah sebagai berikut:
+* **3.2.1 Admin:** Admin memiliki hak akses untuk mengelola data utama sistem. Fitur yang disediakan meliputi pengelolaan paket wisata, pengelolaan akun pengguna, serta pemantauan data pemesanan yang masuk ke dalam sistem.
+* **3.2.2 Bendahara:** Bendahara bertanggung jawab terhadap pengelolaan transaksi pembayaran. Hak akses bendahara meliputi pemeriksaan bukti pembayaran, validasi atau penolakan pembayaran, pencetakan kuitansi, serta pengelolaan laporan pembayaran dan pemesanan.
+* **3.2.3 Direktur:** Direktur memiliki hak akses untuk memantau informasi dan laporan yang dihasilkan sistem. Fitur yang tersedia meliputi pemantauan statistik pemesanan, informasi pembayaran, serta pencetakan laporan berdasarkan rentang tanggal tertentu.
+* **3.2.4 Konsumen:** Konsumen merupakan pengguna yang melakukan pemesanan paket wisata melalui website. Konsumen dapat melakukan registrasi akun, login, melihat katalog paket wisata, melakukan pemesanan, memilih metode pembayaran, serta memantau status pemesanan yang telah dilakukan.
 
-2. **Bendahara (Verifikasi & Keuangan):**
-   * Memeriksa bukti pembayaran yang masuk.
-   * Melakukan validasi pembayaran (*Terima & Validasi* atau *Tolak dengan Catatan*).
-   * Mencetak kuitansi pembayaran resmi bertanda tangan dan stempel biro.
-   * Menghasilkan rekap Laporan Pembayaran dan Pemesanan per periode.
+---
 
-3. **Direktur (Pimpinan / Evaluasi Eksekutif):**
-   * Memantau statistik performa penjualan biro melalui dashboard ringkas.
-   * Meninjau dan mencetak Laporan Pemesanan & Pembayaran berdasarkan filter rentang tanggal.
+### 3.3 Hasil Implementasi Antarmuka Sistem
+Hasil implementasi antarmuka merupakan tampilan dari sistem informasi pemesanan paket wisata berbasis web yang telah dikembangkan berdasarkan hasil analisis dan perancangan sebelumnya. Antarmuka sistem dirancang untuk memudahkan pengguna dalam mengakses berbagai fitur sesuai dengan hak akses masing-masing.
 
-4. **Konsumen (Pelanggan / Pemesan):**
-   * Mendaftar akun dan login mandiri (dilengkapi fitur *Quick Role Login* untuk demo).
-   * Menjelajahi katalog destinasi wisata dan galeri foto tempat wisata.
-   * Melakukan pemesanan tiket online (memilih tanggal berangkat, jumlah rombongan/pax).
-   * Melakukan pembayaran instan real-time via Midtrans (tanpa perlu kirim bukti fisik/struk).
-   * Memantau status pesanan secara langsung (*Belum Bayar &rarr; Pembayaran Valid / Lunas*).
+Implementasi antarmuka mencakup halaman utama, halaman autentikasi, pengelolaan paket wisata, proses pemesanan, pembayaran, serta pengelolaan data dan laporan. Berikut merupakan hasil implementasi dari masing-masing halaman pada sistem informasi pemesanan paket wisata PT. Puma Star Jaya.
+
+#### Halaman Konsumen
+
+##### 3.3.1 Halaman Utama
+![Halaman Utama](public/docs_images/image2.png)
+
+##### 3.3.2 Halaman Login
+![Halaman Login](public/docs_images/image3.png)
+
+##### 3.3.3 Halaman Registrasi
+![Halaman Registrasi](public/docs_images/image4.png)
+
+##### 3.3.4 Halaman Katalog Paket Wisata
+![Halaman Katalog Paket Wisata](public/docs_images/image5.png)
+
+##### 3.3.5 Halaman Detail Paket Wisata
+![Halaman Detail Paket Wisata](public/docs_images/image6.png)
+
+##### 3.3.6 Halaman Form Pemesanan
+![Halaman Form Pemesanan](public/docs_images/image7.png)
+
+##### 3.3.7 Halaman Pembayaran
+![Halaman Pembayaran](public/docs_images/image8.png)
+
+##### 3.3.8 Halaman Riwayat Pembayaran
+![Halaman Riwayat Pembayaran](public/docs_images/image9.png)
+
+---
+
+#### Halaman Admin
+
+##### 3.3.9 Halaman Dashboard Admin
+![Halaman Dashboard Admin](public/docs_images/image10.png)
+
+##### 3.3.10 Halaman Data Paket Wisata
+![Halaman Data Paket Wisata](public/docs_images/image11.png)
+
+##### 3.3.11 Halaman Tambah/Edit Paket
+![Halaman Tambah/Edit Paket](public/docs_images/image12.png)
+
+##### 3.3.12 Halaman Manajemen Pengguna
+![Halaman Manajemen Pengguna](public/docs_images/image13.png)
+
+##### 3.3.13 Halaman Data Pemesanan
+![Halaman Data Pemesanan](public/docs_images/image14.png)
+
+---
+
+#### Halaman Bendahara
+
+##### 3.3.14 Halaman Dashboard Bendahara
+![Halaman Dashboard Bendahara](public/docs_images/image15.png)
+
+##### 3.3.15 Halaman Data Pembayaran
+![Halaman Data Pembayaran](public/docs_images/image16.png)
+
+##### 3.3.16 Halaman Detail Verifikasi Pembayaran
+![Halaman Detail Verifikasi Pembayaran](public/docs_images/image17.png)
+
+##### 3.3.17 Halaman Cetak Kwitansi
+![Halaman Cetak Kwitansi](public/docs_images/image18.png)
+
+---
+
+#### Halaman Direktur
+
+##### 3.3.18 Halaman Dashboard Direktur
+![Halaman Dashboard Direktur](public/docs_images/image19.png)
+
+##### 3.3.19 Halaman Laporan Pemesanan
+![Halaman Laporan Pemesanan](public/docs_images/image20.png)
+
+##### Halaman Laporan Pembayaran
+![Halaman Laporan Pembayaran](public/docs_images/image21.png)
+
+---
+
+#### Implementasi Basis Data
+![Relasi Basis Data](public/docs_images/image22.png)
 
 ---
 
 ## BAB IV: PENGUJIAN SISTEM (TESTING)
 
-Pengujian dilakukan dengan metode **Black Box Testing** untuk menguji fungsionalitas sistem basis data dan antarmuka:
+### 4.1 Metode Pengujian
+Pengujian sistem dilakukan untuk mengetahui apakah seluruh fungsi yang terdapat pada Sistem Informasi Pemesanan Paket Wisata PT. Puma Star Jaya dapat berjalan sesuai dengan kebutuhan yang telah ditentukan. Metode pengujian yang digunakan adalah Black Box Testing.
 
-| No | Modul / Kasus Uji | Skenario Pengujian | Hasil yang Diharapkan | Status |
-|---|---|---|---|:---:|
-| 1 | Registrasi Konsumen | Menginputkan data konsumen baru dengan username unik | Akun tersimpan di tabel `users` dengan level `konsumen` | **Berhasil** |
-| 2 | Pemesanan Tiket | Memilih paket wisata dan menginputkan 3 pax | Total harga dihitung otomatis dan tersimpan di tabel `pemesanan` | **Berhasil** |
-| 3 | Pembayaran Midtrans | Menekan tombol "Bayar Sekarang via Midtrans" | Pop-up pembayaran muncul dan status langsung sinkron otomatis | **Berhasil** |
-| 4 | Validasi Transaksi | Menguji transaksi pembayaran lewat simulasi Midtrans | Status transaksi berubah menjadi `valid`, pesanan lunas | **Berhasil** |
-| 5 | Cetak Kuitansi & Laporan | Mencetak kuitansi dan filter tanggal laporan | Tampilan cetak PDF/kuitansi muncul lengkap dengan logo dan tanda tangan | **Berhasil** |
+Black Box Testing merupakan metode pengujian perangkat lunak yang berfokus pada pengujian fungsi sistem berdasarkan masukan (*input*) dan keluaran (*output*) yang dihasilkan, tanpa memeriksa struktur kode program secara langsung.
+
+Pengujian dilakukan dengan mencoba beberapa fungsi utama sistem, mulai dari proses registrasi konsumen, pemesanan paket wisata, pembayaran melalui Midtrans, pengunggahan bukti pembayaran manual, validasi pembayaran oleh bendahara, hingga pencetakan kuitansi dan laporan.
+
+### 4.2 Skenario Pengujian
+Skenario pengujian disusun berdasarkan fitur utama yang terdapat pada Sistem Informasi Pemesanan Paket Wisata PT. Puma Star Jaya. Setiap pengujian dilakukan dengan memberikan masukan pada sistem, kemudian mengamati hasil yang dihasilkan untuk mengetahui kesesuaian fungsi dengan kebutuhan yang telah dirancang.
+
+Berikut merupakan tabel skenario pengujian sistem menggunakan metode Black Box Testing.
+
+#### Tabel 4.1 Skenario Pengujian Sistem
+![Tabel 4.1 Skenario Pengujian Sistem](public/docs_images/image23.png)
+
+### 4.3 Hasil Pengujian
+Berdasarkan skenario pengujian yang telah disusun, dilakukan pengujian terhadap fungsi-fungsi utama sistem. Pengujian bertujuan untuk memastikan bahwa setiap fitur dapat menghasilkan keluaran sesuai dengan proses yang telah dirancang.
+
+Hasil pengujian menunjukkan bahwa fungsi registrasi konsumen, pemesanan paket wisata, pembayaran, validasi transaksi oleh bendahara, serta pencetakan kuitansi dan laporan dapat dijalankan sesuai dengan kebutuhan sistem.
+
+Adapun rekapitulasi hasil pengujian sistem dapat dilihat pada tabel berikut.
+
+#### Tabel 4.2 Hasil Pengujian Sistem
+![Tabel 4.2 Hasil Pengujian Sistem](public/docs_images/image24.png)
+
+Berdasarkan hasil pengujian menggunakan metode Black Box Testing, dapat disimpulkan bahwa fungsi-fungsi utama pada Sistem Informasi Pemesanan Paket Wisata PT. Puma Star Jaya telah berjalan sesuai dengan hasil yang diharapkan. Pengujian ini menunjukkan bahwa sistem dapat mendukung proses pemesanan paket wisata, pengelolaan pembayaran, validasi transaksi, serta penyajian laporan.
 
 ---
 
 ## BAB V: KESIMPULAN
 
-1. Perancangan basis data relasional pada PT. Puma Star Jaya berhasil menormalisasi data dari format manual (Excel) menjadi 5 entitas terstruktur (`users`, `paket`, `pemesanan`, `transaksi`, `kupon`) dengan integritas referensial yang kuat.
-2. Sistem informasi berbasis web ini telah berhasil mengotomasi proses bisnis biro perjalanan: mulai dari pemesanan paket oleh konsumen, pembayaran otomatis via Payment Gateway Midtrans, validasi bendahara, hingga penerbitan kuitansi dan laporan manajerial bagi direktur.
-3. Efisiensi pencatatan data meningkat, mengurangi risiko manipulasi atau kehilangan data, dan mempermudah pelaporan keuangan secara akurat dan transparan.
+### 5.1 Kesimpulan
+Berdasarkan hasil analisis, perancangan, implementasi, dan pengujian, Sistem Informasi Pemesanan Paket Wisata pada PT. Puma Star Jaya berhasil dikembangkan menggunakan Laravel 12 dan MySQL. Sistem ini memiliki fitur pengelolaan paket wisata, pemesanan, pembayaran melalui Midtrans maupun transfer manual, verifikasi pembayaran, pencetakan kuitansi, serta penyajian laporan. Sistem juga menerapkan pembagian hak akses bagi Admin, Bendahara, Direktur, dan Konsumen. Pengujian menggunakan metode Black Box Testing dilakukan untuk memastikan fitur sistem berjalan sesuai dengan kebutuhan.
 
----
-
-## 🚀 Panduan Instalasi Lokal (Setup)
-
-1. **Clone Repository:**
-   ```bash
-   git clone https://github.com/Ranggafebriawan02/sistempemesanan-tiketwisata.git
-   cd sistempemesanan-tiketwisata
-   ```
-2. **Install Dependensi:**
-   ```bash
-   composer install
-   ```
-3. **Konfigurasi Environment (`.env`):**
-   Salin `.env.example` ke `.env` lalu sesuaikan konfigurasi database dan Midtrans:
-   ```env
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=puma_star_jaya
-   DB_USERNAME=root
-   DB_PASSWORD=
-
-   MIDTRANS_SERVER_KEY=your-midtrans-server-key-here
-   MIDTRANS_CLIENT_KEY=your-midtrans-client-key-here
-   MIDTRANS_IS_PRODUCTION=false
-   ```
-4. **Migrasi Database & Key:**
-   ```bash
-   php artisan key:generate
-   php artisan migrate
-   ```
-5. **Jalankan Aplikasi:**
-   ```bash
-   php artisan serve
-   ```
-   Buka browser di `http://127.0.0.1:8000`.
+### 5.2 Saran
+Berdasarkan hasil pengembangan sistem, beberapa saran yang dapat diberikan adalah:
+1. Menambahkan notifikasi otomatis untuk memberikan informasi kepada konsumen terkait status pemesanan dan pembayaran.
+2. Meningkatkan keamanan sistem, terutama dalam pengelolaan data pengguna dan transaksi pembayaran.
+3. Mengembangkan fitur laporan agar informasi yang disajikan lebih lengkap dan membantu perusahaan dalam mengambil keputusan.
+4. Melakukan pengujian dan pemeliharaan sistem secara berkala agar sistem tetap berjalan dengan baik.
