@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Diagrams PT Puma Star Jaya</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8fafc;
+    margin: 0;
+    padding: 20px;
+    color: #1e293b;
+  }
+  .diagram-container {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  h2 {
+    color: #0f766e;
+    border-bottom: 2px solid #0f766e;
+    padding-bottom: 8px;
+    margin-top: 0;
+    font-size: 20px;
+  }
+  .desc {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .mermaid {
+    display: flex;
+    justify-content: center;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>
+
+<div class="diagram-container" id="box-usecase">
+  <h2>1. Use Case Diagram</h2>
+  <p class="desc">Diagram interaksi antara 4 Aktor (Konsumen, Admin, Bendahara, Direktur) dengan sistem pemesanan tiket wisata PT. Puma Star Jaya.</p>
+  <div class="mermaid">
+flowchart LR
+    subgraph Aktor ["Aktor Pengguna"]
+        K["fa:fa-user Konsumen"]
+        A["fa:fa-user-shield Staff Admin"]
+        B["fa:fa-calculator Bendahara"]
+        D["fa:fa-user-tie Direktur"]
+    end
+
+    subgraph System ["Sistem Informasi Pemesanan Paket Wisata - PT. Puma Star Jaya"]
+        UC1([Registrasi Akun])
+        UC2([Login Akun])
+        UC3([Melihat Katalog & Detail Paket])
+        UC4([Melakukan Pemesanan Paket])
+        UC5([Pembayaran Otomatis Midtrans])
+        UC6([Melihat Status Pemesanan])
+        UC7([Kelola Paket Wisata CRUD])
+        UC8([Kelola Data Pengguna / User])
+        UC9([Monitoring Data Pemesanan])
+        UC10([Validasi Pembayaran])
+        UC11([Mencetak Kuitansi Resmi])
+        UC12([Laporan Pemesanan & Pembayaran])
+        UC13([Monitoring Statistik Eksekutif])
+    end
+
+    K --> UC1
+    K --> UC2
+    K --> UC3
+    K --> UC4
+    K --> UC5
+    K --> UC6
+
+    A --> UC2
+    A --> UC7
+    A --> UC8
+    A --> UC9
+    A --> UC12
+
+    B --> UC2
+    B --> UC9
+    B --> UC10
+    B --> UC11
+    B --> UC12
+
+    D --> UC2
+    D --> UC12
+    D --> UC13
+  </div>
+</div>
+
+<div class="diagram-container" id="box-activity">
+  <h2>2. Activity Diagram (Alur Pemesanan & Pembayaran)</h2>
+  <p class="desc">Alur aktivitas pemesanan tiket wisata oleh Konsumen hingga validasi sistem dan bendahara.</p>
+  <div class="mermaid">
+flowchart TD
+    startNode([Mulai]) --> A1[Konsumen Membuka Website]
+    A1 --> A2[Login ke Akun Konsumen]
+    A2 --> A3[Pilih Katalog Paket Wisata]
+    A3 --> A4[Klik 'Detail Paket' & 'Pesan Sekarang']
+    A4 --> A5[Isi Formulir: Tgl Berangkat, Jumlah Pax, Rombongan, No HP]
+    A5 --> A6{Formulir Lengkap?}
+    A6 -- Tidak --> A5
+    A6 -- Ya --> A7[Sistem Menyimpan Pemesanan & Menghitung Total Harga]
+    A7 --> A8[Masuk Halaman Pembayaran]
+    A8 --> A9[Klik 'Bayar Sekarang via Midtrans']
+    A9 --> A10[Sistem Request Snap Token ke Midtrans]
+    A10 --> A11[Tampil Pop-up Pembayaran Midtrans Snap]
+    A11 --> A12[Konsumen Memilih Saluran: QRIS / VA Bank / E-Wallet]
+    A12 --> A13{Pembayaran Berhasil?}
+    A13 -- Gagal / Batal --> A8
+    A13 -- Sukses --> A14[Midtrans Callback Mengirim Status Settlement]
+    A14 --> A15[Sistem Memperbarui Status Transaksi: VALID / LUNAS]
+    A15 --> A16[Bendahara Memeriksa Rekap & Cetak Kuitansi]
+    A16 --> endNode([Selesai])
+  </div>
+</div>
+
+<div class="diagram-container" id="box-flowchart">
+  <h2>3. Flowchart Sistem (Proses Transaksi & Validasi)</h2>
+  <p class="desc">Bagan alir logika alur transaksi pemesanan wisata hingga penerbitan kuitansi.</p>
+  <div class="mermaid">
+flowchart TD
+    F1([Start]) --> F2[/Input Username & Password/]
+    F2 --> F3{Autentikasi Akun?}
+    F3 -- Gagal --> F4[/Tampilkan Notifikasi Error/]
+    F4 --> F2
+    F3 -- Berhasil --> F5{Cek Hak Akses / Role}
+    
+    F5 -- Konsumen --> F6[/Pilih Paket & Input Data Pemesanan/]
+    F6 --> F7[Hitung: Total = Pax * Harga Paket - Kupon]
+    F7 --> F8[(Simpan ke Database Pemesanan)]
+    F8 --> F9[Panggil Midtrans Snap API]
+    F9 --> F10[/Bayar via QRIS / Virtual Account/]
+    F10 --> F11{Status Bayar Berhasil?}
+    F11 -- Tidak --> F12[Status: Belum Bayar]
+    F12 --> F10
+    F11 -- Ya --> F13[(Update Status Transaksi = VALID)]
+    F13 --> F14[/Tampilkan Status Lunas ke Konsumen/]
+
+    F5 -- Bendahara --> F15[/Buka Menu Pemesanan & Pembayaran/]
+    F15 --> F16{Cek Transaksi Valid?}
+    F16 -- Ya --> F17[Generate Dokumen Kuitansi Resmi]
+    F17 --> F18[/Cetak Kuitansi / PDF/]
+    
+    F5 -- Admin --> F19[/Kelola Master Paket, User, & Monitoring/]
+    F5 -- Direktur --> F20[/Filter & Cetak Laporan Periode/]
+
+    F14 --> F21([End])
+    F18 --> F21
+    F19 --> F21
+    F20 --> F21
+  </div>
+</div>
+
+<div class="diagram-container" id="box-class">
+  <h2>4. Class Diagram</h2>
+  <p class="desc">Diagram struktur kelas model database relasional pada sistem PT. Puma Star Jaya.</p>
+  <div class="mermaid">
+classDiagram
+    class User {
+        +BigInt id
+        +String nama
+        +String username
+        +String email
+        +String password
+        +Enum level
+        +String no_hp
+        +Text alamat
+        +Boolean aktif
+        +Timestamp created_at
+        +Timestamp updated_at
+        +isAdmin() Boolean
+        +isBendahara() Boolean
+        +isDirektur() Boolean
+        +isKonsumen() Boolean
+    }
+
+    class Paket {
+        +BigInt id
+        +String judul
+        +Text deskripsi
+        +String destinasi
+        +String fasilitas
+        +String bus
+        +Decimal harga
+        +String foto
+        +Timestamp created_at
+        +Timestamp updated_at
+        +pemesanan() HasMany
+    }
+
+    class Kupon {
+        +BigInt id
+        +String kode
+        +Decimal potongan
+        +BigInt user_id
+        +Boolean digunakan
+        +Timestamp created_at
+        +user() BelongsTo
+        +pemesanan() HasMany
+    }
+
+    class Pemesanan {
+        +BigInt id
+        +String kode_pemesanan
+        +BigInt user_id
+        +BigInt paket_id
+        +BigInt kupon_id
+        +Date tanggal_berangkat
+        +Integer jumlah_pax
+        +String nama_rombongan
+        +String no_hp
+        +Decimal harga
+        +String snap_token
+        +Text catatan
+        +Timestamp created_at
+        +statusPembayaran() String
+        +labelStatus() String
+        +bisaBayar() Boolean
+    }
+
+    class Transaksi {
+        +BigInt id
+        +BigInt user_id
+        +BigInt pemesanan_id
+        +Enum status
+        +String alat_pembayaran
+        +String bukti_pembayaran
+        +Decimal jumlah_bayar
+        +DateTime tanggal_bayar
+        +Text catatan
+        +Timestamp created_at
+        +pemesanan() BelongsTo
+        +user() BelongsTo
+    }
+
+    User "1" --> "0..*" Pemesanan : membuat
+    Paket "1" --> "0..*" Pemesanan : dipesan pada
+    Kupon "0..1" --> "0..*" Pemesanan : digunakan pada
+    User "1" --> "0..*" Kupon : memiliki
+    Pemesanan "1" --> "0..*" Transaksi : memiliki riwayat
+    User "1" --> "0..*" Transaksi : melakukan bayar
+  </div>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    flowchart: {
+      useMaxWidth: false,
+      htmlLabels: true,
+      curve: 'basis'
+    }
+  });
+</script>
+</body>
+</html>

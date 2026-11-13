@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  body { margin: 0; background: #ffffff; display: flex; justify-content: center; align-items: center; padding: 40px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+  .card { background: #ffffff; border: 2px solid #0f766e; border-radius: 16px; padding: 30px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); width: 1050px; }
+  h1 { color: #0f766e; text-align: center; margin-top: 0; margin-bottom: 25px; font-size: 24px; border-bottom: 2px solid #ccfbf1; padding-bottom: 12px; }
+  .mermaid { display: flex; justify-content: center; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+<div class="card">
+  <h1>USE CASE DIAGRAM — SISTEM PEMESANAN PAKET WISATA</h1>
+  <div class="mermaid">
+flowchart LR
+    subgraph Aktor ["AKTOR PENGGUNA"]
+        K["Konsumen"]
+        A["Staff Admin"]
+        B["Bendahara"]
+        D["Direktur"]
+    end
+
+    subgraph System ["SISTEM INFORMASI PT. PUMA STAR JAYA"]
+        UC1([Registrasi Akun])
+        UC2([Login Akun])
+        UC3([Melihat Katalog & Detail Paket])
+        UC4([Melakukan Pemesanan Paket])
+        UC5([Pembayaran Otomatis Midtrans])
+        UC6([Melihat Status Pemesanan])
+        UC7([Kelola Paket Wisata CRUD])
+        UC8([Kelola Data Pengguna / User])
+        UC9([Monitoring Data Pemesanan])
+        UC10([Validasi Pembayaran])
+        UC11([Mencetak Kuitansi Resmi])
+        UC12([Laporan Pemesanan & Pembayaran])
+        UC13([Monitoring Statistik Eksekutif])
+    end
+
+    K --> UC1
+    K --> UC2
+    K --> UC3
+    K --> UC4
+    K --> UC5
+    K --> UC6
+
+    A --> UC2
+    A --> UC7
+    A --> UC8
+    A --> UC9
+    A --> UC12
+
+    B --> UC2
+    B --> UC9
+    B --> UC10
+    B --> UC11
+    B --> UC12
+
+    D --> UC2
+    D --> UC12
+    D --> UC13
+  </div>
+</div>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'default', flowchart: { htmlLabels: true, curve: 'basis' } });
+</script>
+</body>
+</html>

@@ -62,6 +62,36 @@ Sistem memiliki 5 entitas data utama:
 * **One-to-Many / One-to-One (`pemesanan` &rarr; `transaksi`)**: Satu pemesanan dapat memiliki riwayat transaksi/pembayaran (termasuk jika pembayaran sebelumnya ditolak dan dilakukan pembayaran ulang).
 * **One-to-Many (`users` &rarr; `kupon`) & Many-to-One (`pemesanan` &rarr; `kupon`)**: Satu kupon dapat digunakan untuk memotong total biaya pemesanan.
 
+---
+
+## 📊 DIAGRAM SISTEM (USE CASE, ACTIVITY, FLOWCHART, CLASS DIAGRAM)
+
+### 1. Use Case Diagram
+Diagram interaksi antar 4 Aktor (Konsumen, Staff Admin, Bendahara, Direktur) terhadap fungsi sistem:
+<p align="center">
+  <img src="public/docs_images/diagrams/usecase_diagram.png" alt="Use Case Diagram PT Puma Star Jaya" width="850">
+</p>
+
+### 2. Activity Diagram
+Diagram aktivitas proses pemesanan tiket paket wisata oleh Konsumen hingga validasi bendahara:
+<p align="center">
+  <img src="public/docs_images/diagrams/activity_diagram.png" alt="Activity Diagram Pemesanan Wisata" width="500">
+</p>
+
+### 3. Flowchart Sistem
+Bagan alir logika sistem mulai dari autentikasi login, routing hak akses peran, alur transaksi pembayaran online otomatis Midtrans, hingga cetak kuitansi dan laporan:
+<p align="center">
+  <img src="public/docs_images/diagrams/flowchart_diagram.png" alt="Flowchart Sistem PT Puma Star Jaya" width="600">
+</p>
+
+### 4. Class Diagram
+Diagram struktur kelas objek database relasional beserta atribut dan relasi method pada model sistem:
+<p align="center">
+  <img src="public/docs_images/diagrams/class_diagram.png" alt="Class Diagram PT Puma Star Jaya" width="700">
+</p>
+
+---
+
 ### 2.3 Skema Tabel Database (DDL MySQL)
 ```sql
 -- 1. Tabel Users

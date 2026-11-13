@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  body { margin: 0; background: #ffffff; display: flex; justify-content: center; align-items: center; padding: 40px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+  .card { background: #ffffff; border: 2px solid #0f766e; border-radius: 16px; padding: 30px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); width: 850px; }
+  h1 { color: #0f766e; text-align: center; margin-top: 0; margin-bottom: 25px; font-size: 24px; border-bottom: 2px solid #ccfbf1; padding-bottom: 12px; }
+  .mermaid { display: flex; justify-content: center; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+<div class="card">
+  <h1>ACTIVITY DIAGRAM — PEMESANAN & PEMBAYARAN TIKET WISATA</h1>
+  <div class="mermaid">
+flowchart TD
+    startNode([Mulai]) --> A1[Konsumen Membuka Website]
+    A1 --> A2[Login ke Akun Konsumen]
+    A2 --> A3[Pilih Katalog Paket Wisata]
+    A3 --> A4[Klik 'Detail Paket' & 'Pesan Sekarang']
+    A4 --> A5[Isi Formulir: Tgl Berangkat, Jumlah Pax, Rombongan, No HP]
+    A5 --> A6{Formulir Lengkap?}
+    A6 -- Tidak --> A5
+    A6 -- Ya --> A7[Sistem Menyimpan Pemesanan & Menghitung Total Harga]
+    A7 --> A8[Masuk Halaman Pembayaran]
+    A8 --> A9[Klik 'Bayar Sekarang via Midtrans']
+    A9 --> A10[Sistem Request Snap Token ke Midtrans]
+    A10 --> A11[Tampil Pop-up Pembayaran Midtrans Snap]
+    A11 --> A12[Konsumen Memilih Saluran: QRIS / VA Bank / E-Wallet]
+    A12 --> A13{Pembayaran Berhasil?}
+    A13 -- Gagal / Batal --> A8
+    A13 -- Sukses --> A14[Midtrans Callback Mengirim Status Settlement]
+    A14 --> A15[Sistem Memperbarui Status Transaksi: VALID / LUNAS]
+    A15 --> A16[Bendahara Memeriksa Rekap & Cetak Kuitansi]
+    A16 --> endNode([Selesai])
+  </div>
+</div>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'default', flowchart: { htmlLabels: true, curve: 'basis' } });
+</script>
+</body>
+</html>

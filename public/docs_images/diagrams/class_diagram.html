@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  body { margin: 0; background: #ffffff; display: flex; justify-content: center; align-items: center; padding: 40px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+  .card { background: #ffffff; border: 2px solid #0f766e; border-radius: 16px; padding: 30px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); width: 1050px; }
+  h1 { color: #0f766e; text-align: center; margin-top: 0; margin-bottom: 25px; font-size: 24px; border-bottom: 2px solid #ccfbf1; padding-bottom: 12px; }
+  .mermaid { display: flex; justify-content: center; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+<div class="card">
+  <h1>CLASS DIAGRAM — STRUKTUR MODEL BASIS DATA</h1>
+  <div class="mermaid">
+classDiagram
+    class User {
+        +BigInt id
+        +String nama
+        +String username
+        +String email
+        +String password
+        +Enum level
+        +String no_hp
+        +Text alamat
+        +Boolean aktif
+        +Timestamp created_at
+        +isAdmin() Boolean
+        +isBendahara() Boolean
+        +isDirektur() Boolean
+        +isKonsumen() Boolean
+    }
+
+    class Paket {
+        +BigInt id
+        +String judul
+        +Text deskripsi
+        +String destinasi
+        +String fasilitas
+        +String bus
+        +Decimal harga
+        +String foto
+        +Timestamp created_at
+        +pemesanan() HasMany
+    }
+
+    class Kupon {
+        +BigInt id
+        +String kode
+        +Decimal potongan
+        +BigInt user_id
+        +Boolean digunakan
+        +Timestamp created_at
+        +user() BelongsTo
+        +pemesanan() HasMany
+    }
+
+    class Pemesanan {
+        +BigInt id
+        +String kode_pemesanan
+        +BigInt user_id
+        +BigInt paket_id
+        +BigInt kupon_id
+        +Date tanggal_berangkat
+        +Integer jumlah_pax
+        +String nama_rombongan
+        +String no_hp
+        +Decimal harga
+        +String snap_token
+        +Text catatan
+        +Timestamp created_at
+        +statusPembayaran() String
+        +labelStatus() String
+        +bisaBayar() Boolean
+    }
+
+    class Transaksi {
+        +BigInt id
+        +BigInt user_id
+        +BigInt pemesanan_id
+        +Enum status
+        +String alat_pembayaran
+        +String bukti_pembayaran
+        +Decimal jumlah_bayar
+        +DateTime tanggal_bayar
+        +Text catatan
+        +Timestamp created_at
+        +pemesanan() BelongsTo
+        +user() BelongsTo
+    }
+
+    User "1" --> "0..*" Pemesanan : membuat
+    Paket "1" --> "0..*" Pemesanan : dipesan pada
+    Kupon "0..1" --> "0..*" Pemesanan : digunakan pada
+    User "1" --> "0..*" Kupon : memiliki
+    Pemesanan "1" --> "0..*" Transaksi : memiliki riwayat
+    User "1" --> "0..*" Transaksi : melakukan bayar
+  </div>
+</div>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'default' });
+</script>
+</body>
+</html>
