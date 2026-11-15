@@ -62,7 +62,7 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => true,
+                PDO::MYSQL_ATTR_SSL_CA => file_exists(base_path('isrgrootx1.pem')) ? base_path('isrgrootx1.pem') : '/etc/pki/tls/certs/ca-bundle.crt',
                 PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
             ]),
         ],
@@ -83,7 +83,7 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => true,
+                PDO::MYSQL_ATTR_SSL_CA => file_exists(base_path('isrgrootx1.pem')) ? base_path('isrgrootx1.pem') : '/etc/pki/tls/certs/ca-bundle.crt',
                 PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
             ]),
         ],
