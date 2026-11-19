@@ -86,7 +86,7 @@
                         'linear-gradient(135deg, #7c3aed, #4c1d95)',
                     ];
                     $bannerStyle = $paket->foto
-                        ? "background-image: linear-gradient(180deg, rgba(8,33,31,.1), rgba(8,33,31,.75)), url('".asset('storage/'.$paket->foto)."'); background-size: cover; background-position: center;"
+                        ? "background-image: linear-gradient(180deg, rgba(8,33,31,.1), rgba(8,33,31,.75)), url('".$paket->foto_url."'); background-size: cover; background-position: center;"
                         : 'background: '.$gradients[$paket->id % count($gradients)].';';
                 @endphp
                 <div class="detail-banner" style="{{ $bannerStyle }}">

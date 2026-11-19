@@ -363,7 +363,7 @@
                             'linear-gradient(135deg, #7c3aed, #4c1d95)',
                         ];
                         $mediaStyle = $item->foto
-                            ? "background-image: linear-gradient(180deg, rgba(8,33,31,.15), rgba(8,33,31,.7)), url('".asset('storage/'.$item->foto)."'); background-size: cover; background-position: center;"
+                            ? "background-image: linear-gradient(180deg, rgba(8,33,31,.15), rgba(8,33,31,.7)), url('".$item->foto_url."'); background-size: cover; background-position: center;"
                             : 'background: '.$gradients[$loop->index % count($gradients)].';';
                     @endphp
                     <article class="paket-card">

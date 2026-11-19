@@ -29,6 +29,28 @@ class Paket extends Model
         ];
     }
 
+    public function getFotoUrlAttribute(): ?string
+    {
+        if (!$this->foto) {
+            return null;
+        }
+        $cleanFoto = ltrim($this->foto, '/');
+        $basename = basename($cleanFoto);
+
+        // 1. Cek di public/images/galeri
+        if (file_exists(public_path('images/galeri/' . $basename))) {
+            return asset('images/galeri/' . $basename);
+        }
+
+        // 2. Cek di public/storage/
+        if (file_exists(public_path('storage/' . $cleanFoto))) {
+            return asset('storage/' . $cleanFoto);
+        }
+
+        // 3. Fallback direct asset
+        return asset('images/galeri/' . $basename);
+    }
+
     public function pemesanan(): HasMany
     {
         return $this->hasMany(Pemesanan::class);
