@@ -61,10 +61,19 @@ return [
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
-            'options' => array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA', (env('DB_HOST') !== '127.0.0.1' && env('DB_HOST') !== 'localhost' && file_exists(base_path('isrgrootx1.pem')) ? base_path('isrgrootx1.pem') : null)),
-                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
-            ]),
+            'options' => (function () {
+                $isCloud = env('DB_HOST') !== '127.0.0.1' && env('DB_HOST') !== 'localhost';
+                if (!$isCloud && !env('MYSQL_ATTR_SSL_CA')) {
+                    return [];
+                }
+                $sslCaKey = defined('Pdo\Mysql::ATTR_SSL_CA') ? \Pdo\Mysql::ATTR_SSL_CA : (defined('PDO::MYSQL_ATTR_SSL_CA') ? PDO::MYSQL_ATTR_SSL_CA : 1012);
+                $sslVerifyKey = defined('Pdo\Mysql::ATTR_SSL_VERIFY_SERVER_CERT') ? \Pdo\Mysql::ATTR_SSL_VERIFY_SERVER_CERT : (defined('PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT') ? PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT : 1014);
+                $caPath = env('MYSQL_ATTR_SSL_CA', file_exists(base_path('isrgrootx1.pem')) ? base_path('isrgrootx1.pem') : '/etc/pki/tls/certs/ca-bundle.crt');
+                return array_filter([
+                    $sslCaKey => $caPath,
+                    $sslVerifyKey => false,
+                ]);
+            })(),
         ],
 
         'mariadb' => [
@@ -82,10 +91,19 @@ return [
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
-            'options' => array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA', (env('DB_HOST') !== '127.0.0.1' && env('DB_HOST') !== 'localhost' && file_exists(base_path('isrgrootx1.pem')) ? base_path('isrgrootx1.pem') : null)),
-                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
-            ]),
+            'options' => (function () {
+                $isCloud = env('DB_HOST') !== '127.0.0.1' && env('DB_HOST') !== 'localhost';
+                if (!$isCloud && !env('MYSQL_ATTR_SSL_CA')) {
+                    return [];
+                }
+                $sslCaKey = defined('Pdo\Mysql::ATTR_SSL_CA') ? \Pdo\Mysql::ATTR_SSL_CA : (defined('PDO::MYSQL_ATTR_SSL_CA') ? PDO::MYSQL_ATTR_SSL_CA : 1012);
+                $sslVerifyKey = defined('Pdo\Mysql::ATTR_SSL_VERIFY_SERVER_CERT') ? \Pdo\Mysql::ATTR_SSL_VERIFY_SERVER_CERT : (defined('PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT') ? PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT : 1014);
+                $caPath = env('MYSQL_ATTR_SSL_CA', file_exists(base_path('isrgrootx1.pem')) ? base_path('isrgrootx1.pem') : '/etc/pki/tls/certs/ca-bundle.crt');
+                return array_filter([
+                    $sslCaKey => $caPath,
+                    $sslVerifyKey => false,
+                ]);
+            })(),
         ],
 
         'pgsql' => [

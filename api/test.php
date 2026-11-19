@@ -7,3 +7,4 @@ echo "PHP Version: " . phpversion() . "<br>";
 echo "Available Extensions: " . implode(', ', get_loaded_extensions()) . "<br>";
 echo "PDO Drivers: " . implode(', ', pdo_drivers()) . "<br>";
 echo "OpenSSL: " . (extension_loaded('openssl') ? 'YES' : 'NO') . "<br>";
+
