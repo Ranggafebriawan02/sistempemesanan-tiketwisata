@@ -14,7 +14,7 @@
   ],
   "routes": [
     {
-      "src": "/(build|css|js|images|docs_images|favicon.ico|robots.txt)(.*)",
+      "src": "/(build|css|js|images|docs_images|storage|favicon.ico|robots.txt)(.*)",
       "dest": "/public/$1$2"
     },
     {
