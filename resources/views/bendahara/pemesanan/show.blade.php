@@ -5,21 +5,21 @@
 
 @push('styles')
 <style>
-    .btn-reject { background: #dc2626; color: #fff; box-shadow: 0 8px 18px -10px rgba(220, 38, 38, .8); }
-    .btn-reject:hover { background: #b91c1c; }
-    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: var(--teal-700); text-decoration: none; margin-bottom: 16px; }
-    .back-link:hover { text-decoration: underline; }
-    .history-item { border: 1px solid var(--slate-200); border-radius: 12px; padding: 15px 16px; margin-bottom: 12px; background: #fff; }
-    .history-item.is-latest { border-color: #99f6e4; background: #fbfffe; }
+    .btn-reject { background: #c13515; color: #fff; border-radius: var(--radius-full); padding: 8px 18px; border: none; font-weight: 700; cursor: pointer; }
+    .btn-reject:hover { background: #991b1b; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #222222; text-decoration: none; margin-bottom: 20px; }
+    .back-link:hover { text-decoration: underline; color: #ff385c; }
+    .history-item { border: 1px solid #ebebeb; border-radius: 14px; padding: 18px; margin-bottom: 14px; background: #fff; }
+    .history-item.is-latest { border-color: #222222; background: #fafafa; }
     .history-item.rejected { border-color: #fecaca; background: #fff7f7; }
     .history-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-    .history-amount { font-size: 15px; font-weight: 800; color: var(--teal-800); }
-    .history-meta { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 7px; font-size: 12px; color: var(--slate-500); }
-    .history-note { margin-top: 9px; padding: 9px 11px; border-radius: 8px; background: var(--slate-50); font-size: 12px; color: var(--slate-700); }
+    .history-amount { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 800; color: #222222; }
+    .history-meta { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 7px; font-size: 12px; color: #717171; }
+    .history-note { margin-top: 10px; padding: 10px 12px; border-radius: 10px; background: #f7f7f7; font-size: 12.5px; color: #333333; }
     .history-item.rejected .history-note { background: #fee2e2; color: #991b1b; }
-    .history-proof { margin-top: 11px; }
-    .divider { border: 0; border-top: 1px dashed var(--slate-200); margin: 18px 0; }
-    .validation-note { font-size: 11.5px; color: var(--slate-500); margin-top: 8px; line-height: 1.6; }
+    .history-proof { margin-top: 12px; }
+    .divider { border: 0; border-top: 1px dashed #ebebeb; margin: 20px 0; }
+    .validation-note { font-size: 12px; color: #717171; margin-top: 8px; line-height: 1.6; }
 </style>
 @endpush
 

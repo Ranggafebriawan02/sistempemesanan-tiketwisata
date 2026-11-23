@@ -4,36 +4,35 @@
 
 @push('styles')
 <style>
-    .pay-page { padding: 34px 0 64px; }
-    .breadcrumb { font-size: 12.5px; color: var(--slate-500); margin-bottom: 18px; }
-    .breadcrumb a { color: var(--teal-700); font-weight: 600; text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
+    .pay-page { padding: 36px 0 70px; }
+    .breadcrumb { font-size: 13px; color: #717171; margin-bottom: 20px; }
+    .breadcrumb a { color: #222222; font-weight: 600; text-decoration: underline; }
 
-    .pay-grid { display: grid; grid-template-columns: 1fr 370px; gap: 28px; align-items: start; }
+    .pay-grid { display: grid; grid-template-columns: 1fr 390px; gap: 32px; align-items: start; }
 
-    .panel { background: #fff; border: 1px solid var(--slate-200); border-radius: 16px; box-shadow: var(--shadow-sm); overflow: hidden; }
-    .panel-head { padding: 22px 24px; border-bottom: 1px solid var(--slate-200); }
-    .panel-head h1 { font-size: 20px; letter-spacing: -.02em; }
-    .panel-head p { margin-top: 5px; font-size: 13px; color: var(--slate-500); }
-    .panel-body { padding: 24px; }
+    .panel { background: #fff; border: 1px solid #ebebeb; border-radius: 20px; box-shadow: var(--shadow-subtle); overflow: hidden; }
+    .panel-head { padding: 24px 28px; border-bottom: 1px solid #f0f0f0; }
+    .panel-head h1 { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 800; color: #222222; letter-spacing: -.02em; }
+    .panel-head p { margin-top: 5px; font-size: 13.5px; color: #717171; }
+    .panel-body { padding: 28px; }
 
-    .summary-card { position: sticky; top: 96px; overflow: hidden; }
-    .summary-top { background: linear-gradient(135deg, var(--teal-800), var(--teal-900)); color: #fff; padding: 22px; }
-    .summary-top .label { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: #99f6e4; font-weight: 800; }
-    .summary-top .total { font-size: 29px; font-weight: 800; letter-spacing: -.03em; margin-top: 4px; }
-    .summary-top .code { margin-top: 8px; font-size: 12px; color: #c7e8e3; }
-    .summary-body { padding: 20px; }
-    .summary-list { list-style: none; display: grid; gap: 11px; }
-    .summary-list li { display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; }
-    .summary-list span:first-child { color: var(--slate-500); }
-    .summary-list span:last-child { font-weight: 700; text-align: right; }
+    .summary-card { position: sticky; top: 96px; overflow: hidden; border-radius: 20px; border: 1px solid #ebebeb; }
+    .summary-top { background: #222222; color: #fff; padding: 26px; }
+    .summary-top .label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #b0b0b0; font-weight: 800; }
+    .summary-top .total { font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 900; letter-spacing: -.03em; margin-top: 4px; color: #ffffff; }
+    .summary-top .code { margin-top: 8px; font-size: 13px; color: #dddddd; }
+    .summary-body { padding: 24px; background: #ffffff; }
+    .summary-list { list-style: none; display: grid; gap: 12px; }
+    .summary-list li { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; }
+    .summary-list span:first-child { color: #717171; }
+    .summary-list span:last-child { font-weight: 700; color: #222222; text-align: right; }
 
     .midtrans-box {
-        background: linear-gradient(135deg, #064e3b, #0f766e);
+        background: #222222;
         color: #fff;
-        border-radius: 16px;
-        padding: 32px 28px;
-        box-shadow: 0 10px 25px -10px rgba(13, 148, 136, .5);
+        border-radius: 18px;
+        padding: 34px 28px;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
         text-align: center;
     }
 
@@ -45,8 +44,8 @@
         margin: 22px 0 28px;
     }
     .channel-badge {
-        background: rgba(255, 255, 255, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 8px;
         padding: 8px 14px;
         font-size: 12px;
@@ -58,6 +57,23 @@
     }
 
     .btn-pay-midtrans {
+        background: #ff385c;
+        color: #ffffff;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 800;
+        padding: 14px 28px;
+        border-radius: var(--radius-full);
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 16px rgba(255, 56, 92, 0.35);
+        transition: all .2s;
+    }
+    .btn-pay-midtrans:hover {
+        background: #e00b41;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(255, 56, 92, 0.45);
+    }
         background: #f59e0b;
         color: #78350f;
         font-weight: 800;

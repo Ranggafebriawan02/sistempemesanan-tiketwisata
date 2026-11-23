@@ -1,4 +1,4 @@
-﻿    <style>
+    <style>
         :root {
             /* Scandinavian Minimalist (Airbnb Style) Admin/User Panel */
             --bg-body: #f7f7f7;
