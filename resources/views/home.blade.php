@@ -57,84 +57,130 @@
         font-style: normal; font-size: 11px; font-weight: 900;
     }
 
-    /* Traveloka Search / Service Box Widget */
-    .hero-widget {
+    /* Traveloka Full-Width Search Panel */
+    .traveloka-search-wrapper {
+        position: relative;
+        z-index: 5;
+        margin-top: -54px;
+        margin-bottom: 24px;
+    }
+    .traveloka-search-card {
         background: #ffffff;
         border-radius: 16px;
-        box-shadow: 0 16px 40px rgba(3, 18, 38, 0.2);
-        overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 16px 40px rgba(3, 18, 38, 0.14);
+        border: 1px solid #e5e9ed;
+        padding: 24px 28px;
     }
-    .widget-tabs {
-        display: flex;
-        background: #f7f9fa;
-        border-bottom: 1px solid #e5e9ed;
-    }
-    .widget-tab {
-        flex: 1;
-        padding: 14px 16px;
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--slate-700);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        border-bottom: 2px solid transparent;
-        background: transparent;
-    }
-    .widget-tab.active {
-        color: var(--traveloka-blue);
-        background: #ffffff;
-        border-bottom-color: var(--traveloka-blue);
-    }
-    .widget-tab svg { width: 18px; height: 18px; fill: currentColor; }
-    .widget-body {
-        padding: 24px;
-        color: var(--slate-900);
-    }
-    .widget-title {
-        font-size: 15px;
-        font-weight: 800;
-        color: var(--slate-900);
-        margin-bottom: 14px;
+    .search-card-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin-bottom: 18px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #f2f4f7;
     }
-    .widget-title span.badge {
+    .search-card-header h3 {
+        font-size: 16px;
+        font-weight: 800;
+        color: #1c2430;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .search-card-header span.tag {
         font-size: 11px;
         font-weight: 700;
         background: #e7f5ff;
         color: #0194f3;
-        padding: 3px 8px;
-        border-radius: 6px;
+        padding: 4px 10px;
+        border-radius: 999px;
     }
-    .widget-features {
-        list-style: none;
+    .search-form-grid {
         display: grid;
-        gap: 10px;
+        grid-template-columns: 1.4fr 1fr 1fr auto;
+        gap: 16px;
+        align-items: center;
     }
-    .widget-features li {
+    .search-input-box {
         display: flex;
         align-items: center;
         gap: 12px;
-        padding: 10px 12px;
-        background: #f8fafc;
-        border: 1px solid #e5e9ed;
+        background: #f7f9fa;
+        border: 1.5px solid #e5e9ed;
         border-radius: 10px;
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--slate-700);
+        padding: 10px 14px;
+        transition: all .15s ease-in-out;
     }
-    .widget-features li svg {
-        width: 18px;
-        height: 18px;
-        flex-shrink: 0;
+    .search-input-box:hover {
+        background: #ffffff;
+        border-color: #cbd5e1;
+    }
+    .search-input-box:focus-within {
+        background: #ffffff;
+        border-color: #0194f3;
+        box-shadow: 0 0 0 3px rgba(1, 148, 243, 0.15);
+    }
+    .search-input-box svg {
+        width: 20px;
+        height: 20px;
         color: #0194f3;
+        flex-shrink: 0;
     }
-    .widget-footer {
-        margin-top: 16px;
+    .input-content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .input-content label {
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+        color: #687176;
+    }
+    .input-content input, .input-content select {
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #1c2430;
+        outline: none;
+        width: 100%;
+        padding-top: 2px;
+    }
+    .btn-search-traveloka {
+        background: #ff5e1f;
+        color: #ffffff;
+        border: none;
+        border-radius: 10px;
+        padding: 14px 28px;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 800;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        box-shadow: 0 6px 16px rgba(255, 94, 31, 0.35);
+        transition: all .18s;
+        height: 100%;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+    .btn-search-traveloka:hover {
+        background: #e04b12;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 22px rgba(255, 94, 31, 0.45);
+        color: #fff;
+    }
+
+    @media (max-width: 980px) {
+        .search-form-grid { grid-template-columns: 1fr 1fr; }
+        .traveloka-search-wrapper { margin-top: 20px; }
+    }
+    @media (max-width: 640px) {
+        .search-form-grid { grid-template-columns: 1fr; }
     }
 
     /* Floating Stats Bar */
@@ -376,14 +422,14 @@
             <div>
                 <span class="hero-tag">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                    RESMI &middot; BIRO PERJALANAN SEJAK 2016
+                    BIRO PERJALANAN RESMI &middot; METRO, LAMPUNG
                 </span>
                 <h1>Mau ke Mana? Temukan <em>Paket Wisata Impianmu</em></h1>
                 <p>Pesan paket perjalanan wisata nusantara, study tour, kunjungan industri, KKL, dan ziarah Wali Songo bersama PT. Puma Star Jaya. Nikmati kemudahan reservasi tiket, pembayaran fleksibel, dan kuitansi instan langsung dari website.</p>
                 <div class="hero-actions">
                     <a href="{{ route('paket.index') }}" class="btn btn-amber">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                        Cari Paket Wisata
+                        Lihat Semua Paket
                     </a>
                     @guest
                         <a href="{{ route('register') }}" class="btn btn-light">Daftar Akun Gratis</a>
@@ -398,46 +444,77 @@
                 </div>
             </div>
 
-            <!-- Traveloka Search / Booking Box Widget -->
-            <div class="hero-widget">
-                <div class="widget-tabs">
-                    <div class="widget-tab active">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 19.5 21 12 2.5 4.5l3 7.5-3 7.5Z"/><path d="M5.5 12H21"/></svg>
-                        Paket Wisata &amp; Tour
-                    </div>
-                    <div class="widget-tab">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-                        Reservasi Cepat
-                    </div>
+            <!-- Quick Info Cards -->
+            <div style="display:grid;gap:14px;">
+                <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:14px;padding:16px 20px;backdrop-filter:blur(8px);">
+                    <div style="font-size:12px;font-weight:800;letter-spacing:.06em;color:#ffeb3b;text-transform:uppercase;">Layanan Wisata Nusantara</div>
+                    <div style="font-size:16px;font-weight:800;color:#fff;margin-top:4px;">Tour Bali, Jogja, Danau Toba &amp; Bandung</div>
+                    <p style="font-size:13px;color:#e1f3ff;margin-top:4px;">Armada Bus Executive ber-AC lengkap dengan penginapan dan makan 3x sehari.</p>
                 </div>
-                <div class="widget-body">
-                    <div class="widget-title">
-                        <span>Layanan Utama Tour &amp; Travel</span>
-                        <span class="badge">Terpercaya</span>
-                    </div>
-                    <ul class="widget-features">
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
-                            <div><strong>Paket Wisata Nusantara:</strong> Bali, Yogyakarta, Danau Toba, Bandung, Jakarta</div>
-                        </li>
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                            <div><strong>Instansi &amp; Akademik:</strong> Study Tour, Kunjungan Industri, KKL</div>
-                        </li>
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                            <div><strong>Wisata Religi:</strong> Ziarah Wali Songo Jawa Timur &amp; Jawa Tengah</div>
-                        </li>
-                    </ul>
-                    <div class="widget-footer">
-                        <a href="{{ route('paket.index') }}" class="btn btn-primary btn-block">
-                            Eksplorasi Katalog Wisata &rarr;
-                        </a>
-                    </div>
+                <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:14px;padding:16px 20px;backdrop-filter:blur(8px);">
+                    <div style="font-size:12px;font-weight:800;letter-spacing:.06em;color:#ffeb3b;text-transform:uppercase;">Wisata Religi &amp; Edukasi</div>
+                    <div style="font-size:16px;font-weight:800;color:#fff;margin-top:4px;">Ziarah Wali Songo, Study Tour &amp; KKL Kampus</div>
+                    <p style="font-size:13px;color:#e1f3ff;margin-top:4px;">Didampingi pemandu wisata bersertifikat dan berpengalaman sejak 2016.</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Traveloka Interactive Search Box Panel -->
+    <div class="container traveloka-search-wrapper">
+        <div class="traveloka-search-card">
+            <div class="search-card-header">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0194f3" stroke-width="2.5"><path d="M2.5 19.5 21 12 2.5 4.5l3 7.5-3 7.5Z"/><path d="M5.5 12H21"/></svg>
+                    Pencarian Cepat Paket Wisata
+                </h3>
+                <span class="tag">Puma Star Jaya Booking</span>
+            </div>
+            <form action="{{ route('paket.index') }}" method="GET" class="search-form-grid">
+                <div class="search-input-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <div class="input-content">
+                        <label>Destinasi / Rute Wisata</label>
+                        <select name="dest">
+                            <option value="">Semua Destinasi Nusantara</option>
+                            <option value="Bali">Bali (Pantai &amp; Budaya)</option>
+                            <option value="Yogyakarta">Yogyakarta (Candi &amp; Keraton)</option>
+                            <option value="Jawa">Ziarah Wali Songo (Jatim &amp; Jateng)</option>
+                            <option value="Sumatera Utara">Danau Toba (Sumatera Utara)</option>
+                            <option value="Bandung">Bandung (Sentra Industri)</option>
+                            <option value="Jakarta">Jakarta (Wisata Kota &amp; Edukasi)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="search-input-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    <div class="input-content">
+                        <label>Rencana Berangkat</label>
+                        <input type="date" name="tgl" value="{{ date('Y-m-d') }}">
+                    </div>
+                </div>
+
+                <div class="search-input-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <div class="input-content">
+                        <label>Kategori Peserta</label>
+                        <select name="kategori">
+                            <option value="">Keluarga / Umum / Instansi</option>
+                            <option value="rombongan">Rombongan Sekolah / Kampus</option>
+                            <option value="pengajian">Jamaah Ziarah / Majelis Taklim</option>
+                            <option value="kantor">Instansi Kantor / Perusahaan</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-search-traveloka">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    Cari Paket
+                </button>
+            </form>
+        </div>
+    </div>
 
     <div class="container stats-strip">
         <div class="stats-grid">

@@ -4,59 +4,65 @@
 
 @push('styles')
 <style>
-    .breadcrumb { padding: 22px 0 0; font-size: 12.5px; color: var(--slate-500); }
-    .breadcrumb a { color: var(--teal-700); text-decoration: none; font-weight: 600; }
+    .breadcrumb { padding: 18px 0 0; font-size: 13px; color: #687176; font-weight: 600; }
+    .breadcrumb a { color: #0194f3; text-decoration: none; font-weight: 700; }
     .breadcrumb a:hover { text-decoration: underline; }
 
-    .detail-grid { display: grid; grid-template-columns: 1fr 360px; gap: 32px; align-items: start; }
+    .detail-grid { display: grid; grid-template-columns: 1fr 380px; gap: 32px; align-items: start; margin-top: 20px; }
     .detail-main {
-        background: #fff; border: 1px solid var(--slate-200); border-radius: 18px; overflow: hidden;
+        background: #fff; border: 1px solid #e5e9ed; border-radius: 16px; overflow: hidden;
+        box-shadow: 0 2px 12px rgba(3, 18, 38, 0.04);
     }
     .detail-banner {
-        height: 240px; position: relative; display: flex; align-items: flex-end; padding: 24px;
+        height: 280px; position: relative; display: flex; align-items: flex-end; padding: 28px;
         color: #fff;
     }
-    .detail-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 20%, rgba(8, 33, 31, .65)); }
+    .detail-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(3, 18, 38, .15) 0%, rgba(3, 18, 38, .85) 100%); }
     .detail-banner .inner { position: relative; z-index: 1; }
     .detail-banner .dest {
-        display: inline-block; font-size: 12px; font-weight: 700;
-        background: rgba(255, 255, 255, .18); border: 1px solid rgba(255, 255, 255, .3);
-        padding: 4px 10px; border-radius: 999px; margin-bottom: 8px;
+        display: inline-block; font-size: 11.5px; font-weight: 800;
+        background: rgba(3, 18, 38, 0.7); backdrop-filter: blur(6px);
+        border: 1px solid rgba(255, 255, 255, .3);
+        padding: 4px 12px; border-radius: 6px; margin-bottom: 10px; text-transform: uppercase;
     }
-    .detail-banner h1 { font-size: clamp(24px, 3vw, 34px); letter-spacing: -.025em; color: #fff; line-height: 1.2; }
+    .detail-banner h1 { font-size: clamp(24px, 3vw, 36px); letter-spacing: -.025em; color: #fff; line-height: 1.2; font-weight: 800; }
 
-    .detail-content { padding: 28px; }
-    .detail-content h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .08em; color: var(--teal-700); margin-bottom: 10px; }
-    .detail-content p { font-size: 14px; color: var(--slate-700); }
-    .detail-content hr { border: 0; border-top: 1px dashed var(--slate-200); margin: 24px 0; }
+    .detail-content { padding: 32px; }
+    .detail-content h2 {
+        font-size: 17px; font-weight: 800; color: #1c2430; margin-bottom: 12px;
+        display: flex; align-items: center; gap: 8px;
+    }
+    .detail-content h2 svg { color: #0194f3; width: 20px; height: 20px; }
+    .detail-content p { font-size: 14.5px; color: #434d5b; line-height: 1.7; }
+    .detail-content hr { border: 0; border-top: 1px dashed #e5e9ed; margin: 26px 0; }
 
-    .fasilitas-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .fasilitas-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .fasilitas-list li {
-        display: flex; gap: 10px; align-items: flex-start;
-        font-size: 13.5px; color: var(--slate-700);
-        background: var(--slate-50); border: 1px solid var(--slate-200);
-        padding: 10px 12px; border-radius: 10px;
+        display: flex; gap: 12px; align-items: center;
+        font-size: 13.5px; font-weight: 600; color: #1c2430;
+        background: #f7f9fa; border: 1px solid #e5e9ed;
+        padding: 12px 16px; border-radius: 10px;
     }
     .fasilitas-list .tick {
-        flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
-        background: var(--teal-50); color: var(--teal-700);
-        border: 1px solid #99f6e4; display: grid; place-items: center;
-        font-size: 10px; font-weight: 800;
+        flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+        background: #e7f5ff; color: #0194f3;
+        display: grid; place-items: center;
+        font-size: 12px; font-weight: 900;
     }
 
-    .detail-side { position: sticky; top: 92px; }
+    .detail-side { position: sticky; top: 110px; }
     .booking-card {
-        background: #fff; border: 1px solid var(--slate-200); border-radius: 18px;
-        padding: 24px; box-shadow: var(--shadow);
+        background: #fff; border: 1px solid #e5e9ed; border-radius: 16px;
+        padding: 26px; box-shadow: 0 8px 24px rgba(3, 18, 38, 0.08);
     }
-    .booking-card .label { font-size: 12px; font-weight: 600; color: var(--slate-500); }
-    .booking-card .big-price { font-size: 30px; font-weight: 800; color: var(--teal-800); letter-spacing: -.03em; margin-top: 2px; }
-    .booking-card .big-price small { font-size: 11.5px; color: var(--slate-500); font-weight: 600; letter-spacing: 0; }
-    .booking-card .meta { display: grid; gap: 10px; margin: 18px 0; padding: 16px 0; border-top: 1px dashed var(--slate-200); border-bottom: 1px dashed var(--slate-200); }
-    .booking-card .meta div { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; }
-    .booking-card .meta span:first-child { color: var(--slate-500); }
-    .booking-card .meta span:last-child { font-weight: 700; color: var(--slate-900); text-align: right; }
-    .booking-card .note { font-size: 11.5px; color: var(--slate-500); margin-top: 12px; line-height: 1.6; }
+    .booking-card .label { font-size: 11.5px; font-weight: 700; color: #687176; text-transform: uppercase; }
+    .booking-card .big-price { font-size: 32px; font-weight: 900; color: #ff5e1f; letter-spacing: -.03em; margin-top: 2px; }
+    .booking-card .big-price small { font-size: 12.5px; color: #687176; font-weight: 600; }
+    .booking-card .meta { display: grid; gap: 12px; margin: 20px 0; padding: 18px 0; border-top: 1px dashed #e5e9ed; border-bottom: 1px dashed #e5e9ed; }
+    .booking-card .meta div { display: flex; justify-content: space-between; gap: 12px; font-size: 13.5px; }
+    .booking-card .meta span:first-child { color: #687176; font-weight: 500; }
+    .booking-card .meta span:last-child { font-weight: 800; color: #1c2430; text-align: right; }
+    .booking-card .note { font-size: 12px; color: #687176; margin-top: 14px; line-height: 1.6; }
 
     @media (max-width: 980px) {
         .detail-grid { grid-template-columns: 1fr; }

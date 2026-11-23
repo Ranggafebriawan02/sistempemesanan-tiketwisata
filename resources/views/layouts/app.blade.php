@@ -66,13 +66,13 @@
             padding: 0 24px;
         }
 
-        /* ---------- Top bar ---------- */
+        /* ---------- Top bar Traveloka ---------- */
         .topbar {
-            background: #0264b1;
-            color: #dff0ff;
+            background: #ffffff;
+            color: #687176;
             font-size: 12.5px;
             padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            border-bottom: 1px solid #f2f4f7;
         }
         .topbar .container {
             display: flex;
@@ -81,23 +81,33 @@
             gap: 16px;
             flex-wrap: wrap;
         }
-        .topbar strong { color: #ffffff; font-weight: 700; }
+        .topbar .badge-agent {
+            background: #e7f5ff;
+            color: #0194f3;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .topbar strong { color: #1c2430; font-weight: 700; }
 
-        /* ---------- Navbar ---------- */
+        /* ---------- Navbar Traveloka Style ---------- */
         .site-header {
             position: sticky;
             top: 0;
             z-index: 50;
             background: #ffffff;
-            border-bottom: 1px solid var(--slate-200);
-            box-shadow: 0 2px 8px rgba(3, 18, 38, 0.04);
+            border-bottom: 1px solid #e5e9ed;
+            box-shadow: 0 4px 12px rgba(3, 18, 38, 0.05);
         }
         .navbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
-            padding: 14px 0;
+            gap: 24px;
+            padding: 12px 0;
         }
         .brand {
             display: flex;
@@ -106,47 +116,91 @@
             text-decoration: none;
             flex-shrink: 0;
         }
-        .brand-mark {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+        .brand-logo-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
             background: linear-gradient(135deg, #0194f3, #007ce8);
             display: grid;
             place-items: center;
-            box-shadow: 0 4px 12px rgba(1, 148, 243, 0.35);
+            box-shadow: 0 6px 14px rgba(1, 148, 243, 0.35);
         }
-        .brand-mark svg { width: 22px; height: 22px; }
+        .brand-logo-img svg { width: 24px; height: 24px; fill: #ffffff; }
         .brand-text h1 {
-            font-size: 17px;
-            font-weight: 800;
+            font-size: 18px;
+            font-weight: 900;
             letter-spacing: -.02em;
-            line-height: 1.15;
+            line-height: 1.1;
             color: #0194f3;
-        }
-        .brand-text span {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--slate-500);
-            letter-spacing: .05em;
-            text-transform: uppercase;
-        }
-        .nav-links {
             display: flex;
             align-items: center;
             gap: 6px;
+        }
+        .brand-text h1 span.travel-pill {
+            font-size: 10px;
+            background: #ff5e1f;
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            letter-spacing: 0;
+            font-weight: 800;
+        }
+        .brand-text span.sub {
+            font-size: 11px;
+            font-weight: 700;
+            color: #687176;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+        }
+        
+        /* Secondary Product Icons Navigation Strip (Khas Traveloka) */
+        .product-nav {
+            background: #ffffff;
+            border-bottom: 1px solid #f2f4f7;
+            padding: 8px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .product-nav .container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .prod-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #434d5b;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: all .15s;
+        }
+        .prod-item:hover, .prod-item.active {
+            color: #0194f3;
+            background: #e7f5ff;
+        }
+        .prod-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
             list-style: none;
         }
         .nav-links a {
             display: inline-block;
             text-decoration: none;
-            color: var(--slate-700);
-            font-size: 14px;
-            font-weight: 600;
+            color: #434d5b;
+            font-size: 13.5px;
+            font-weight: 700;
             padding: 8px 14px;
             border-radius: 8px;
             transition: background .15s, color .15s;
         }
-        .nav-links a:hover { background: var(--traveloka-blue-light); color: var(--traveloka-blue); }
+        .nav-links a:hover { background: #e7f5ff; color: #0194f3; }
         .nav-actions {
             display: flex;
             align-items: center;
@@ -157,15 +211,26 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 6px 8px 6px 14px;
-            border: 1px solid var(--slate-200);
+            padding: 5px 8px 5px 14px;
+            border: 1px solid #e5e9ed;
             border-radius: 999px;
-            background: var(--white);
-            box-shadow: var(--shadow-sm);
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(3, 18, 38, .05);
+        }
+        .user-pill .avatar {
+            width: 28px;
+            height: 28px;
+            background: #e7f5ff;
+            color: #0194f3;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            font-size: 12px;
         }
         .user-pill .meta { display: flex; flex-direction: column; line-height: 1.2; }
-        .user-pill .meta strong { font-size: 12.5px; color: var(--slate-900); white-space: nowrap; }
-        .user-pill .meta small { font-size: 10px; color: var(--traveloka-blue); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
+        .user-pill .meta strong { font-size: 12.5px; color: #1c2430; white-space: nowrap; }
+        .user-pill .meta small { font-size: 10px; color: #0194f3; font-weight: 800; text-transform: uppercase; white-space: nowrap; }
 
         .nav-mobile-only { display: none; }
 
@@ -393,60 +458,102 @@
 <body>
     <div class="topbar">
         <div class="container">
-            <span>Melayani perjalanan wisata, study tour, KKL, dan ziarah sejak <strong>2016</strong></span>
-            <span>Metro, Lampung &middot; <strong>0812-3456-7890</strong></span>
+            <div style="display:flex;align-items:center;gap:10px;">
+                <span class="badge-agent">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    Official Tour &amp; Travel
+                </span>
+                <span>Biro Wisata Terpercaya Sejak <strong>2016</strong></span>
+            </div>
+            <div>
+                <span>Call Center: <strong>0812-3456-7890</strong> &middot; Kota Metro, Lampung</span>
+            </div>
         </div>
     </div>
 
     <header class="site-header">
         <div class="container navbar">
             <a href="{{ route('home') }}" class="brand">
-                <span class="brand-mark" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <span class="brand-logo-img" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M2.5 19.5 21 12 2.5 4.5l3 7.5-3 7.5Z"/>
                         <path d="M5.5 12H21"/>
                     </svg>
                 </span>
                 <span class="brand-text">
-                    <h1>PUMA STAR JAYA</h1>
-                    <span>Tour &amp; Travel</span>
+                    <h1>PUMA STAR JAYA <span class="travel-pill">Travel</span></h1>
+                    <span class="sub">PT. Puma Star Jaya Tour &amp; Travel</span>
                 </span>
             </a>
 
             <ul class="nav-links" id="navLinks">
-                <li><a href="{{ route('home') }}">Home</a></li>
+                <li><a href="{{ route('home') }}">Beranda</a></li>
                 <li><a href="{{ route('paket.index') }}">Paket Wisata</a></li>
                 @auth
-                    <li class="nav-mobile-only"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li class="nav-mobile-only"><a href="{{ route('dashboard') }}">Dashboard Utama</a></li>
                     @if (auth()->user()->isKonsumen())
                         <li><a href="{{ route('konsumen.pemesanan.index') }}">Pesanan Saya</a></li>
                     @endif
                 @endauth
                 <li><a href="{{ route('home') }}#tentang">Tentang Kami</a></li>
-                <li><a href="{{ route('home') }}#galeri">Galeri</a></li>
-                <li><a href="{{ route('home') }}#kontak">Kontak</a></li>
+                <li><a href="{{ route('home') }}#galeri">Galeri Foto</a></li>
+                <li><a href="{{ route('home') }}#kontak">Bantuan</a></li>
             </ul>
 
             <div class="nav-actions">
                 @auth
                     <a href="{{ route('dashboard') }}" class="btn btn-outline btn-sm nav-dashboard-link">Dashboard</a>
                     <div class="user-pill">
+                        <div class="avatar">{{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}</div>
                         <div class="meta">
                             <strong>{{ auth()->user()->nama }}</strong>
                             <small>{{ auth()->user()->labelLevel() }}</small>
                         </div>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-danger btn-sm">Keluar</button>
+                            <button type="submit" class="btn btn-danger btn-sm" title="Keluar">Keluar</button>
                         </form>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="btn btn-outline btn-sm">Masuk</a>
+                    <a href="{{ route('login') }}" class="btn btn-outline btn-sm">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
+                        Masuk
+                    </a>
                     <a href="{{ route('register') }}" class="btn btn-primary btn-sm">Daftar</a>
                 @endauth
                 <button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Buka menu">&#9776;</button>
             </div>
         </div>
+
+        <!-- Traveloka Style Product Sub-Navigation -->
+        <nav class="product-nav">
+            <div class="container">
+                <a href="{{ route('paket.index') }}" class="prod-item active">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 19.5 21 12 2.5 4.5l3 7.5-3 7.5Z"/><path d="M5.5 12H21"/></svg>
+                    Paket Wisata Nusantara
+                </a>
+                <a href="{{ route('paket.index') }}?dest=Bali" class="prod-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/></svg>
+                    Study Tour Bali
+                </a>
+                <a href="{{ route('paket.index') }}?dest=Yogyakarta" class="prod-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+                    KKL &amp; Wisata Jogja
+                </a>
+                <a href="{{ route('paket.index') }}?dest=Wali" class="prod-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18M6.5 6.5l11 11M6.5 17.5l11-11"/></svg>
+                    Ziarah Wali Songo
+                </a>
+                <a href="{{ route('home') }}#galeri" class="prod-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    Galeri Destinasi
+                </a>
+                <a href="{{ route('home') }}#kontak" class="prod-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Bantuan 24/7
+                </a>
+            </div>
+        </nav>
     </header>
 
     @if (session('success'))
