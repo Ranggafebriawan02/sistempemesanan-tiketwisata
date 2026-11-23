@@ -37,7 +37,36 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: auto; }
+
+        /* Lenis Recommended CSS */
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
+
+        /* Reveal words animation styling */
+        .reveal-word-wrapper {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: top;
+            padding-bottom: 0.12em;
+        }
+        .reveal-word {
+            display: inline-block;
+            will-change: transform, opacity;
+        }
 
         body {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -797,7 +826,111 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
+        // Inisialisasi Lenis Smooth Scroll
+        let lenis;
+        try {
+            lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                smoothWheel: true,
+                touchMultiplier: 1.5,
+                infinite: false
+            });
+
+            // Integrasi Lenis dengan GSAP ScrollTrigger
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+
+                lenis.on('scroll', ScrollTrigger.update);
+
+                gsap.ticker.add((time) => {
+                    lenis.raf(time * 1000);
+                });
+
+                gsap.ticker.lagSmoothing(0);
+            } else {
+                function raf(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
+                requestAnimationFrame(raf);
+            }
+        } catch (e) {
+            console.warn('Lenis gagal diinisialisasi:', e);
+        }
+
+        // Efek Reveal Judul Per Kata dengan GSAP + ScrollTrigger
+        document.addEventListener('DOMContentLoaded', () => {
+            const targets = document.querySelectorAll('.reveal-words');
+            
+            targets.forEach((elem) => {
+                // Split teks ke per kata dengan mempertahankan tag HTML child (seperti span highlight)
+                splitWordsPreserveHtml(elem);
+
+                const words = elem.querySelectorAll('.reveal-word');
+                if (words.length > 0 && typeof gsap !== 'undefined') {
+                    gsap.fromTo(words, 
+                        {
+                            y: '115%',
+                            opacity: 0,
+                            rotateZ: 2
+                        },
+                        {
+                            y: '0%',
+                            opacity: 1,
+                            rotateZ: 0,
+                            duration: 0.7,
+                            ease: 'power3.out',
+                            stagger: 0.04,
+                            scrollTrigger: {
+                                trigger: elem,
+                                start: 'top 88%',
+                                toggleActions: 'play none none none',
+                                once: true
+                            }
+                        }
+                    );
+                }
+            });
+
+            function splitWordsPreserveHtml(node) {
+                const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null, false);
+                const textNodes = [];
+                let current;
+                while (current = walker.nextNode()) {
+                    if (current.nodeValue.trim().length > 0) {
+                        textNodes.push(current);
+                    }
+                }
+
+                textNodes.forEach(textNode => {
+                    const words = textNode.nodeValue.split(/(\s+)/);
+                    const fragment = document.createDocumentFragment();
+
+                    words.forEach(part => {
+                        if (part.trim().length > 0) {
+                            const wrapper = document.createElement('span');
+                            wrapper.className = 'reveal-word-wrapper';
+                            const inner = document.createElement('span');
+                            inner.className = 'reveal-word';
+                            inner.textContent = part;
+                            wrapper.appendChild(inner);
+                            fragment.appendChild(wrapper);
+                        } else if (part.length > 0) {
+                            fragment.appendChild(document.createTextNode(part));
+                        }
+                    });
+
+                    textNode.parentNode.replaceChild(fragment, textNode);
+                });
+            }
+        });
+
+        // Toggle mobile menu
         const toggle = document.getElementById('mobileToggle');
         const navLinks = document.getElementById('navLinks');
         if (toggle && navLinks) {

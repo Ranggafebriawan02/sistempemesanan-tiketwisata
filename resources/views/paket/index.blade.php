@@ -171,7 +171,7 @@
     <section class="page-hero">
         <div class="container">
             <span class="eyebrow">KATALOG PERJALANAN</span>
-            <h1>Pilihan Paket Wisata</h1>
+            <h1 class="reveal-words">Pilihan Paket Wisata</h1>
             <p>Pilih perjalanan yang sesuai untuk rombongan sekolah, instansi dinas, jamaah ziarah, atau liburan keluarga Anda dengan armada bus pariwisata prima.</p>
         </div>
     </section>

@@ -315,7 +315,7 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff385c" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 <span>Biro Wisata Terpercaya Sejak 2016 &middot; Metro, Lampung</span>
             </div>
-            <h1>Jelajahi Pengalaman Nusantara Tanpa Batas bersama <span class="gradient-text">Puma Star Jaya</span></h1>
+            <h1 class="reveal-words">Jelajahi Pengalaman Nusantara Tanpa Batas bersama <span class="gradient-text">Puma Star Jaya</span></h1>
             <p>Pesan paket perjalanan wisata, study tour, ziarah, dan KKL kampus dengan proses mudah, armada bus pariwisata premium, dan harga transparan.</p>
 
             <!-- Airbnb Style Floating Search -->
@@ -370,7 +370,7 @@
     <section class="container catalog-section" id="paket">
         <div class="catalog-header">
             <div>
-                <h2>Destinasi &amp; Paket Wisata Unggulan</h2>
+                <h2 class="reveal-words">Destinasi &amp; Paket Wisata Unggulan</h2>
                 <p>Dipilih dan disusun khusus untuk kenyamanan liburan serta kegiatan akademik Anda.</p>
             </div>
             <a href="{{ route('paket.index') }}" class="btn btn-outline btn-sm">Lihat Semua Paket ({{ $paket->count() }})</a>
@@ -435,7 +435,7 @@
     <section class="container" id="galeri" style="padding: 40px 28px 70px;">
         <div class="catalog-header">
             <div>
-                <h2>Galeri Perjalanan Bersama Kami</h2>
+                <h2 class="reveal-words">Galeri Perjalanan Bersama Kami</h2>
                 <p>Dokumentasi perjalanan rombongan sekolah, instansi, dan jamaah ziarah.</p>
             </div>
         </div>
