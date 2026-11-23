@@ -9,36 +9,278 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --traveloka-blue: #0194f3;
-            --traveloka-blue-dark: #007ce8;
-            --traveloka-blue-light: #e7f5ff;
-            --traveloka-blue-subtle: #f2f9ff;
-            --traveloka-navy: #031226;
-            --traveloka-orange: #ff5e1f;
-            --traveloka-orange-hover: #e04b12;
-            --teal-900: #0194f3;
-            --teal-800: #007ce8;
-            --teal-700: #0194f3;
-            --teal-600: #00a5ff;
-            --teal-100: #e7f5ff;
-            --teal-50: #f2f9ff;
-            --amber-500: #ff5e1f;
-            --amber-100: #ffede6;
-            --slate-900: #1c2430;
-            --slate-700: #434d5b;
-            --slate-500: #687176;
-            --slate-300: #cbd5e1;
-            --slate-200: #e5e9ed;
-            --slate-100: #f2f4f7;
-            --slate-50: #f7f9fa;
-            --white: #ffffff;
-            --danger: #d32f2f;
-            --success: #05a569;
-            --radius: 12px;
-            --shadow-sm: 0 1px 3px rgba(3, 18, 38, .07);
-            --shadow: 0 4px 16px rgba(3, 18, 38, .08);
-            --shadow-lg: 0 12px 32px rgba(3, 18, 38, .12);
-            --container: 1180px;
+            /* Scandinavian Minimalist (Airbnb Style) Palette */
+            --bg-body: #f7f7f7;
+            --bg-surface: #ffffff;
+            --primary: #ff385c;
+            --primary-hover: #e00b41;
+            --primary-light: #fff0f3;
+            --neutral-900: #222222;
+            --neutral-800: #333333;
+            --neutral-700: #555555;
+            --neutral-500: #717171;
+            --neutral-300: #b0b0b0;
+            --neutral-200: #dddddd;
+            --neutral-100: #ebebeb;
+            --neutral-50: #f7f7f7;
+            --danger: #c13515;
+            --success: #008a05;
+            --radius-sm: 8px;
+            --radius: 14px;
+            --radius-lg: 24px;
+            --radius-full: 9999px;
+            --shadow-subtle: 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-card: 0 4px 16px rgba(0,0,0,0.08);
+            --shadow-hover: 0 12px 28px rgba(0,0,0,0.12);
+            --shadow-float: 0 16px 36px rgba(0,0,0,0.14);
+            --container: 1240px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-body);
+            color: var(--neutral-900);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            width: 100%;
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* Scandinavian Header */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: #ffffff;
+            border-bottom: 1px solid var(--neutral-100);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 16px 0;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #ff385c;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(255, 56, 92, 0.28);
+        }
+        .brand-icon svg { width: 22px; height: 22px; }
+        .brand-info h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 19px;
+            font-weight: 800;
+            letter-spacing: -.02em;
+            color: #222222;
+            line-height: 1.1;
+        }
+        .brand-info span {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--neutral-500);
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        /* Center Nav Pill */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+            background: #ffffff;
+            border: 1px solid var(--neutral-200);
+            padding: 5px 8px;
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow-subtle);
+        }
+        .nav-links a {
+            display: inline-block;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--neutral-800);
+            padding: 8px 18px;
+            border-radius: var(--radius-full);
+            transition: all .18s ease;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--neutral-100);
+            color: #222222;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px 6px 5px 14px;
+            border: 1px solid var(--neutral-200);
+            border-radius: var(--radius-full);
+            background: #ffffff;
+            box-shadow: var(--shadow-subtle);
+            transition: box-shadow .15s;
+        }
+        .user-pill:hover {
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        }
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: var(--neutral-900);
+            color: #ffffff;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .user-meta { display: flex; flex-direction: column; line-height: 1.2; text-align: left; }
+        .user-meta strong { font-size: 12.5px; color: var(--neutral-900); font-weight: 700; }
+        .user-meta small { font-size: 10px; color: var(--neutral-500); text-transform: uppercase; font-weight: 600; }
+
+        /* Airbnb Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1px solid transparent;
+            border-radius: var(--radius-full);
+            padding: 10px 22px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all .2s ease;
+            white-space: nowrap;
+        }
+        .btn:hover { transform: translateY(-1px); }
+        .btn-primary {
+            background: linear-gradient(135deg, #ff385c 0%, #e00b41 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(255, 56, 92, 0.35);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(255, 56, 92, 0.45);
+            color: #fff;
+        }
+        .btn-outline {
+            background: #ffffff;
+            border-color: var(--neutral-200);
+            color: var(--neutral-900);
+            font-weight: 700;
+        }
+        .btn-outline:hover {
+            border-color: var(--neutral-900);
+            background: #f7f7f7;
+        }
+        .btn-danger {
+            background: transparent;
+            color: var(--danger);
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+        .btn-danger:hover { background: #fee2e2; }
+        .btn-sm { padding: 8px 16px; font-size: 13px; }
+        .btn-block { width: 100%; }
+
+        /* Footer */
+        .footer {
+            background: #ffffff;
+            border-top: 1px solid var(--neutral-200);
+            color: var(--neutral-500);
+            padding: 56px 0 28px;
+            margin-top: 80px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.3fr;
+            gap: 48px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--neutral-100);
+        }
+        .footer h4 {
+            color: var(--neutral-900);
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            font-family: 'Outfit', sans-serif;
+        }
+        .footer p, .footer li { font-size: 14px; line-height: 1.7; color: var(--neutral-700); }
+        .footer ul { list-style: none; display: grid; gap: 8px; }
+        .footer a { color: var(--neutral-700); transition: color .15s; }
+        .footer a:hover { color: #ff385c; }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding-top: 24px;
+            font-size: 13px;
+            color: var(--neutral-500);
+        }
+
+        .mobile-toggle {
+            display: none;
+            border: 1px solid var(--neutral-200);
+            background: #fff;
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 960px) {
+            .nav-links { display: none; }
+            .mobile-toggle { display: grid; place-items: center; }
+            .nav-links.open {
+                display: flex;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: #fff;
+                padding: 16px 24px;
+                border-radius: 0 0 20px 20px;
+                border-bottom: 1px solid var(--neutral-200);
+                box-shadow: var(--shadow-float);
+            }
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -456,104 +698,56 @@
     @stack('styles')
 </head>
 <body>
-    <div class="topbar">
-        <div class="container">
-            <div style="display:flex;align-items:center;gap:10px;">
-                <span class="badge-agent">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                    Official Tour &amp; Travel
-                </span>
-                <span>Biro Wisata Terpercaya Sejak <strong>2016</strong></span>
-            </div>
-            <div>
-                <span>Call Center: <strong>0812-3456-7890</strong> &middot; Kota Metro, Lampung</span>
-            </div>
-        </div>
-    </div>
-
     <header class="site-header">
         <div class="container navbar">
             <a href="{{ route('home') }}" class="brand">
-                <span class="brand-logo-img" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <span class="brand-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M2.5 19.5 21 12 2.5 4.5l3 7.5-3 7.5Z"/>
                         <path d="M5.5 12H21"/>
                     </svg>
                 </span>
-                <span class="brand-text">
-                    <h1>PUMA STAR JAYA <span class="travel-pill">Travel</span></h1>
-                    <span class="sub">PT. Puma Star Jaya Tour &amp; Travel</span>
+                <span class="brand-info">
+                    <h1>Puma Star Jaya</h1>
+                    <span>Tour &amp; Travel &middot; Est 2016</span>
                 </span>
             </a>
 
             <ul class="nav-links" id="navLinks">
-                <li><a href="{{ route('home') }}">Beranda</a></li>
+                <li><a href="{{ route('home') }}">Jelajahi</a></li>
                 <li><a href="{{ route('paket.index') }}">Paket Wisata</a></li>
                 @auth
-                    <li class="nav-mobile-only"><a href="{{ route('dashboard') }}">Dashboard Utama</a></li>
+                    <li class="nav-mobile-only"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                     @if (auth()->user()->isKonsumen())
-                        <li><a href="{{ route('konsumen.pemesanan.index') }}">Pesanan Saya</a></li>
+                        <li><a href="{{ route('konsumen.pemesanan.index') }}">Perjalanan Saya</a></li>
                     @endif
                 @endauth
-                <li><a href="{{ route('home') }}#tentang">Tentang Kami</a></li>
-                <li><a href="{{ route('home') }}#galeri">Galeri Foto</a></li>
-                <li><a href="{{ route('home') }}#kontak">Bantuan</a></li>
+                <li><a href="{{ route('home') }}#tentang">Tentang</a></li>
+                <li><a href="{{ route('home') }}#galeri">Destinasi</a></li>
+                <li><a href="{{ route('home') }}#kontak">Kontak</a></li>
             </ul>
 
             <div class="nav-actions">
                 @auth
                     <a href="{{ route('dashboard') }}" class="btn btn-outline btn-sm nav-dashboard-link">Dashboard</a>
                     <div class="user-pill">
-                        <div class="avatar">{{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}</div>
-                        <div class="meta">
+                        <div class="user-avatar">{{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}</div>
+                        <div class="user-meta">
                             <strong>{{ auth()->user()->nama }}</strong>
                             <small>{{ auth()->user()->labelLevel() }}</small>
                         </div>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-danger btn-sm" title="Keluar">Keluar</button>
+                            <button type="submit" class="btn btn-danger" title="Keluar">Keluar</button>
                         </form>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="btn btn-outline btn-sm">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
-                        Masuk
-                    </a>
-                    <a href="{{ route('register') }}" class="btn btn-primary btn-sm">Daftar</a>
+                    <a href="{{ route('login') }}" class="btn btn-outline btn-sm">Masuk</a>
+                    <a href="{{ route('register') }}" class="btn btn-primary btn-sm">Daftar Akun</a>
                 @endauth
                 <button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Buka menu">&#9776;</button>
             </div>
         </div>
-
-        <!-- Traveloka Style Product Sub-Navigation -->
-        <nav class="product-nav">
-            <div class="container">
-                <a href="{{ route('paket.index') }}" class="prod-item active">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 19.5 21 12 2.5 4.5l3 7.5-3 7.5Z"/><path d="M5.5 12H21"/></svg>
-                    Paket Wisata Nusantara
-                </a>
-                <a href="{{ route('paket.index') }}?dest=Bali" class="prod-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/></svg>
-                    Study Tour Bali
-                </a>
-                <a href="{{ route('paket.index') }}?dest=Yogyakarta" class="prod-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
-                    KKL &amp; Wisata Jogja
-                </a>
-                <a href="{{ route('paket.index') }}?dest=Wali" class="prod-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18M6.5 6.5l11 11M6.5 17.5l11-11"/></svg>
-                    Ziarah Wali Songo
-                </a>
-                <a href="{{ route('home') }}#galeri" class="prod-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                    Galeri Destinasi
-                </a>
-                <a href="{{ route('home') }}#kontak" class="prod-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                    Bantuan 24/7
-                </a>
-            </div>
-        </nav>
     </header>
 
     @if (session('success'))

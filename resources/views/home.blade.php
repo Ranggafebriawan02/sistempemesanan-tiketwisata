@@ -1,767 +1,456 @@
 @extends('layouts.app')
 
-@section('title', 'PT. Puma Star Jaya — Pemesanan Paket Wisata')
+@section('title', 'Puma Star Jaya — Perjalanan & Paket Wisata Eksklusif')
 
 @push('styles')
 <style>
-    /* ========== Traveloka Ultra-Modern Hero ========== */
-    .hero {
-        position: relative;
-        overflow: hidden;
-        background:
-            radial-gradient(1200px 600px at 80% -10%, rgba(1, 148, 243, 0.45), transparent 70%),
-            radial-gradient(900px 500px at 10% 120%, rgba(255, 94, 31, 0.2), transparent 60%),
-            linear-gradient(135deg, #0264b1 0%, #0194f3 50%, #007ce8 100%);
-        color: #ffffff;
-        padding: 68px 0 108px;
+    /* Scandinavian / Airbnb Clean Aesthetic */
+    .hero-clean {
+        background: #ffffff;
+        padding: 48px 0 24px;
+        text-align: center;
     }
-    .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background-image: 
-            radial-gradient(circle at 25px 25px, rgba(255, 255, 255, 0.12) 2px, transparent 0),
-            radial-gradient(circle at 75px 75px, rgba(255, 255, 255, 0.08) 3px, transparent 0);
-        background-size: 100px 100px;
-        opacity: 0.6;
-        pointer-events: none;
-    }
-    /* Animated Floating Aurora Glow */
-    .hero::after {
-        content: "";
-        position: absolute;
-        bottom: -30%;
-        right: -10%;
-        width: 600px;
-        height: 600px;
-        background: radial-gradient(circle, rgba(255, 235, 59, 0.22) 0%, rgba(1, 148, 243, 0) 70%);
-        filter: blur(60px);
-        pointer-events: none;
-    }
-    .hero .container { position: relative; z-index: 1; display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
-    .hero-tag {
+    .hero-badge {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        background: rgba(255, 255, 255, 0.16);
-        border: 1px solid rgba(255, 255, 255, 0.35);
-        color: #ffffff;
-        font-family: 'Outfit', sans-serif;
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: .08em;
-        padding: 7px 16px;
-        border-radius: 999px;
-        margin-bottom: 20px;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    }
-    .hero h1 {
-        font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
-        font-size: clamp(32px, 4.2vw, 52px);
-        line-height: 1.12;
-        letter-spacing: -.03em;
-        font-weight: 900;
-        color: #ffffff;
-        text-shadow: 0 2px 10px rgba(2, 100, 177, 0.3);
-    }
-    .hero h1 em {
-        font-style: normal;
-        background: linear-gradient(120deg, #ffeb3b, #ffb300);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        display: inline-block;
-    }
-    .hero p { margin-top: 18px; max-width: 520px; color: #e1f3ff; font-size: 15.5px; line-height: 1.65; font-weight: 400; }
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
-    .hero-note { margin-top: 28px; display: flex; gap: 22px; flex-wrap: wrap; color: #d4edff; font-size: 13.5px; font-weight: 600; }
-    .hero-note span { display: inline-flex; align-items: center; gap: 8px; }
-    .hero-note i {
-        width: 20px; height: 20px; border-radius: 50%;
-        background: #ffffff;
-        color: #0194f3;
-        display: inline-grid; place-items: center;
-        font-style: normal; font-size: 11px; font-weight: 900;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Glassmorphism Quick Info Cards */
-    .hero-info-glass {
-        display: grid;
-        gap: 16px;
-    }
-    .glass-card {
-        background: rgba(255, 255, 255, 0.12);
-        border: 1px solid rgba(255, 255, 255, 0.28);
-        border-radius: 16px;
-        padding: 20px 24px;
-        backdrop-filter: blur(14px);
-        box-shadow: 0 8px 32px rgba(2, 60, 110, 0.18);
-        transition: transform .25s ease, background .25s ease, border-color .25s ease;
-    }
-    .glass-card:hover {
-        transform: translateY(-3px);
-        background: rgba(255, 255, 255, 0.18);
-        border-color: rgba(255, 255, 255, 0.45);
-    }
-    .glass-tag {
-        font-family: 'Outfit', sans-serif;
-        font-size: 11px;
-        font-weight: 800;
-        letter-spacing: .08em;
-        color: #ffeb3b;
-        text-transform: uppercase;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-    .glass-title {
-        font-family: 'Outfit', sans-serif;
-        font-size: 17px;
-        font-weight: 800;
-        color: #ffffff;
-        margin-top: 6px;
-        letter-spacing: -.01em;
-    }
-    .glass-desc {
+        background: #f7f7f7;
+        border: 1px solid #ebebeb;
+        padding: 8px 18px;
+        border-radius: var(--radius-full);
         font-size: 13px;
-        color: #e1f3ff;
-        margin-top: 6px;
-        line-height: 1.5;
-    }
-
-    /* Traveloka Full-Width Search Panel */
-    .traveloka-search-wrapper {
-        position: relative;
-        z-index: 5;
-        margin-top: -54px;
+        font-weight: 700;
+        color: #222222;
         margin-bottom: 24px;
     }
-    .traveloka-search-card {
-        background: #ffffff;
-        border-radius: 16px;
-        box-shadow: 0 16px 40px rgba(3, 18, 38, 0.14);
-        border: 1px solid #e5e9ed;
-        padding: 24px 28px;
-    }
-    .search-card-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 18px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid #f2f4f7;
-    }
-    .search-card-header h3 {
-        font-size: 16px;
+    .hero-clean h1 {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(34px, 4.8vw, 56px);
         font-weight: 800;
-        color: #1c2430;
-        display: flex;
-        align-items: center;
-        gap: 8px;
+        letter-spacing: -.03em;
+        line-height: 1.12;
+        color: #222222;
+        max-width: 840px;
+        margin: 0 auto;
     }
-    .search-card-header span.tag {
-        font-size: 11px;
-        font-weight: 700;
-        background: #e7f5ff;
-        color: #0194f3;
-        padding: 4px 10px;
-        border-radius: 999px;
+    .hero-clean h1 span.gradient-text {
+        background: linear-gradient(135deg, #ff385c 0%, #e00b41 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
-    .search-form-grid {
+    .hero-clean p {
+        font-size: 17px;
+        color: #717171;
+        max-width: 640px;
+        margin: 18px auto 0;
+        line-height: 1.6;
+    }
+
+    /* Floating Interactive Airbnb Search Bar */
+    .search-clean-wrapper {
+        margin: 36px auto 0;
+        max-width: 900px;
+    }
+    .search-clean-bar {
+        background: #ffffff;
+        border: 1px solid #dddddd;
+        border-radius: var(--radius-full);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
         display: grid;
-        grid-template-columns: 1.4fr 1fr 1fr auto;
-        gap: 16px;
-        align-items: center;
-    }
-    .search-input-box {
-        display: flex;
+        grid-template-columns: 1.4fr 1.1fr 1fr auto;
+        padding: 8px 10px 8px 24px;
         align-items: center;
         gap: 12px;
-        background: #f7f9fa;
-        border: 1.5px solid #e5e9ed;
-        border-radius: 10px;
-        padding: 10px 14px;
-        transition: all .15s ease-in-out;
+        transition: box-shadow .2s;
     }
-    .search-input-box:hover {
-        background: #ffffff;
-        border-color: #cbd5e1;
+    .search-clean-bar:hover {
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
     }
-    .search-input-box:focus-within {
-        background: #ffffff;
-        border-color: #0194f3;
-        box-shadow: 0 0 0 3px rgba(1, 148, 243, 0.15);
-    }
-    .search-input-box svg {
-        width: 20px;
-        height: 20px;
-        color: #0194f3;
-        flex-shrink: 0;
-    }
-    .input-content {
+    .clean-col {
         display: flex;
         flex-direction: column;
-        width: 100%;
+        text-align: left;
+        padding-right: 12px;
+        border-right: 1px solid #ebebeb;
     }
-    .input-content label {
-        font-size: 10px;
+    .clean-col:last-of-type { border-right: none; }
+    .clean-col label {
+        font-size: 11px;
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: .06em;
-        color: #687176;
+        color: #222222;
     }
-    .input-content input, .input-content select {
+    .clean-col input, .clean-col select {
         border: none;
         background: transparent;
         font-family: inherit;
-        font-size: 13.5px;
-        font-weight: 700;
-        color: #1c2430;
+        font-size: 14px;
+        color: #717171;
         outline: none;
         width: 100%;
         padding-top: 2px;
+        font-weight: 500;
     }
-    .btn-search-traveloka {
-        background: #ff5e1f;
-        color: #ffffff;
+    .clean-col select { cursor: pointer; }
+    .btn-clean-search {
+        background: #ff385c;
+        color: #fff;
         border: none;
-        border-radius: 10px;
-        padding: 14px 28px;
-        font-family: inherit;
-        font-size: 15px;
-        font-weight: 800;
+        border-radius: var(--radius-full);
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        transition: transform .15s, background .15s;
+    }
+    .btn-clean-search:hover {
+        background: #e00b41;
+        transform: scale(1.05);
+    }
+    .btn-clean-search svg { width: 20px; height: 20px; }
+
+    /* Category Filter Pills (Airbnb Experience Bar) */
+    .filter-pills {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin: 36px 0 10px;
+        flex-wrap: wrap;
+    }
+    .pill-btn {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        cursor: pointer;
-        box-shadow: 0 6px 16px rgba(255, 94, 31, 0.35);
-        transition: all .18s;
-        height: 100%;
-        text-decoration: none;
-        white-space: nowrap;
+        padding: 10px 20px;
+        border-radius: var(--radius-full);
+        background: #ffffff;
+        border: 1px solid #dddddd;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #222222;
+        transition: all .15s;
     }
-    .btn-search-traveloka:hover {
-        background: #e04b12;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 22px rgba(255, 94, 31, 0.45);
-        color: #fff;
-    }
-
-    @media (max-width: 980px) {
-        .search-form-grid { grid-template-columns: 1fr 1fr; }
-        .traveloka-search-wrapper { margin-top: 20px; }
-    }
-    @media (max-width: 640px) {
-        .search-form-grid { grid-template-columns: 1fr; }
+    .pill-btn:hover, .pill-btn.active {
+        background: #222222;
+        border-color: #222222;
+        color: #ffffff;
     }
 
-    /* Floating Stats Bar */
-    .stats-strip {
-        margin-top: -42px;
-        position: relative;
-        z-index: 2;
+    /* Minimalist Photo-Centric Cards */
+    .catalog-section {
+        padding: 40px 0 70px;
     }
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        background: #fff;
-        border: 1px solid var(--slate-200);
-        border-radius: 16px;
-        box-shadow: 0 8px 24px rgba(3, 18, 38, .08);
-        overflow: hidden;
+    .catalog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 28px;
     }
-    .stat {
-        padding: 20px 24px;
-        border-right: 1px solid var(--slate-200);
+    .catalog-header h2 {
+        font-family: 'Outfit', sans-serif;
+        font-size: 28px;
+        font-weight: 800;
+        color: #222222;
+        letter-spacing: -.02em;
     }
-    .stat:last-child { border-right: 0; }
-    .stat strong { display: block; font-size: 26px; letter-spacing: -.02em; color: var(--traveloka-blue); font-weight: 800; }
-    .stat span { font-size: 12px; color: var(--slate-500); font-weight: 600; }
+    .catalog-header p { font-size: 14.5px; color: #717171; margin-top: 4px; }
 
-    /* ========== Paket Grid (Traveloka Card Style) ========== */
-    .paket-grid {
+    .grid-airbnb {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
+        gap: 32px 24px;
     }
-    .paket-card {
-        background: #fff;
-        border: 1px solid #e5e9ed;
-        border-radius: 14px;
-        overflow: hidden;
+    .airbnb-card {
+        text-decoration: none;
+        color: inherit;
         display: flex;
         flex-direction: column;
-        transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-        box-shadow: 0 2px 8px rgba(3, 18, 38, 0.04);
+        transition: transform .2s ease;
     }
-    .paket-card:hover {
+    .airbnb-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 12px 28px rgba(3, 18, 38, 0.12);
-        border-color: #b9e3ff;
     }
-    .paket-media {
-        height: 154px;
+    .card-photo-box {
         position: relative;
+        width: 100%;
+        height: 250px;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #ebebeb;
+        margin-bottom: 14px;
+    }
+    .card-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform .35s ease;
+    }
+    .airbnb-card:hover .card-photo {
+        transform: scale(1.04);
+    }
+    .dest-pill-badge {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        background: rgba(255, 255, 255, 0.95);
+        color: #222222;
+        font-size: 11px;
+        font-weight: 800;
+        padding: 4px 10px;
+        border-radius: var(--radius-full);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        text-transform: uppercase;
+        letter-spacing: .05em;
+    }
+    .card-meta-top {
         display: flex;
-        align-items: flex-start;
         justify-content: space-between;
-        padding: 12px 14px;
-        color: #fff;
+        align-items: baseline;
+        gap: 10px;
     }
-    .paket-media::after {
-        content: "";
-        position: absolute; inset: 0;
-        background: linear-gradient(180deg, rgba(3, 18, 38, .3) 0%, transparent 40%, rgba(3, 18, 38, .7) 100%);
+    .card-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #222222;
+        line-height: 1.35;
     }
-    .paket-media .dest {
-        position: relative; z-index: 1;
-        font-size: 11.5px; font-weight: 700;
-        background: rgba(3, 18, 38, 0.7);
-        backdrop-filter: blur(4px);
-        border: 1px solid rgba(255, 255, 255, .25);
-        padding: 4px 10px; border-radius: 6px;
-        color: #fff;
-    }
-    .paket-media .rating-badge {
-        position: relative; z-index: 1;
-        font-size: 11px; font-weight: 800;
-        background: #0194f3;
-        color: #fff;
-        padding: 3px 8px;
-        border-radius: 6px;
+    .card-rating {
         display: flex;
         align-items: center;
         gap: 4px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #222222;
+        flex-shrink: 0;
     }
-    .paket-body { padding: 18px 20px; display: flex; flex-direction: column; flex: 1; }
-    .paket-body h3 { font-size: 16px; font-weight: 800; line-height: 1.35; letter-spacing: -.01em; color: var(--slate-900); }
-    .paket-body p { margin-top: 8px; font-size: 12.5px; color: var(--slate-500); flex: 1; line-height: 1.5; }
-    .paket-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
-    .chip {
-        font-size: 11px; font-weight: 700;
-        background: #f0f7ff;
-        color: #0194f3;
-        border: 1px solid #cce5ff;
-        padding: 3px 8px; border-radius: 6px;
+    .card-bus-info {
+        font-size: 13.5px;
+        color: #717171;
+        margin-top: 4px;
     }
-    .chip-bus {
-        background: #fff6ed;
-        color: #ea580c;
-        border-color: #ffedd5;
+    .card-facility {
+        font-size: 12.5px;
+        color: #888888;
+        margin-top: 2px;
     }
-    .paket-foot {
-        display: flex; align-items: flex-end; justify-content: space-between;
-        gap: 10px; margin-top: 16px; padding-top: 14px;
-        border-top: 1px dashed #e2e8f0;
+    .card-price-bottom {
+        margin-top: 10px;
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
     }
-    .price-block { display: flex; flex-direction: column; }
-    .price-label { font-size: 10.5px; color: var(--slate-500); font-weight: 600; text-transform: uppercase; }
-    .price { font-size: 17px; font-weight: 900; color: #ff5e1f; letter-spacing: -.02em; }
-    .price small { font-size: 11px; color: var(--slate-500); font-weight: 600; }
-
-    /* About Section */
-    .about {
-        display: grid;
-        grid-template-columns: .95fr 1.05fr;
-        gap: 48px;
-        align-items: center;
+    .card-price {
+        font-size: 17px;
+        font-weight: 800;
+        color: #222222;
     }
-    .about-visual {
-        border-radius: 18px;
-        min-height: 320px;
-        background: linear-gradient(135deg, #0194f3, #0264b1);
-        position: relative;
-        overflow: hidden;
-        display: grid;
-        place-items: center;
-        color: #ffffff;
-        text-align: center;
-        padding: 30px;
-        box-shadow: 0 12px 30px rgba(1, 148, 243, 0.25);
-    }
-    .about-visual::before {
-        content: "";
-        position: absolute; inset: 0;
-        background-image: radial-gradient(rgba(255, 255, 255, .15) 1px, transparent 1px);
-        background-size: 20px 20px;
-    }
-    .about-visual div { position: relative; z-index: 1; }
-    .about-visual strong { display: block; font-size: 52px; color: #ffeb3b; letter-spacing: -.03em; font-weight: 900; }
-    .about-visual span { font-size: 14px; letter-spacing: .06em; text-transform: uppercase; font-weight: 700; }
-    .about-list { list-style: none; display: grid; gap: 12px; margin-top: 22px; }
-    .about-list li {
-        display: flex; gap: 12px; align-items: flex-start;
-        font-size: 13.5px; color: var(--slate-700);
-    }
-    .about-list .num {
-        flex-shrink: 0; width: 26px; height: 26px; border-radius: 8px;
-        background: #e7f5ff; color: #0194f3;
-        border: 1px solid #b9e3ff;
-        display: grid; place-items: center;
-        font-size: 12px; font-weight: 800;
+    .card-price span {
+        font-size: 13px;
+        font-weight: 400;
+        color: #717171;
     }
 
-    /* Galeri Grid */
-    .galeri-grid {
+    /* Trust & About Banner */
+    .trust-clean {
+        background: #ffffff;
+        border-top: 1px solid #ebebeb;
+        border-bottom: 1px solid #ebebeb;
+        padding: 60px 0;
+        margin: 40px 0;
+    }
+    .trust-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
+        gap: 40px;
     }
-    .galeri-item {
-        height: 220px;
-        border-radius: 14px;
-        position: relative;
-        overflow: hidden;
+    .trust-item {
         display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 16px 18px;
-        color: #fff;
-        background-size: cover;
-        background-position: center;
-        box-shadow: 0 4px 14px rgba(3, 18, 38, .08);
-        border: 1px solid rgba(255, 255, 255, .15);
-        transition: transform .25s ease, box-shadow .25s ease;
+        gap: 18px;
+        align-items: flex-start;
     }
-    .galeri-item:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 14px 28px rgba(3, 18, 38, .2);
-    }
-    .galeri-item::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, transparent 30%, rgba(3, 18, 38, .85) 100%);
-    }
-    .galeri-item .galeri-text { position: relative; z-index: 2; }
-    .galeri-item .galeri-text strong {
-        display: block; font-size: 15px; font-weight: 800; color: #fff;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, .4);
-    }
-    .galeri-item .galeri-text span {
-        display: block; font-size: 12px; color: #d7efff; margin-top: 2px; font-weight: 500;
-    }
-
-    /* Contact Card */
-    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .contact-card {
-        background: #fff;
-        border: 1px solid var(--slate-200);
+    .trust-icon {
+        width: 48px;
+        height: 48px;
         border-radius: 14px;
-        padding: 22px;
-        box-shadow: 0 2px 6px rgba(3, 18, 38, 0.03);
+        background: #f7f7f7;
+        border: 1px solid #ebebeb;
+        display: grid;
+        place-items: center;
+        font-size: 22px;
+        flex-shrink: 0;
     }
-    .contact-card h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--traveloka-blue); font-weight: 800; }
-    .contact-card p { margin-top: 8px; font-size: 14px; color: var(--slate-900); font-weight: 600; line-height: 1.5; }
-
-    /* CTA Section */
-    .cta {
-        margin-top: 52px;
-        border-radius: 18px;
-        padding: 40px 44px;
-        background: linear-gradient(120deg, #0194f3, #007ce8);
-        color: #ffffff;
-        display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
-        box-shadow: 0 16px 36px rgba(1, 148, 243, 0.28);
+    .trust-info h4 {
+        font-family: 'Outfit', sans-serif;
+        font-size: 17px;
+        font-weight: 700;
+        color: #222222;
+        margin-bottom: 6px;
     }
-    .cta h3 { font-size: 24px; letter-spacing: -.02em; color: #fff; font-weight: 800; }
-    .cta p { margin-top: 6px; font-size: 14px; color: #e1f3ff; }
+    .trust-info p {
+        font-size: 14px;
+        color: #717171;
+        line-height: 1.55;
+    }
 
     @media (max-width: 980px) {
-        .hero .container { grid-template-columns: 1fr; gap: 36px; }
-        .hero-widget { max-width: 520px; }
-        .paket-grid { grid-template-columns: repeat(2, 1fr); }
-        .about { grid-template-columns: 1fr; gap: 28px; }
-        .galeri-grid { grid-template-columns: repeat(2, 1fr); }
-        .contact-grid { grid-template-columns: 1fr; }
-        .stats-grid { grid-template-columns: repeat(2, 1fr); }
-        .stat:nth-child(2) { border-right: 0; }
-        .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--slate-200); }
+        .search-clean-bar { grid-template-columns: 1fr 1fr; border-radius: 20px; padding: 16px; }
+        .clean-col { border-right: none; margin-bottom: 8px; }
+        .grid-airbnb { grid-template-columns: repeat(2, 1fr); }
+        .trust-grid { grid-template-columns: 1fr; gap: 28px; }
     }
     @media (max-width: 640px) {
-        .paket-grid, .galeri-grid { grid-template-columns: 1fr; }
-        .stats-grid { grid-template-columns: 1fr; }
-        .stat { border-right: 0; border-bottom: 1px solid var(--slate-200); }
-        .stat:last-child { border-bottom: 0; }
-        .cta { padding: 28px 24px; }
+        .grid-airbnb { grid-template-columns: 1fr; }
+        .search-clean-bar { grid-template-columns: 1fr; }
     }
 </style>
 @endpush
 
 @section('content')
-    <section class="hero">
+    <!-- Scandinavian Clean Hero -->
+    <section class="hero-clean">
         <div class="container">
-            <div>
-                <span class="hero-tag">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                    BIRO PERJALANAN RESMI &middot; METRO, LAMPUNG
-                </span>
-                <h1>Mau ke Mana? Temukan <em>Paket Wisata Impianmu</em></h1>
-                <p>Pesan paket perjalanan wisata nusantara, study tour, kunjungan industri, KKL, dan ziarah Wali Songo bersama PT. Puma Star Jaya. Nikmati kemudahan reservasi tiket, pembayaran fleksibel, dan kuitansi instan langsung dari website.</p>
-                <div class="hero-actions">
-                    <a href="{{ route('paket.index') }}" class="btn btn-amber">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                        Lihat Semua Paket
-                    </a>
-                    @guest
-                        <a href="{{ route('register') }}" class="btn btn-light">Daftar Akun Gratis</a>
-                    @else
-                        <a href="{{ route('dashboard') }}" class="btn btn-light">Buka Dashboard Saya</a>
-                    @endguest
-                </div>
-                <div class="hero-note">
-                    <span><i>&#10003;</i> Jaminan Harga Terbaik</span>
-                    <span><i>&#10003;</i> Armada Bus Pariwisata Nyaman</span>
-                    <span><i>&#10003;</i> Pemandu Wisata Profesional</span>
-                </div>
+            <div class="hero-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff385c" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span>Biro Wisata Terpercaya Sejak 2016 &middot; Metro, Lampung</span>
             </div>
+            <h1>Jelajahi Pengalaman Nusantara Tanpa Batas bersama <span class="gradient-text">Puma Star Jaya</span></h1>
+            <p>Pesan paket perjalanan wisata, study tour, ziarah, dan KKL kampus dengan proses mudah, armada bus pariwisata premium, dan harga transparan.</p>
 
-            <!-- Glassmorphism Quick Info Cards -->
-            <div class="hero-info-glass">
-                <div class="glass-card">
-                    <span class="glass-tag">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        Layanan Wisata Nusantara
-                    </span>
-                    <h3 class="glass-title">Tour Bali, Jogja, Danau Toba &amp; Bandung</h3>
-                    <p class="glass-desc">Armada Bus Executive ber-AC lengkap dengan penginapan berbintang dan konsumsi 3x sehari.</p>
-                </div>
-                <div class="glass-card">
-                    <span class="glass-tag">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        Wisata Religi &amp; Edukasi
-                    </span>
-                    <h3 class="glass-title">Ziarah Wali Songo, Study Tour &amp; KKL Kampus</h3>
-                    <p class="glass-desc">Didampingi tour leader bersertifikat, izin resmi, dan rute terlengkap dari Lampung.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Traveloka Interactive Search Box Panel -->
-    <div class="container traveloka-search-wrapper">
-        <div class="traveloka-search-card">
-            <div class="search-card-header">
-                <h3>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0194f3" stroke-width="2.5"><path d="M2.5 19.5 21 12 2.5 4.5l3 7.5-3 7.5Z"/><path d="M5.5 12H21"/></svg>
-                    Pencarian Cepat Paket Wisata
-                </h3>
-                <span class="tag">Puma Star Jaya Booking</span>
-            </div>
-            <form action="{{ route('paket.index') }}" method="GET" class="search-form-grid">
-                <div class="search-input-box">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    <div class="input-content">
-                        <label>Destinasi / Rute Wisata</label>
+            <!-- Airbnb Style Floating Search -->
+            <div class="search-clean-wrapper">
+                <form action="{{ route('paket.index') }}" method="GET" class="search-clean-bar">
+                    <div class="clean-col">
+                        <label>Destinasi Wisata</label>
                         <select name="dest">
-                            <option value="">Semua Destinasi Nusantara</option>
-                            <option value="Bali">Bali (Pantai &amp; Budaya)</option>
-                            <option value="Yogyakarta">Yogyakarta (Candi &amp; Keraton)</option>
-                            <option value="Jawa">Ziarah Wali Songo (Jatim &amp; Jateng)</option>
-                            <option value="Sumatera Utara">Danau Toba (Sumatera Utara)</option>
-                            <option value="Bandung">Bandung (Sentra Industri)</option>
-                            <option value="Jakarta">Jakarta (Wisata Kota &amp; Edukasi)</option>
+                            <option value="">Mau pergi ke mana?</option>
+                            <option value="Bali">Pulau Dewata Bali</option>
+                            <option value="Yogyakarta">Yogyakarta &amp; Candi</option>
+                            <option value="Jawa">Ziarah Wali Songo</option>
+                            <option value="Sumatera Utara">Danau Toba &amp; Samosir</option>
+                            <option value="Bandung">Bandung Kota Kembang</option>
+                            <option value="Jakarta">DKI Jakarta</option>
                         </select>
                     </div>
-                </div>
 
-                <div class="search-input-box">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-                    <div class="input-content">
-                        <label>Rencana Berangkat</label>
+                    <div class="clean-col">
+                        <label>Waktu Berangkat</label>
                         <input type="date" name="tgl" value="{{ date('Y-m-d') }}">
                     </div>
-                </div>
 
-                <div class="search-input-box">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    <div class="input-content">
-                        <label>Kategori Peserta</label>
+                    <div class="clean-col">
+                        <label>Siapa yang Ikut?</label>
                         <select name="kategori">
-                            <option value="">Keluarga / Umum / Instansi</option>
-                            <option value="rombongan">Rombongan Sekolah / Kampus</option>
-                            <option value="pengajian">Jamaah Ziarah / Majelis Taklim</option>
-                            <option value="kantor">Instansi Kantor / Perusahaan</option>
+                            <option value="">Rombongan / Keluarga</option>
+                            <option value="rombongan">Pelajar / Mahasiswa</option>
+                            <option value="pengajian">Jamaah Pengajian</option>
+                            <option value="kantor">Instansi / Perusahaan</option>
                         </select>
                     </div>
-                </div>
 
-                <button type="submit" class="btn-search-traveloka">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                    Cari Paket
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <div class="container stats-strip">
-        <div class="stats-grid">
-            <div class="stat"><strong>2016</strong><span>Tahun Berdiri di Lampung</span></div>
-            <div class="stat"><strong>24</strong><span>Staff &amp; Pemandu Profesional</span></div>
-            <div class="stat"><strong>{{ $paket->count() }}+</strong><span>Destinasi Wisata Pilihan</span></div>
-            <div class="stat"><strong>100%</strong><span>Reservasi Online Mudah</span></div>
-        </div>
-    </div>
-
-    <section class="page-section" id="paket">
-        <div class="container">
-            <div class="section-head">
-                <span class="eyebrow" style="color:var(--traveloka-blue); font-weight:800;">PROMO &amp; DESTINASI POPULER</span>
-                <h2 class="section-title">Rekomendasi Paket Wisata Terbaik</h2>
-                <p class="section-desc">Pilihan destinasi favorit dengan fasilitas terpadu: transportasi bus eksklusif, penginapan nyaman, konsumsi harian, dan tiket masuk objek wisata.</p>
+                    <button type="submit" class="btn-clean-search" aria-label="Cari">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </button>
+                </form>
             </div>
 
-            <div class="paket-grid">
-                @forelse ($paket as $item)
-                    @php
-                        $gradients = [
-                            'linear-gradient(135deg, #0194f3, #0264b1)',
-                            'linear-gradient(135deg, #007ce8, #0056a3)',
-                            'linear-gradient(135deg, #0f4c46, #08211f)',
-                            'linear-gradient(135deg, #1d4ed8, #1e3a8a)',
-                            'linear-gradient(135deg, #0284c7, #0369a1)',
-                            'linear-gradient(135deg, #0f766e, #134e4a)',
-                        ];
-                        $mediaStyle = $item->foto_url
-                            ? "background-image: linear-gradient(180deg, rgba(3,18,38,.2), rgba(3,18,38,.75)), url('".$item->foto_url."'); background-size: cover; background-position: center;"
-                            : 'background: '.$gradients[$loop->index % count($gradients)].';';
-                    @endphp
-                    <article class="paket-card">
-                        <div class="paket-media" style="{{ $mediaStyle }}">
-                            <span class="dest">{{ $item->destinasi }}</span>
-                            <span class="rating-badge">★ 4.9</span>
-                        </div>
-                        <div class="paket-body">
-                            <h3>{{ $item->judul }}</h3>
-                            <p>{{ \Illuminate\Support\Str::limit($item->deskripsi, 105) }}</p>
-                            <div class="paket-meta">
-                                @if ($item->bus)
-                                    <span class="chip chip-bus">🚌 {{ $item->bus }}</span>
-                                @endif
-                                <span class="chip">✨ {{ $item->fasilitas ? \Illuminate\Support\Str::limit($item->fasilitas, 30) : 'Fasilitas lengkap' }}</span>
-                            </div>
-                            <div class="paket-foot">
-                                <div class="price-block">
-                                    <span class="price-label">Mulai Dari</span>
-                                    <div class="price">
-                                        Rp {{ number_format((float) $item->harga, 0, ',', '.') }}
-                                        <small>/pax</small>
-                                    </div>
-                                </div>
-                                <a href="{{ route('paket.show', $item) }}" class="btn btn-amber btn-sm">Lihat Detail</a>
-                            </div>
-                        </div>
-                    </article>
-                @empty
-                    <p>Belum ada paket wisata yang tersedia.</p>
-                @endforelse
+            <!-- Categories Quick Navigation -->
+            <div class="filter-pills">
+                <a href="{{ route('paket.index') }}" class="pill-btn active">Semua Destinasi</a>
+                <a href="{{ route('paket.index') }}?dest=Bali" class="pill-btn">🌴 Study Tour Bali</a>
+                <a href="{{ route('paket.index') }}?dest=Yogyakarta" class="pill-btn">🏛️ KKL Yogyakarta</a>
+                <a href="{{ route('paket.index') }}?dest=Jawa" class="pill-btn">🕌 Ziarah Wali Songo</a>
+                <a href="{{ route('paket.index') }}?dest=Sumatera" class="pill-btn">🌊 Danau Toba</a>
             </div>
         </div>
     </section>
 
-    <section class="page-section" id="tentang" style="background:#fff; border-top:1px solid var(--slate-200); border-bottom:1px solid var(--slate-200);">
-        <div class="container about">
-            <div class="about-visual">
-                <div>
-                    <strong>10+</strong>
-                    <span>Tahun melayani perjalanan</span>
-                </div>
-            </div>
+    <!-- Catalog Section (Airbnb Clean Grid) -->
+    <section class="container catalog-section" id="paket">
+        <div class="catalog-header">
             <div>
-                <span class="eyebrow">Tentang Kami</span>
-                <h2 class="section-title">Biro perjalanan wisata yang tumbuh bersama kepercayaan pelanggan</h2>
-                <p class="section-desc">PT. Puma Star Jaya berdiri sejak 10 Agustus 2016 dan berkedudukan di Jl. Sultan Dumas No. A8&ndash;A9, Metro Selatan, Kota Metro, Lampung. Kami didukung 24 karyawan yang berpengalaman di bidang wisata rohani maupun wisata umum.</p>
-                <ul class="about-list">
-                    <li><span class="num">1</span><span>Informasi paket wisata yang lengkap dan mudah diakses.</span></li>
-                    <li><span class="num">2</span><span>Pemesanan online tanpa harus datang ke kantor.</span></li>
-                    <li><span class="num">3</span><span>Konfirmasi pembayaran dan kuitansi yang tertata.</span></li>
-                    <li><span class="num">4</span><span>Laporan pemesanan dan pembayaran yang cepat dan akurat.</span></li>
-                </ul>
+                <h2>Destinasi &amp; Paket Wisata Unggulan</h2>
+                <p>Dipilih dan disusun khusus untuk kenyamanan liburan serta kegiatan akademik Anda.</p>
+            </div>
+            <a href="{{ route('paket.index') }}" class="btn btn-outline btn-sm">Lihat Semua Paket ({{ $paket->count() }})</a>
+        </div>
+
+        <div class="grid-airbnb">
+            @forelse ($paket as $item)
+                <a href="{{ route('paket.show', $item) }}" class="airbnb-card">
+                    <div class="card-photo-box">
+                        <img src="{{ $item->foto_url ?? asset('images/galeri/bali.webp') }}" alt="{{ $item->judul }}" class="card-photo" loading="lazy">
+                        <span class="dest-pill-badge">{{ $item->destinasi }}</span>
+                    </div>
+                    <div class="card-meta-top">
+                        <h3 class="card-title">{{ $item->judul }}</h3>
+                        <span class="card-rating">★ 4.94</span>
+                    </div>
+                    <div class="card-bus-info">🚌 {{ $item->bus ?: 'Armada Pariwisata Nyaman' }}</div>
+                    <div class="card-facility">{{ $item->fasilitas ? \Illuminate\Support\Str::limit($item->fasilitas, 48) : 'Fasilitas lengkap penginapan & makan' }}</div>
+                    <div class="card-price-bottom">
+                        <div class="card-price">Rp {{ number_format((float) $item->harga, 0, ',', '.') }}</div>
+                        <span>/ orang</span>
+                    </div>
+                </a>
+            @empty
+                <p>Belum ada paket wisata.</p>
+            @endforelse
+        </div>
+    </section>
+
+    <!-- Trust Values Strip (Scandinavian Clean) -->
+    <section class="trust-clean" id="tentang">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <div class="trust-icon">🛡️</div>
+                    <div class="trust-info">
+                        <h4>Berizin Resmi &amp; Terpercaya</h4>
+                        <p>Berdiri sejak 10 Agustus 2016 di Kota Metro, Lampung dengan legalitas lengkap dan 24 karyawan profesional.</p>
+                    </div>
+                </div>
+
+                <div class="trust-item">
+                    <div class="trust-icon">🚍</div>
+                    <div class="trust-info">
+                        <h4>Armada Bus Pariwisata Prima</h4>
+                        <p>Unit Big Bus dan Medium Bus AC dengan perawatan rutin, audio visual, reclining seats, dan kru sopir berpengalaman.</p>
+                    </div>
+                </div>
+
+                <div class="trust-item">
+                    <div class="trust-icon">💳</div>
+                    <div class="trust-info">
+                        <h4>Pemesanan &amp; Kuitansi Instan</h4>
+                        <p>Reservasi online langsung terbit kode pemesanan, validasi transaksi oleh bendahara, dan kuitansi resmi sistem.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="page-section" id="galeri">
-        <div class="container">
-            <div class="section-head">
-                <span class="eyebrow">Galeri</span>
-                <h2 class="section-title">Destinasi yang kami layani</h2>
-                <p class="section-desc">Sebagian destinasi populer dalam paket perjalanan PT. Puma Star Jaya.</p>
-            </div>
-            <div class="galeri-grid">
-                <div class="galeri-item" style="background-image: url('{{ asset('images/galeri/walisa.jpg') }}');">
-                    <div class="galeri-text">
-                        <strong>Ziarah Wali Songo</strong>
-                        <span>Wisata Rohani &amp; Makam Para Wali</span>
-                    </div>
-                </div>
-                <div class="galeri-item" style="background-image: url('{{ asset('images/galeri/bali.webp') }}');">
-                    <div class="galeri-text">
-                        <strong>Study Tour Bali</strong>
-                        <span>Pantai, Budaya &amp; Edukasi Pulau Dewata</span>
-                    </div>
-                </div>
-                <div class="galeri-item" style="background-image: url('{{ asset('images/galeri/yogya.jpg') }}');">
-                    <div class="galeri-text">
-                        <strong>Yogyakarta Istimewa</strong>
-                        <span>Candi, Keraton, &amp; Kunjungan Industri</span>
-                    </div>
-                </div>
-                <div class="galeri-item" style="background-image: url('{{ asset('images/galeri/toba.jpg') }}');">
-                    <div class="galeri-text">
-                        <strong>Pesona Danau Toba</strong>
-                        <span>Keindahan Alam Danau Vulkanik Terbesar</span>
-                    </div>
-                </div>
-                <div class="galeri-item" style="background-image: url('{{ asset('images/galeri/jkt.jpg') }}');">
-                    <div class="galeri-text">
-                        <strong>Study Banding Jakarta</strong>
-                        <span>Kunjungan Instansi &amp; Wisata Modern Ibu Kota</span>
-                    </div>
-                </div>
-                <div class="galeri-item" style="background-image: url('{{ asset('images/galeri/bdh.jpg') }}');">
-                    <div class="galeri-text">
-                        <strong>Wisata Bandung</strong>
-                        <span>Kesejukan Alam &amp; Wisata Edukasi Kuliner</span>
-                    </div>
-                </div>
+    <!-- Galeri Preview Section -->
+    <section class="container" id="galeri" style="padding: 40px 28px 70px;">
+        <div class="catalog-header">
+            <div>
+                <h2>Galeri Perjalanan Bersama Kami</h2>
+                <p>Dokumentasi perjalanan rombongan sekolah, instansi, dan jamaah ziarah.</p>
             </div>
         </div>
-    </section>
-
-    <section class="page-section" id="kontak" style="padding-top:0;">
-        <div class="container">
-            <div class="section-head">
-                <span class="eyebrow">Kontak</span>
-                <h2 class="section-title">Butuh bantuan merencanakan perjalanan?</h2>
-                <p class="section-desc">Hubungi kami melalui kanal berikut atau daftar akun untuk memesan secara online.</p>
+        <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:16px;">
+            <div style="height:200px;border-radius:16px;overflow:hidden;background:#ebebeb;">
+                <img src="{{ asset('images/galeri/bali.webp') }}" alt="Bali" style="width:100%;height:100%;object-fit:cover;">
             </div>
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <h4>Alamat</h4>
-                    <p>Jl. Sultan Dumas No. A8&ndash;A9, Metro Selatan, Kota Metro, Lampung</p>
-                </div>
-                <div class="contact-card">
-                    <h4>Telepon / WhatsApp</h4>
-                    <p>0812-3456-7890</p>
-                </div>
-                <div class="contact-card">
-                    <h4>Email</h4>
-                    <p>info@pumastarjaya.test</p>
-                </div>
+            <div style="height:200px;border-radius:16px;overflow:hidden;background:#ebebeb;">
+                <img src="{{ asset('images/galeri/yogya.jpg') }}" alt="Yogya" style="width:100%;height:100%;object-fit:cover;">
             </div>
-
-            <div class="cta">
-                <div>
-                    <h3>Siap memesan paket wisata?</h3>
-                    <p>Buat akun konsumen, pilih paket, lalu unggah bukti pembayaran Anda.</p>
-                </div>
-                @guest
-                    <a href="{{ route('register') }}" class="btn btn-amber">Daftar Sekarang</a>
-                @else
-                    <a href="{{ route('paket.index') }}" class="btn btn-amber">Pilih Paket</a>
-                @endguest
+            <div style="height:200px;border-radius:16px;overflow:hidden;background:#ebebeb;">
+                <img src="{{ asset('images/galeri/walisa.jpg') }}" alt="Wali Songo" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <div style="height:200px;border-radius:16px;overflow:hidden;background:#ebebeb;">
+                <img src="{{ asset('images/galeri/toba.jpg') }}" alt="Danau Toba" style="width:100%;height:100%;object-fit:cover;">
             </div>
         </div>
     </section>
