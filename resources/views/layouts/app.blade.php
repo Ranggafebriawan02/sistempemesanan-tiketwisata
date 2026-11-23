@@ -9,28 +9,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --teal-900: #0b3d3a;
-            --teal-800: #0f4c46;
-            --teal-700: #0f766e;
-            --teal-600: #0d9488;
-            --teal-100: #ccfbf1;
-            --teal-50: #f0fdfa;
-            --amber-500: #f59e0b;
-            --amber-100: #fef3c7;
-            --slate-900: #0f172a;
-            --slate-700: #334155;
-            --slate-500: #64748b;
+            --traveloka-blue: #0194f3;
+            --traveloka-blue-dark: #007ce8;
+            --traveloka-blue-light: #e7f5ff;
+            --traveloka-blue-subtle: #f2f9ff;
+            --traveloka-navy: #031226;
+            --traveloka-orange: #ff5e1f;
+            --traveloka-orange-hover: #e04b12;
+            --teal-900: #0194f3;
+            --teal-800: #007ce8;
+            --teal-700: #0194f3;
+            --teal-600: #00a5ff;
+            --teal-100: #e7f5ff;
+            --teal-50: #f2f9ff;
+            --amber-500: #ff5e1f;
+            --amber-100: #ffede6;
+            --slate-900: #1c2430;
+            --slate-700: #434d5b;
+            --slate-500: #687176;
             --slate-300: #cbd5e1;
-            --slate-200: #e2e8f0;
-            --slate-100: #f1f5f9;
-            --slate-50: #f8fafc;
+            --slate-200: #e5e9ed;
+            --slate-100: #f2f4f7;
+            --slate-50: #f7f9fa;
             --white: #ffffff;
-            --danger: #dc2626;
-            --success: #16a34a;
-            --radius: 14px;
-            --shadow-sm: 0 1px 2px rgba(15, 23, 42, .06);
-            --shadow: 0 10px 30px -12px rgba(15, 23, 42, .25);
-            --shadow-lg: 0 24px 60px -20px rgba(15, 23, 42, .35);
+            --danger: #d32f2f;
+            --success: #05a569;
+            --radius: 12px;
+            --shadow-sm: 0 1px 3px rgba(3, 18, 38, .07);
+            --shadow: 0 4px 16px rgba(3, 18, 38, .08);
+            --shadow-lg: 0 12px 32px rgba(3, 18, 38, .12);
             --container: 1180px;
         }
 
@@ -61,10 +68,11 @@
 
         /* ---------- Top bar ---------- */
         .topbar {
-            background: var(--teal-900);
-            color: #d7fbf4;
+            background: #0264b1;
+            color: #dff0ff;
             font-size: 12.5px;
             padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
         }
         .topbar .container {
             display: flex;
@@ -73,23 +81,23 @@
             gap: 16px;
             flex-wrap: wrap;
         }
-        .topbar strong { color: #fde68a; }
+        .topbar strong { color: #ffffff; font-weight: 700; }
 
         /* ---------- Navbar ---------- */
         .site-header {
             position: sticky;
             top: 0;
             z-index: 50;
-            background: rgba(255, 255, 255, .96);
-            backdrop-filter: blur(14px);
+            background: #ffffff;
             border-bottom: 1px solid var(--slate-200);
+            box-shadow: 0 2px 8px rgba(3, 18, 38, 0.04);
         }
         .navbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 20px;
-            padding: 12px 0;
+            padding: 14px 0;
         }
         .brand {
             display: flex;
@@ -99,13 +107,13 @@
             flex-shrink: 0;
         }
         .brand-mark {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--teal-700), var(--teal-600));
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #0194f3, #007ce8);
             display: grid;
             place-items: center;
-            box-shadow: 0 8px 18px -6px rgba(13, 148, 136, .6);
+            box-shadow: 0 4px 12px rgba(1, 148, 243, 0.35);
         }
         .brand-mark svg { width: 22px; height: 22px; }
         .brand-text h1 {
@@ -113,96 +121,98 @@
             font-weight: 800;
             letter-spacing: -.02em;
             line-height: 1.15;
-            color: var(--teal-900);
+            color: #0194f3;
         }
         .brand-text span {
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--slate-500);
-            letter-spacing: .04em;
+            letter-spacing: .05em;
             text-transform: uppercase;
         }
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             list-style: none;
         }
         .nav-links a {
             display: inline-block;
             text-decoration: none;
             color: var(--slate-700);
-            font-size: 13.5px;
+            font-size: 14px;
             font-weight: 600;
-            padding: 8px 12px;
-            border-radius: 9px;
-            transition: background .18s, color .18s;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: background .15s, color .15s;
         }
-        .nav-links a:hover { background: var(--slate-100); color: var(--teal-700); }
+        .nav-links a:hover { background: var(--traveloka-blue-light); color: var(--traveloka-blue); }
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             flex-shrink: 0;
         }
         .user-pill {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 5px 6px 5px 12px;
+            padding: 6px 8px 6px 14px;
             border: 1px solid var(--slate-200);
-            border-radius: 12px;
+            border-radius: 999px;
             background: var(--white);
             box-shadow: var(--shadow-sm);
         }
         .user-pill .meta { display: flex; flex-direction: column; line-height: 1.2; }
         .user-pill .meta strong { font-size: 12.5px; color: var(--slate-900); white-space: nowrap; }
-        .user-pill .meta small { font-size: 10.5px; color: var(--slate-500); text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
+        .user-pill .meta small { font-size: 10px; color: var(--traveloka-blue); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
 
         .nav-mobile-only { display: none; }
 
-        /* ---------- Buttons ---------- */
+        /* ---------- Buttons (Traveloka Style) ---------- */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             border: 1px solid transparent;
-            border-radius: 11px;
-            padding: 10px 18px;
+            border-radius: 8px;
+            padding: 10px 20px;
             font-family: inherit;
-            font-size: 13.5px;
+            font-size: 14px;
             font-weight: 700;
             text-decoration: none;
             cursor: pointer;
-            transition: transform .15s, background .18s, box-shadow .18s, border-color .18s;
+            transition: all .18s ease-in-out;
             white-space: nowrap;
         }
         .btn:hover { transform: translateY(-1px); }
         .btn-primary {
-            background: var(--teal-700);
+            background: var(--traveloka-blue);
             color: var(--white);
-            box-shadow: 0 10px 22px -10px rgba(15, 118, 110, .8);
+            box-shadow: 0 4px 12px rgba(1, 148, 243, 0.35);
         }
-        .btn-primary:hover { background: var(--teal-800); }
+        .btn-primary:hover { background: var(--traveloka-blue-dark); color: #fff; }
         .btn-amber {
-            background: var(--amber-500);
-            color: #422006;
-            box-shadow: 0 10px 22px -10px rgba(245, 158, 11, .8);
+            background: var(--traveloka-orange);
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(255, 94, 31, 0.4);
         }
-        .btn-amber:hover { background: #eab308; }
+        .btn-amber:hover { background: var(--traveloka-orange-hover); color: #fff; }
         .btn-outline {
-            background: transparent;
-            border-color: var(--slate-300);
-            color: var(--slate-700);
+            background: #ffffff;
+            border-color: var(--traveloka-blue);
+            color: var(--traveloka-blue);
+            font-weight: 700;
         }
-        .btn-outline:hover { background: var(--slate-100); border-color: var(--slate-300); }
+        .btn-outline:hover { background: var(--traveloka-blue-light); border-color: var(--traveloka-blue); }
         .btn-light {
-            background: rgba(255, 255, 255, .14);
-            border-color: rgba(255, 255, 255, .35);
-            color: var(--white);
+            background: #ffffff;
+            border-color: #ffffff;
+            color: var(--traveloka-blue);
+            font-weight: 700;
         }
-        .btn-light:hover { background: rgba(255, 255, 255, .24); }
+        .btn-light:hover { background: #f0f7ff; color: var(--traveloka-blue-dark); }
         .btn-danger {
             background: transparent;
             color: var(--danger);
@@ -210,7 +220,7 @@
             padding: 8px 10px;
         }
         .btn-danger:hover { background: #fee2e2; }
-        .btn-sm { padding: 7px 12px; font-size: 12.5px; border-radius: 9px; }
+        .btn-sm { padding: 8px 14px; font-size: 13px; border-radius: 8px; }
         .btn-block { width: 100%; }
 
         /* ---------- Status badge ---------- */
@@ -288,10 +298,11 @@
 
         /* ---------- Footer ---------- */
         .footer {
-            background: #08211f;
-            color: #9fb8b4;
-            padding: 52px 0 22px;
+            background: #031226;
+            color: #93a3b8;
+            padding: 56px 0 24px;
             margin-top: 64px;
+            border-top: 3px solid var(--traveloka-blue);
         }
         .footer-grid {
             display: grid;
@@ -302,14 +313,14 @@
         }
         .footer h4 {
             color: #fff;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
-        .footer p, .footer li { font-size: 13px; line-height: 1.8; }
+        .footer p, .footer li { font-size: 13.5px; line-height: 1.8; }
         .footer ul { list-style: none; }
-        .footer a { text-decoration: none; color: #9fb8b4; }
-        .footer a:hover { color: #5eead4; }
+        .footer a { text-decoration: none; color: #93a3b8; transition: color .15s; }
+        .footer a:hover { color: #0194f3; }
         .footer-bottom {
             display: flex;
             justify-content: space-between;
@@ -317,7 +328,7 @@
             flex-wrap: wrap;
             padding-top: 20px;
             font-size: 12px;
-            color: #6b8f8a;
+            color: #64748b;
         }
 
         .mobile-toggle {
