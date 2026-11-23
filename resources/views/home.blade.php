@@ -4,21 +4,38 @@
 
 @push('styles')
 <style>
-    /* ========== Traveloka Header Hero ========== */
+    /* ========== Traveloka Ultra-Modern Hero ========== */
     .hero {
         position: relative;
         overflow: hidden;
-        background: linear-gradient(135deg, #0194f3 0%, #007ce8 65%, #0264b1 100%);
+        background:
+            radial-gradient(1200px 600px at 80% -10%, rgba(1, 148, 243, 0.45), transparent 70%),
+            radial-gradient(900px 500px at 10% 120%, rgba(255, 94, 31, 0.2), transparent 60%),
+            linear-gradient(135deg, #0264b1 0%, #0194f3 50%, #007ce8 100%);
         color: #ffffff;
-        padding: 56px 0 88px;
+        padding: 68px 0 108px;
     }
     .hero::before {
         content: "";
         position: absolute;
         inset: 0;
-        background-image: radial-gradient(rgba(255, 255, 255, .15) 1px, transparent 1px);
-        background-size: 24px 24px;
-        opacity: .4;
+        background-image: 
+            radial-gradient(circle at 25px 25px, rgba(255, 255, 255, 0.12) 2px, transparent 0),
+            radial-gradient(circle at 75px 75px, rgba(255, 255, 255, 0.08) 3px, transparent 0);
+        background-size: 100px 100px;
+        opacity: 0.6;
+        pointer-events: none;
+    }
+    /* Animated Floating Aurora Glow */
+    .hero::after {
+        content: "";
+        position: absolute;
+        bottom: -30%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(255, 235, 59, 0.22) 0%, rgba(1, 148, 243, 0) 70%);
+        filter: blur(60px);
         pointer-events: none;
     }
     .hero .container { position: relative; z-index: 1; display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
@@ -26,35 +43,91 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        background: rgba(255, 255, 255, .2);
-        border: 1px solid rgba(255, 255, 255, .35);
+        background: rgba(255, 255, 255, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.35);
         color: #ffffff;
+        font-family: 'Outfit', sans-serif;
         font-size: 12px;
         font-weight: 700;
-        letter-spacing: .06em;
-        padding: 6px 14px;
+        letter-spacing: .08em;
+        padding: 7px 16px;
         border-radius: 999px;
-        margin-bottom: 16px;
-        backdrop-filter: blur(8px);
+        margin-bottom: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     }
     .hero h1 {
-        font-size: clamp(30px, 4vw, 48px);
-        line-height: 1.15;
-        letter-spacing: -.025em;
-        font-weight: 800;
+        font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+        font-size: clamp(32px, 4.2vw, 52px);
+        line-height: 1.12;
+        letter-spacing: -.03em;
+        font-weight: 900;
         color: #ffffff;
+        text-shadow: 0 2px 10px rgba(2, 100, 177, 0.3);
     }
-    .hero h1 em { font-style: normal; color: #ffeb3b; }
-    .hero p { margin-top: 16px; max-width: 520px; color: #e1f3ff; font-size: 15px; line-height: 1.6; }
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
-    .hero-note { margin-top: 24px; display: flex; gap: 20px; flex-wrap: wrap; color: #d4edff; font-size: 13px; font-weight: 600; }
-    .hero-note span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero h1 em {
+        font-style: normal;
+        background: linear-gradient(120deg, #ffeb3b, #ffb300);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+    }
+    .hero p { margin-top: 18px; max-width: 520px; color: #e1f3ff; font-size: 15.5px; line-height: 1.65; font-weight: 400; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
+    .hero-note { margin-top: 28px; display: flex; gap: 22px; flex-wrap: wrap; color: #d4edff; font-size: 13.5px; font-weight: 600; }
+    .hero-note span { display: inline-flex; align-items: center; gap: 8px; }
     .hero-note i {
-        width: 18px; height: 18px; border-radius: 50%;
+        width: 20px; height: 20px; border-radius: 50%;
         background: #ffffff;
         color: #0194f3;
         display: inline-grid; place-items: center;
         font-style: normal; font-size: 11px; font-weight: 900;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Glassmorphism Quick Info Cards */
+    .hero-info-glass {
+        display: grid;
+        gap: 16px;
+    }
+    .glass-card {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 16px;
+        padding: 20px 24px;
+        backdrop-filter: blur(14px);
+        box-shadow: 0 8px 32px rgba(2, 60, 110, 0.18);
+        transition: transform .25s ease, background .25s ease, border-color .25s ease;
+    }
+    .glass-card:hover {
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.45);
+    }
+    .glass-tag {
+        font-family: 'Outfit', sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: .08em;
+        color: #ffeb3b;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .glass-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 17px;
+        font-weight: 800;
+        color: #ffffff;
+        margin-top: 6px;
+        letter-spacing: -.01em;
+    }
+    .glass-desc {
+        font-size: 13px;
+        color: #e1f3ff;
+        margin-top: 6px;
+        line-height: 1.5;
     }
 
     /* Traveloka Full-Width Search Panel */
@@ -444,17 +517,23 @@
                 </div>
             </div>
 
-            <!-- Quick Info Cards -->
-            <div style="display:grid;gap:14px;">
-                <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:14px;padding:16px 20px;backdrop-filter:blur(8px);">
-                    <div style="font-size:12px;font-weight:800;letter-spacing:.06em;color:#ffeb3b;text-transform:uppercase;">Layanan Wisata Nusantara</div>
-                    <div style="font-size:16px;font-weight:800;color:#fff;margin-top:4px;">Tour Bali, Jogja, Danau Toba &amp; Bandung</div>
-                    <p style="font-size:13px;color:#e1f3ff;margin-top:4px;">Armada Bus Executive ber-AC lengkap dengan penginapan dan makan 3x sehari.</p>
+            <!-- Glassmorphism Quick Info Cards -->
+            <div class="hero-info-glass">
+                <div class="glass-card">
+                    <span class="glass-tag">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        Layanan Wisata Nusantara
+                    </span>
+                    <h3 class="glass-title">Tour Bali, Jogja, Danau Toba &amp; Bandung</h3>
+                    <p class="glass-desc">Armada Bus Executive ber-AC lengkap dengan penginapan berbintang dan konsumsi 3x sehari.</p>
                 </div>
-                <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:14px;padding:16px 20px;backdrop-filter:blur(8px);">
-                    <div style="font-size:12px;font-weight:800;letter-spacing:.06em;color:#ffeb3b;text-transform:uppercase;">Wisata Religi &amp; Edukasi</div>
-                    <div style="font-size:16px;font-weight:800;color:#fff;margin-top:4px;">Ziarah Wali Songo, Study Tour &amp; KKL Kampus</div>
-                    <p style="font-size:13px;color:#e1f3ff;margin-top:4px;">Didampingi pemandu wisata bersertifikat dan berpengalaman sejak 2016.</p>
+                <div class="glass-card">
+                    <span class="glass-tag">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        Wisata Religi &amp; Edukasi
+                    </span>
+                    <h3 class="glass-title">Ziarah Wali Songo, Study Tour &amp; KKL Kampus</h3>
+                    <p class="glass-desc">Didampingi tour leader bersertifikat, izin resmi, dan rute terlengkap dari Lampung.</p>
                 </div>
             </div>
         </div>

@@ -5,11 +5,26 @@
 @push('styles')
 <style>
     .dash-hero {
-        background: linear-gradient(135deg, #042f2e 0%, #0d544c 50%, #115e59 100%);
+        background:
+            radial-gradient(1000px 400px at 80% -20%, rgba(1, 148, 243, 0.4), transparent 60%),
+            linear-gradient(135deg, #0264b1 0%, #0194f3 60%, #007ce8 100%);
         color: #fff;
-        padding: 36px 0 40px;
+        padding: 42px 0 48px;
+        position: relative;
+        overflow: hidden;
+    }
+    .dash-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle at 20px 20px, rgba(255, 255, 255, 0.12) 1.5px, transparent 0);
+        background-size: 40px 40px;
+        opacity: 0.5;
+        pointer-events: none;
     }
     .dash-hero-inner {
+        position: relative;
+        z-index: 1;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -17,15 +32,17 @@
         flex-wrap: wrap;
     }
     .dash-hero h1 {
-        font-size: clamp(22px, 3vw, 30px);
-        font-weight: 800;
+        font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+        font-size: clamp(24px, 3.2vw, 34px);
+        font-weight: 900;
         letter-spacing: -.02em;
         margin-bottom: 6px;
+        color: #fff;
     }
     .dash-hero p {
-        font-size: 14px;
-        color: #ccfbf1;
-        max-width: 600px;
+        font-size: 14.5px;
+        color: #e1f3ff;
+        max-width: 620px;
         line-height: 1.5;
         margin: 0;
     }
@@ -33,15 +50,17 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        background: rgba(255, 255, 255, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        padding: 8px 18px;
         border-radius: 999px;
+        font-family: 'Outfit', sans-serif;
         font-size: 13px;
-        font-weight: 700;
-        letter-spacing: .05em;
-        color: #fef08a;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        font-weight: 800;
+        letter-spacing: .06em;
+        color: #ffeb3b;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 14px rgba(0,0,0,0.1);
     }
 
     .main-wrap {
@@ -60,46 +79,48 @@
     }
     .stat-card {
         background: #fff;
-        border: 1px solid var(--slate-200);
+        border: 1px solid #e5e9ed;
         border-radius: 16px;
-        padding: 20px 22px;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        padding: 22px 24px;
+        box-shadow: 0 4px 16px rgba(3, 18, 38, 0.04);
         display: flex;
         align-items: center;
         gap: 16px;
-        transition: transform 0.2s, box-shadow 0.2s;
+        transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
     .stat-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(3, 18, 38, 0.08);
+        border-color: #b9e3ff;
     }
     .stat-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 22px;
+        font-size: 24px;
         flex-shrink: 0;
     }
-    .icon-emerald { background: #dcfce7; color: #15803d; }
-    .icon-blue { background: #dbeafe; color: #1d4ed8; }
-    .icon-amber { background: #fef3c7; color: #b45309; }
-    .icon-teal { background: #ccfbf1; color: #0f766e; }
+    .icon-emerald { background: #e6f7ef; color: #05a569; }
+    .icon-blue { background: #e7f5ff; color: #0194f3; }
+    .icon-amber { background: #fff4eb; color: #ff5e1f; }
+    .icon-teal { background: #eff6ff; color: #2563eb; }
 
     .stat-data { min-width: 0; }
     .stat-data .num {
-        font-size: clamp(18px, 1.8vw, 22px);
-        font-weight: 800;
-        color: var(--slate-900);
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(20px, 2vw, 24px);
+        font-weight: 900;
+        color: #1c2430;
         line-height: 1.2;
         overflow-wrap: anywhere;
     }
     .stat-data .lbl {
         font-size: 12.5px;
-        font-weight: 600;
-        color: var(--slate-500);
+        font-weight: 700;
+        color: #687176;
         margin-top: 4px;
     }
 
@@ -144,54 +165,57 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 18px;
+        padding: 20px;
         border-radius: 14px;
-        border: 1.5px solid var(--slate-200);
+        border: 1.5px solid #e5e9ed;
         text-decoration: none;
         color: inherit;
         background: #fff;
         transition: all 0.2s ease;
+        box-shadow: 0 2px 8px rgba(3, 18, 38, 0.03);
     }
     .menu-card:hover {
-        border-color: var(--teal-600);
-        background: #f0fdfa;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(13, 148, 136, 0.12);
+        border-color: #0194f3;
+        background: #f0f7ff;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(1, 148, 243, 0.12);
     }
     .menu-card-top {
         display: flex;
         align-items: center;
-        gap: 12px;
-        margin-bottom: 10px;
+        gap: 14px;
+        margin-bottom: 12px;
     }
     .menu-emoji {
         font-size: 24px;
-        background: var(--slate-100);
-        width: 44px;
-        height: 44px;
-        border-radius: 10px;
+        background: #e7f5ff;
+        color: #0194f3;
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
     .menu-title {
-        font-size: 14px;
-        font-weight: 700;
-        color: var(--slate-800);
+        font-family: 'Outfit', sans-serif;
+        font-size: 15px;
+        font-weight: 800;
+        color: #1c2430;
     }
     .menu-desc {
-        font-size: 12px;
-        color: var(--slate-500);
-        line-height: 1.45;
-        margin-bottom: 12px;
+        font-size: 12.5px;
+        color: #687176;
+        line-height: 1.5;
+        margin-bottom: 14px;
     }
     .menu-action {
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--teal-700);
+        font-size: 13px;
+        font-weight: 800;
+        color: #0194f3;
         display: flex;
         align-items: center;
-        gap: 4px;
+        gap: 6px;
     }
 
     /* Profile / Account Card */
