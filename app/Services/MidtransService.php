@@ -3,8 +3,10 @@
 namespace App\Services;
 
 use App\Models\Pemesanan;
+use App\Models\Transaksi;
 use Midtrans\Config;
 use Midtrans\Snap;
+use Midtrans\Transaction;
 
 class MidtransService
 {
@@ -54,5 +56,80 @@ class MidtransService
 
         return $snapToken;
     }
+
+    /**
+     * Cek status transaksi langsung ke server Midtrans (termasuk simulator)
+     * dan otomatis sinkronkan ke basis data lokal (tabel Transaksi).
+     */
+    public function syncStatusFromMidtrans(Pemesanan $pemesanan): ?Transaksi
+    {
+        if (empty(Config::$serverKey)) {
+            return null;
+        }
+
+        // Coba cek dengan kode pemesanan secara langsung atau order id yang cocok
+        $possibleOrderIds = [];
+
+        // Ambil order_id dari catatan transaksi terakhir jika ada
+        $lastTrx = $pemesanan->transaksi()->latest()->first();
+        if ($lastTrx && preg_match('/Order ID:\s*([A-Za-z0-9\-_]+)/', $lastTrx->catatan ?? '', $matches)) {
+            $possibleOrderIds[] = $matches[1];
+        }
+
+        $possibleOrderIds[] = $pemesanan->kode_pemesanan;
+
+        $statusData = null;
+        foreach ($possibleOrderIds as $orderId) {
+            try {
+                $res = Transaction::status($orderId);
+                if ($res && (isset($res->transaction_status) || is_array($res))) {
+                    $statusData = (object) $res;
+                    break;
+                }
+            } catch (\Exception $e) {
+                // Lanjut ke percobaan berikutnya jika order_id tidak ditemukan
+            }
+        }
+
+        if (! $statusData) {
+            return null;
+        }
+
+        $transactionStatus = $statusData->transaction_status ?? null;
+        $paymentType = $statusData->payment_type ?? 'midtrans';
+        $fraudStatus = $statusData->fraud_status ?? null;
+        $grossAmount = isset($statusData->gross_amount) ? (float) $statusData->gross_amount : (float) $pemesanan->harga;
+        $orderId = $statusData->order_id ?? $pemesanan->kode_pemesanan;
+
+        $status = Transaksi::STATUS_MENUNGGU;
+        if ($transactionStatus === 'capture') {
+            $status = ($fraudStatus === 'challenge') ? Transaksi::STATUS_MENUNGGU : Transaksi::STATUS_VALID;
+        } elseif ($transactionStatus === 'settlement') {
+            $status = Transaksi::STATUS_VALID;
+        } elseif (in_array($transactionStatus, ['deny', 'cancel', 'expire'])) {
+            $status = Transaksi::STATUS_DITOLAK;
+        } elseif ($transactionStatus === 'pending') {
+            $status = Transaksi::STATUS_MENUNGGU;
+        }
+
+        $metode = mb_strimwidth('midtrans (' . $paymentType . ')', 0, 30, '');
+
+        $transaksi = Transaksi::updateOrCreate(
+            [
+                'pemesanan_id' => $pemesanan->id,
+                'alat_pembayaran' => $metode,
+            ],
+            [
+                'user_id' => $pemesanan->user_id,
+                'status' => $status,
+                'jumlah_bayar' => $grossAmount,
+                'tanggal_bayar' => now(),
+                'catatan' => 'Pembayaran via Midtrans (' . $paymentType . ' - ' . ($transactionStatus ?? 'sukses') . ') [Order ID: ' . $orderId . ']',
+            ]
+        );
+
+        return $transaksi;
+    }
 }
+
 

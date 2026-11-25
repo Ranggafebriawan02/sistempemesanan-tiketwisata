@@ -187,17 +187,28 @@
 @if ($snapToken)
 <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
 <script>
-    function kirimStatusKeServer(result) {
-        fetch("{{ route('konsumen.pemesanan.syncMidtrans', $pemesanan) }}", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": "{{ csrf_token() }}"
-            },
-            body: JSON.stringify({ result: result })
-        }).finally(() => {
+    async function kirimStatusKeServer(result) {
+        const btn = document.getElementById('pay-button');
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = '<span>Memverifikasi Pembayaran...</span>';
+        }
+
+        try {
+            await fetch("{{ route('konsumen.pemesanan.syncMidtrans', $pemesanan) }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({ result: result })
+            });
+        } catch (err) {
+            console.error("Gagal sinkronisasi:", err);
+        } finally {
             window.location.href = "{{ route('konsumen.pemesanan.show', $pemesanan) }}";
-        });
+        }
     }
 
     const payBtn = document.getElementById('pay-button');
@@ -211,10 +222,11 @@
                     kirimStatusKeServer(result);
                 },
                 onError: function (result) {
-                    alert('Pembayaran gagal atau terjadi kesalahan.');
+                    kirimStatusKeServer(result);
                 },
                 onClose: function () {
-                    // Konsumen menutup pop-up
+                    // Konsumen menutup pop-up, cek apakah di simulator sudah dibayar
+                    kirimStatusKeServer({ transaction_status: 'check' });
                 }
             });
         };

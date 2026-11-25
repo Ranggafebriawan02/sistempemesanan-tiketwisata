@@ -94,7 +94,16 @@ class PemesananController extends Controller
     {
         $this->ensureOwner($pemesanan);
 
-        $pemesanan->load(['paket', 'transaksi', 'kupon']);
+        // Jika pesanan belum valid dan ada riwayat transaksi/snap_token, cek update status ke Midtrans
+        if ($pemesanan->statusPembayaran() !== Transaksi::STATUS_VALID && $pemesanan->snap_token) {
+            try {
+                $midtrans->syncStatusFromMidtrans($pemesanan);
+            } catch (\Exception $e) {
+                \Log::info('Sync status Midtrans check: ' . $e->getMessage());
+            }
+        }
+
+        $pemesanan->load(['paket', 'transaksi', 'kupon', 'transaksiTerakhir']);
 
         $snapToken = null;
         if ($pemesanan->bisaBayar()) {
@@ -112,10 +121,19 @@ class PemesananController extends Controller
     {
         $this->ensureOwner($pemesanan);
 
+        // Jika pesanan sudah valid via Midtrans, langsung arahkan ke show
+        if ($pemesanan->statusPembayaran() !== Transaksi::STATUS_VALID && $pemesanan->snap_token) {
+            try {
+                $midtrans->syncStatusFromMidtrans($pemesanan);
+            } catch (\Exception $e) {
+                \Log::info('Sync status Midtrans check in bayar: ' . $e->getMessage());
+            }
+        }
+
         if (! $pemesanan->bisaBayar()) {
             return redirect()
                 ->route('konsumen.pemesanan.show', $pemesanan)
-                ->with('info', 'Pembayaran untuk pesanan ini sudah dikirim dan sedang menunggu validasi bendahara.');
+                ->with('info', 'Pembayaran untuk pesanan ini sudah diverifikasi / sedang diproses.');
         }
 
         $snapToken = null;
@@ -177,17 +195,35 @@ class PemesananController extends Controller
             ->with('success', 'Bukti pembayaran berhasil diunggah. Pembayaran akan divalidasi oleh bendahara.');
     }
 
-    public function syncMidtrans(Request $request, Pemesanan $pemesanan): \Illuminate\Http\JsonResponse
+    public function syncMidtrans(Request $request, Pemesanan $pemesanan, MidtransService $midtrans): \Illuminate\Http\JsonResponse
     {
         $this->ensureOwner($pemesanan);
 
         $result = $request->input('result', []);
         $transactionStatus = $result['transaction_status'] ?? null;
+
+        // Jika request hanya berupa cek status (misal pop-up ditutup atau ditekan tombol cek manual),
+        // lakukan inquiry langsung ke API Midtrans
+        if ($transactionStatus === 'check' || empty($transactionStatus)) {
+            $updatedTrx = $midtrans->syncStatusFromMidtrans($pemesanan);
+            $pemesanan->refresh();
+            return response()->json([
+                'success' => true,
+                'status' => $pemesanan->statusPembayaran(),
+                'label' => $pemesanan->labelStatus()
+            ]);
+        }
+
         $paymentType = $result['payment_type'] ?? 'midtrans';
         $grossAmount = isset($result['gross_amount']) ? (float) $result['gross_amount'] : (float) $pemesanan->harga;
+        $orderId = $result['order_id'] ?? $pemesanan->kode_pemesanan;
+        $fraudStatus = $result['fraud_status'] ?? null;
 
+        // Tentukan status transaksi
         $status = Transaksi::STATUS_MENUNGGU;
-        if (in_array($transactionStatus, ['settlement', 'capture'])) {
+        if ($transactionStatus === 'capture') {
+            $status = ($fraudStatus === 'challenge') ? Transaksi::STATUS_MENUNGGU : Transaksi::STATUS_VALID;
+        } elseif ($transactionStatus === 'settlement') {
             $status = Transaksi::STATUS_VALID;
         } elseif (in_array($transactionStatus, ['deny', 'cancel', 'expire'])) {
             $status = Transaksi::STATUS_DITOLAK;
@@ -195,21 +231,30 @@ class PemesananController extends Controller
             $status = Transaksi::STATUS_MENUNGGU;
         }
 
-        Transaksi::updateOrCreate(
+        // Simpan alat_pembayaran dengan panjang aman (max 30 karakter)
+        $metode = mb_strimwidth('midtrans (' . $paymentType . ')', 0, 30, '');
+
+        $transaksi = Transaksi::updateOrCreate(
             [
                 'pemesanan_id' => $pemesanan->id,
-                'alat_pembayaran' => 'midtrans (' . $paymentType . ')',
+                'alat_pembayaran' => $metode,
             ],
             [
                 'user_id' => $pemesanan->user_id,
                 'status' => $status,
                 'jumlah_bayar' => $grossAmount,
                 'tanggal_bayar' => now(),
-                'catatan' => 'Pembayaran via Midtrans (' . $paymentType . ' - ' . ($transactionStatus ?? 'sukses') . ')',
+                'catatan' => 'Pembayaran via Midtrans (' . $paymentType . ' - ' . ($transactionStatus ?? 'sukses') . ') [Order ID: ' . $orderId . ']',
             ]
         );
 
-        return response()->json(['success' => true]);
+        $pemesanan->refresh();
+
+        return response()->json([
+            'success' => true,
+            'status' => $pemesanan->statusPembayaran(),
+            'label' => $pemesanan->labelStatus()
+        ]);
     }
 
     private function ensureOwner(Pemesanan $pemesanan): void

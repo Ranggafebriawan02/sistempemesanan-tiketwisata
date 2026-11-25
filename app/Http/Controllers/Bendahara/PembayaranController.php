@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Bendahara;
 use App\Http\Controllers\Controller;
 use App\Models\Pemesanan;
 use App\Models\Transaksi;
+use App\Services\MidtransService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -53,11 +54,36 @@ class PembayaranController extends Controller
         return view('bendahara.pemesanan.index', compact('pemesanan', 'status', 'q', 'counts'));
     }
 
-    public function show(Pemesanan $pemesanan): View
+    public function show(Pemesanan $pemesanan, MidtransService $midtrans): View
     {
+        // Cek pembaruan status transaksi otomatis dari Midtrans jika ada snap_token dan belum valid
+        if ($pemesanan->statusPembayaran() !== Transaksi::STATUS_VALID && $pemesanan->snap_token) {
+            try {
+                $midtrans->syncStatusFromMidtrans($pemesanan);
+            } catch (\Exception $e) {
+                \Log::info('Bendahara show sync Midtrans notice: ' . $e->getMessage());
+            }
+        }
+
         $pemesanan->load(['user', 'paket', 'kupon', 'transaksi' => fn ($query) => $query->latest()]);
 
         return view('bendahara.pemesanan.show', compact('pemesanan'));
+    }
+
+    public function syncMidtrans(Pemesanan $pemesanan, MidtransService $midtrans): RedirectResponse
+    {
+        $transaksi = null;
+        try {
+            $transaksi = $midtrans->syncStatusFromMidtrans($pemesanan);
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal memeriksa status Midtrans: ' . $e->getMessage());
+        }
+
+        if ($transaksi) {
+            return back()->with('success', 'Status transaksi berhasil disinkronkan dari Midtrans: ' . $transaksi->status);
+        }
+
+        return back()->with('info', 'Belum ada transaksi pembayaran tercatat di server Midtrans untuk pesanan ini.');
     }
 
     public function validasi(Request $request, Transaksi $transaksi): RedirectResponse

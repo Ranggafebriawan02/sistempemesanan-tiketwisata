@@ -54,6 +54,7 @@ Route::middleware(['auth', 'role:bendahara'])
     ->group(function () {
         Route::get('/pemesanan', [PembayaranController::class, 'index'])->name('pemesanan.index');
         Route::get('/pemesanan/{pemesanan}', [PembayaranController::class, 'show'])->name('pemesanan.show');
+        Route::post('/pemesanan/{pemesanan}/sync-midtrans', [PembayaranController::class, 'syncMidtrans'])->name('pemesanan.syncMidtrans');
         Route::post('/pembayaran/{transaksi}/validasi', [PembayaranController::class, 'validasi'])->name('pembayaran.validasi');
         Route::get('/pembayaran/{transaksi}/kuitansi', [PembayaranController::class, 'kuitansi'])->name('pembayaran.kuitansi');
     });

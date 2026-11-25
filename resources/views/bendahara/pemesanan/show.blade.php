@@ -194,6 +194,15 @@
                             Cetak Kuitansi
                         </a>
                     @endif
+
+                    @if ($pemesanan->snap_token || ($latest && str_contains(strtolower($latest->alat_pembayaran), 'midtrans')))
+                        <form action="{{ route('bendahara.pemesanan.syncMidtrans', $pemesanan) }}" method="POST" style="margin-top: 12px;">
+                            @csrf
+                            <button type="submit" class="btn btn-outline btn-block" style="font-size: 12.5px;" title="Cek status pembayaran langsung ke server Midtrans">
+                                &#x21bb; Cek &amp; Sinkron Status Midtrans
+                            </button>
+                        </form>
+                    @endif
                 </div>
             </div>
 

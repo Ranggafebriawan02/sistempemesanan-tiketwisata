@@ -201,45 +201,81 @@
                         </p>
                     @endif
 
+                    @if ($status !== 'valid' && $pemesanan->snap_token)
+                        <button type="button" onclick="cekStatusMidtransManual()" class="btn btn-outline btn-block" style="margin-top:10px; font-size: 12px;" title="Cek apakah pembayaran di Midtrans/QRIS simulator sudah selesai">
+                            &#x21bb; Cek Status Pembayaran Midtrans
+                        </button>
+                    @endif
+
                     <a href="{{ route('konsumen.pemesanan.index') }}" class="btn btn-outline btn-block" style="margin-top:10px;">Kembali ke Pesanan</a>
                 </div>
             </aside>
         </div>
     </div>
 
-    @if ($snapToken)
-        <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
-        <script>
-            function kirimStatusKeServer(result) {
-                fetch("{{ route('konsumen.pemesanan.syncMidtrans', $pemesanan) }}", {
+    <script>
+        async function cekStatusMidtransManual() {
+            try {
+                const res = await fetch("{{ route('konsumen.pemesanan.syncMidtrans', $pemesanan) }}", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
+                        "Accept": "application/json",
                         "X-CSRF-TOKEN": "{{ csrf_token() }}"
                     },
-                    body: JSON.stringify({ result: result })
-                }).finally(() => {
-                    window.location.reload();
+                    body: JSON.stringify({ result: { transaction_status: 'check' } })
                 });
+                const data = await res.json();
+                if (data.status === 'valid') {
+                    alert('Pembayaran berhasil diverifikasi! Halaman akan dimuat ulang.');
+                }
+            } catch (e) {
+                console.error(e);
+            } finally {
+                window.location.reload();
+            }
+        }
+    </script>
+    @if ($snapToken)
+        <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
+        <script>
+            async function kirimStatusKeServer(result) {
+                try {
+                    await fetch("{{ route('konsumen.pemesanan.syncMidtrans', $pemesanan) }}", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json",
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                        },
+                        body: JSON.stringify({ result: result })
+                    });
+                } catch (err) {
+                    console.error("Gagal sync status:", err);
+                } finally {
+                    window.location.reload();
+                }
             }
 
-            document.getElementById('pay-button').onclick = function () {
-                snap.pay('{{ $snapToken }}', {
-                    onSuccess: function (result) {
-                        kirimStatusKeServer(result);
-                    },
-                    onPending: function (result) {
-                        kirimStatusKeServer(result);
-                    },
-                    onError: function (result) {
-                        alert('Pembayaran gagal atau terjadi kesalahan.');
-                        window.location.reload();
-                    },
-                    onClose: function () {
-                        // Konsumen menutup pop-up tanpa menyelesaikan pembayaran
-                    }
-                });
-            };
+            const payBtn = document.getElementById('pay-button');
+            if (payBtn) {
+                payBtn.onclick = function () {
+                    snap.pay('{{ $snapToken }}', {
+                        onSuccess: function (result) {
+                            kirimStatusKeServer(result);
+                        },
+                        onPending: function (result) {
+                            kirimStatusKeServer(result);
+                        },
+                        onError: function (result) {
+                            kirimStatusKeServer(result);
+                        },
+                        onClose: function () {
+                            kirimStatusKeServer({ transaction_status: 'check' });
+                        }
+                    });
+                };
+            }
         </script>
     @endif
 @endsection
