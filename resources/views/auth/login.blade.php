@@ -12,78 +12,78 @@
         align-items: center;
         padding: 40px 20px;
         margin: 0 auto;
-        background:
-            radial-gradient(700px 380px at 12% 0%, rgba(13, 148, 136, .12), transparent 60%),
-            radial-gradient(600px 320px at 100% 100%, rgba(245, 158, 11, .12), transparent 60%);
+        background: #f7f7f7;
     }
     .auth-card {
         width: 100%;
         max-width: 440px;
         margin: 0 auto;
         background: #fff;
-        border: 1px solid var(--slate-200);
-        border-radius: 18px;
-        padding: 34px;
-        box-shadow: var(--shadow);
+        border: 1px solid #ebebeb;
+        border-radius: 24px;
+        padding: 36px 32px;
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
     }
     .auth-head { text-align: center; margin-bottom: 26px; }
     .auth-head .badge {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 46px; height: 46px;
-        border-radius: 14px;
-        background: var(--teal-50);
-        border: 1px solid #99f6e4;
-        color: var(--teal-700);
+        width: 48px; height: 48px;
+        border-radius: 16px;
+        background: #fff0f3;
+        border: 1px solid #ffd6df;
+        color: #ff385c;
         font-weight: 800;
-        font-size: 13px;
-        margin-bottom: 12px;
+        font-size: 14px;
+        margin-bottom: 14px;
     }
-    .auth-head h1 { font-size: 23px; letter-spacing: -.02em; }
-    .auth-head p { margin-top: 6px; font-size: 13.5px; color: var(--slate-500); }
+    .auth-head h1 { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #222222; letter-spacing: -.02em; }
+    .auth-head p { margin-top: 6px; font-size: 13.5px; color: #717171; }
 
     .field { margin-bottom: 16px; }
     .field label {
         display: block;
-        font-size: 12.5px;
-        font-weight: 700;
-        color: var(--slate-700);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        color: #222222;
         margin-bottom: 6px;
     }
     .field input {
         width: 100%;
-        border: 1px solid var(--slate-300);
-        border-radius: 10px;
-        padding: 11px 13px;
+        border: 1px solid #dddddd;
+        border-radius: 12px;
+        padding: 12px 14px;
         font-family: inherit;
-        font-size: 13.5px;
-        color: var(--slate-900);
-        background: var(--white);
+        font-size: 14px;
+        color: #222222;
+        background: #ffffff;
         transition: border-color .18s, box-shadow .18s;
     }
     .field input:focus {
         outline: none;
-        border-color: var(--teal-600);
-        box-shadow: 0 0 0 3px rgba(13, 148, 136, .14);
+        border-color: #ff385c;
+        box-shadow: 0 0 0 3px rgba(255, 56, 92, .14);
     }
-    .field .error { margin-top: 5px; font-size: 12px; color: var(--danger); font-weight: 600; }
+    .field .error { margin-top: 5px; font-size: 12px; color: #c13515; font-weight: 600; }
     .field-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 4px 0 18px; }
-    .check { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--slate-700); font-weight: 600; }
-    .check input { width: 15px; height: 15px; accent-color: var(--teal-700); }
-    .auth-alt { margin-top: 20px; text-align: center; font-size: 13px; color: var(--slate-500); }
-    .auth-alt a { color: var(--teal-700); font-weight: 700; text-decoration: none; }
+    .check { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: #555555; font-weight: 600; }
+    .check input { width: 16px; height: 16px; accent-color: #ff385c; }
+    .auth-alt { margin-top: 22px; text-align: center; font-size: 13.5px; color: #717171; }
+    .auth-alt a { color: #ff385c; font-weight: 700; text-decoration: none; }
     .auth-alt a:hover { text-decoration: underline; }
 
     .demo-box {
         margin-top: 22px;
-        background: var(--slate-50);
-        border: 1px dashed var(--slate-300);
-        border-radius: 12px;
-        padding: 14px;
+        background: #fafafa;
+        border: 1px dashed #dddddd;
+        border-radius: 16px;
+        padding: 16px;
     }
-    .demo-box h4 { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--slate-500); margin-bottom: 6px; }
-    .demo-desc { font-size: 12px; color: var(--slate-500); margin-bottom: 12px; }
+    .demo-box h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #717171; margin-bottom: 6px; font-weight: 800; }
+    .demo-desc { font-size: 12px; color: #717171; margin-bottom: 12px; }
     .quick-roles {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -95,28 +95,28 @@
         align-items: flex-start;
         padding: 10px 12px;
         background: #fff;
-        border: 1px solid var(--slate-200);
-        border-radius: 10px;
+        border: 1px solid #ebebeb;
+        border-radius: 12px;
         cursor: pointer;
         text-align: left;
         transition: all .2s;
     }
     .btn-quick-role:hover {
-        border-color: var(--teal-600);
-        background: var(--teal-50);
+        border-color: #ff385c;
+        background: #fff0f3;
         transform: translateY(-2px);
-        box-shadow: 0 4px 10px -2px rgba(13, 148, 136, .2);
+        box-shadow: 0 4px 10px -2px rgba(255, 56, 92, .2);
     }
     .btn-quick-role strong {
         font-size: 12.5px;
-        color: var(--slate-900);
+        color: #222222;
         display: flex;
         align-items: center;
         gap: 5px;
     }
     .btn-quick-role span {
         font-size: 11px;
-        color: var(--slate-500);
+        color: #717171;
         margin-top: 2px;
     }
     .btn-quick-role:active {
@@ -199,10 +199,10 @@
             userInput.style.transition = 'background-color 0.3s, border-color 0.3s';
             passInput.style.transition = 'background-color 0.3s, border-color 0.3s';
             
-            userInput.style.backgroundColor = '#ccfbf1';
-            passInput.style.backgroundColor = '#ccfbf1';
-            userInput.style.borderColor = '#0d9488';
-            passInput.style.borderColor = '#0d9488';
+            userInput.style.backgroundColor = '#fff0f3';
+            passInput.style.backgroundColor = '#fff0f3';
+            userInput.style.borderColor = '#ff385c';
+            passInput.style.borderColor = '#ff385c';
 
             setTimeout(() => {
                 userInput.style.backgroundColor = '';

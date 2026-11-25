@@ -111,7 +111,7 @@
                             Bayar Online via Midtrans
                         </h2>
                         
-                        <p style="font-size: 14px; color: #ccfbf1; margin: 0 auto; max-width: 520px; line-height: 1.6;">
+                        <p style="font-size: 14px; color: #bbf7d0; margin: 0 auto; max-width: 520px; line-height: 1.6;">
                             Tidak perlu lagi mengirim atau mengunggah bukti pembayaran manual. Status pesanan Anda akan otomatis lunas terkonfirmasi detik itu juga begitu Anda selesai membayar.
                         </p>
 
@@ -156,7 +156,7 @@
                         <li><span>Status</span><span>{{ $pemesanan->labelStatus() }}</span></li>
                     </ul>
 
-                    <div style="margin-top: 20px; padding: 14px; background: var(--slate-50); border-radius: 12px; border: 1px solid var(--slate-200); font-size: 12px; color: var(--slate-600); line-height: 1.6;">
+                    <div style="margin-top: 20px; padding: 14px; background: #f7f7f7; border-radius: 12px; border: 1px solid #ebebeb; font-size: 12px; color: #717171; line-height: 1.6;">
                         <strong>🔒 Transaksi Terenkripsi &amp; Aman</strong><br>
                         Sistem terintegrasi resmi dengan Midtrans Snap Payment. Pembayaran langsung diverifikasi tanpa perantara.
                     </div>

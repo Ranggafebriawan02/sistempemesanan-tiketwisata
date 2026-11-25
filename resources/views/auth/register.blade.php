@@ -21,10 +21,10 @@
         max-width: 560px;
         margin: 0 auto;
         background: #fff;
-        border: 1px solid var(--slate-200);
-        border-radius: 18px;
+        border: 1px solid #ebebeb;
+        border-radius: 24px;
         padding: 34px;
-        box-shadow: var(--shadow);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
     }
     .auth-head { text-align: center; margin-bottom: 26px; }
     .auth-head .badge {
@@ -33,15 +33,15 @@
         justify-content: center;
         width: 46px; height: 46px;
         border-radius: 14px;
-        background: var(--teal-50);
-        border: 1px solid #99f6e4;
-        color: var(--teal-700);
+        background: #fff0f3;
+        border: 1px solid #ffd6df;
+        color: #ff385c;
         font-weight: 800;
         font-size: 13px;
         margin-bottom: 12px;
     }
     .auth-head h1 { font-size: 23px; letter-spacing: -.02em; }
-    .auth-head p { margin-top: 6px; font-size: 13.5px; color: var(--slate-500); }
+    .auth-head p { margin-top: 6px; font-size: 13.5px; color: #717171; }
 
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
     .field { margin-bottom: 16px; }
@@ -50,31 +50,31 @@
         display: block;
         font-size: 12.5px;
         font-weight: 700;
-        color: var(--slate-700);
+        color: #222222;
         margin-bottom: 6px;
     }
     .field input, .field textarea {
         width: 100%;
-        border: 1px solid var(--slate-300);
+        border: 1px solid #dddddd;
         border-radius: 10px;
         padding: 11px 13px;
         font-family: inherit;
         font-size: 13.5px;
-        color: var(--slate-900);
-        background: var(--white);
+        color: #222222;
+        background: #ffffff;
         transition: border-color .18s, box-shadow .18s;
     }
     .field textarea { resize: vertical; min-height: 74px; }
     .field input:focus, .field textarea:focus {
         outline: none;
-        border-color: var(--teal-600);
-        box-shadow: 0 0 0 3px rgba(13, 148, 136, .14);
+        border-color: #ff385c;
+        box-shadow: 0 0 0 3px rgba(255, 56, 92, .14);
     }
-    .field .error { margin-top: 5px; font-size: 12px; color: var(--danger); font-weight: 600; }
-    .auth-alt { margin-top: 20px; text-align: center; font-size: 13px; color: var(--slate-500); }
-    .auth-alt a { color: var(--teal-700); font-weight: 700; text-decoration: none; }
+    .field .error { margin-top: 5px; font-size: 12px; color: #c13515; font-weight: 600; }
+    .auth-alt { margin-top: 20px; text-align: center; font-size: 13px; color: #717171; }
+    .auth-alt a { color: #ff385c; font-weight: 700; text-decoration: none; }
     .auth-alt a:hover { text-decoration: underline; }
-    .hint { font-size: 11.5px; color: var(--slate-500); margin-top: 4px; }
+    .hint { font-size: 11.5px; color: #717171; margin-top: 4px; }
 
     @media (max-width: 560px) {
         .form-grid { grid-template-columns: 1fr; }

@@ -270,7 +270,7 @@
 
     .box {
         background: #fff;
-        border: 1px solid var(--slate-200);
+        border: 1px solid #ebebeb;
         border-radius: 16px;
         padding: 24px;
         box-shadow: var(--shadow-sm);
@@ -278,7 +278,7 @@
     .box-title {
         font-size: 17px;
         font-weight: 800;
-        color: var(--slate-900);
+        color: #222222;
         letter-spacing: -.01em;
         display: flex;
         align-items: center;
@@ -287,7 +287,7 @@
     }
     .box-desc {
         font-size: 13px;
-        color: var(--slate-500);
+        color: #717171;
         margin-bottom: 20px;
     }
 
@@ -360,8 +360,8 @@
         align-items: center;
         gap: 16px;
         padding: 16px;
-        background: var(--slate-50);
-        border: 1px solid var(--slate-200);
+        background: #f7f7f7;
+        border: 1px solid #ebebeb;
         border-radius: 14px;
         margin-bottom: 20px;
     }
@@ -369,7 +369,7 @@
         width: 52px;
         height: 52px;
         border-radius: 50%;
-        background: linear-gradient(135deg, var(--teal-700), var(--teal-900));
+        background: linear-gradient(135deg, #222222, #000000);
         color: #fff;
         display: flex;
         align-items: center;
@@ -381,11 +381,11 @@
     .profile-info strong {
         display: block;
         font-size: 15px;
-        color: var(--slate-900);
+        color: #222222;
     }
     .profile-info span {
         font-size: 12.5px;
-        color: var(--slate-500);
+        color: #717171;
     }
 
     .detail-table {
@@ -393,7 +393,7 @@
         border-collapse: collapse;
     }
     .detail-table tr {
-        border-bottom: 1px solid var(--slate-100);
+        border-bottom: 1px solid #f0f0f0;
     }
     .detail-table tr:last-child {
         border-bottom: none;
@@ -403,11 +403,11 @@
         font-size: 13px;
     }
     .detail-table td:first-child {
-        color: var(--slate-500);
+        color: #717171;
         width: 38%;
     }
     .detail-table td:last-child {
-        color: var(--slate-900);
+        color: #222222;
         font-weight: 700;
         text-align: right;
     }

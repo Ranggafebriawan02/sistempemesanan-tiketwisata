@@ -4,51 +4,51 @@
 
 @push('styles')
 <style>
-    .detail-page { padding: 34px 0 64px; }
-    .breadcrumb { font-size: 12.5px; color: var(--slate-500); margin-bottom: 18px; }
-    .breadcrumb a { color: var(--teal-700); font-weight: 600; text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
+    .detail-page { padding: 36px 0 70px; }
+    .breadcrumb { font-size: 13px; color: #717171; margin-bottom: 20px; }
+    .breadcrumb a { color: #222222; font-weight: 600; text-decoration: underline; }
+    .breadcrumb a:hover { color: #ff385c; }
 
-    .detail-grid { display: grid; grid-template-columns: 1fr 350px; gap: 26px; align-items: start; }
+    .detail-grid { display: grid; grid-template-columns: 1fr 370px; gap: 32px; align-items: start; }
 
-    .panel { background: #fff; border: 1px solid var(--slate-200); border-radius: 16px; box-shadow: var(--shadow-sm); overflow: hidden; }
-    .panel-head { padding: 20px 24px; border-bottom: 1px solid var(--slate-200); display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
-    .panel-head h1 { font-size: 19px; letter-spacing: -.02em; }
-    .panel-head p { margin-top: 4px; font-size: 12.5px; color: var(--slate-500); }
-    .panel-body { padding: 24px; }
+    .panel { background: #fff; border: 1px solid #ebebeb; border-radius: 20px; box-shadow: var(--shadow-subtle); overflow: hidden; }
+    .panel-head { padding: 22px 28px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+    .panel-head h1 { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 800; color: #222222; letter-spacing: -.02em; }
+    .panel-head p { margin-top: 4px; font-size: 13px; color: #717171; }
+    .panel-body { padding: 28px; }
 
-    .data-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
+    .data-list { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; }
     .data-list .full { grid-column: 1 / -1; }
-    .data-item span { display: block; font-size: 11.5px; font-weight: 600; color: var(--slate-500); margin-bottom: 3px; }
-    .data-item strong { font-size: 13.5px; font-weight: 700; color: var(--slate-900); }
-    .data-item p { font-size: 13.5px; color: var(--slate-700); }
+    .data-item span { display: block; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: #717171; margin-bottom: 4px; }
+    .data-item strong { font-size: 14px; font-weight: 700; color: #222222; }
+    .data-item p { font-size: 13.5px; color: #333333; line-height: 1.5; }
 
-    .summary-card { position: sticky; top: 96px; }
-    .summary-top { background: linear-gradient(135deg, var(--teal-800), var(--teal-900)); color: #fff; padding: 22px; }
-    .summary-top .label { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: #99f6e4; font-weight: 800; }
-    .summary-top .total { font-size: 27px; font-weight: 800; letter-spacing: -.03em; margin-top: 4px; }
-    .summary-top .status { margin-top: 10px; }
-    .summary-body { padding: 20px; }
-    .summary-list { list-style: none; display: grid; gap: 11px; }
-    .summary-list li { display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; }
-    .summary-list span:first-child { color: var(--slate-500); }
-    .summary-list span:last-child { font-weight: 700; text-align: right; }
+    .summary-card { position: sticky; top: 96px; border-radius: 20px; border: 1px solid #ebebeb; overflow: hidden; }
+    .summary-top { background: #222222; color: #fff; padding: 24px 26px; }
+    .summary-top .label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #b0b0b0; font-weight: 800; }
+    .summary-top .total { font-family: 'Outfit', sans-serif; font-size: 30px; font-weight: 900; letter-spacing: -.03em; margin-top: 4px; color: #ffffff; }
+    .summary-top .status-wrap { margin-top: 12px; }
+    .summary-body { padding: 24px 26px; background: #ffffff; }
+    .summary-list { list-style: none; display: grid; gap: 12px; }
+    .summary-list li { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; }
+    .summary-list span:first-child { color: #717171; }
+    .summary-list span:last-child { font-weight: 700; color: #222222; text-align: right; }
     .summary-body .btn { margin-top: 16px; }
-    .note { margin-top: 13px; font-size: 11.5px; color: var(--slate-500); line-height: 1.6; }
+    .note { margin-top: 14px; font-size: 12px; color: #717171; line-height: 1.6; }
 
-    .history-title { font-size: 15px; letter-spacing: -.01em; margin-bottom: 4px; }
-    .history-sub { font-size: 12.5px; color: var(--slate-500); margin-bottom: 16px; }
-    .history-list { display: grid; gap: 12px; }
-    .history-item { border: 1px solid var(--slate-200); border-radius: 12px; padding: 14px 16px; }
+    .history-title { font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 800; color: #222222; margin-bottom: 4px; }
+    .history-sub { font-size: 13px; color: #717171; margin-bottom: 18px; }
+    .history-list { display: grid; gap: 14px; }
+    .history-item { border: 1px solid #ebebeb; border-radius: 14px; padding: 18px; background: #fafafa; }
     .history-item.rejected { border-color: #fecaca; background: #fff7f7; }
     .history-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-    .history-amount { font-size: 15px; font-weight: 800; color: var(--teal-800); }
-    .history-meta { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 6px; font-size: 12px; color: var(--slate-500); }
-    .history-note { margin-top: 8px; padding: 9px 11px; background: var(--slate-50); border-radius: 8px; font-size: 12px; color: var(--slate-700); }
-    .history-item.rejected .history-note { background: #fee2e2; color: #991b1b; }
-    .proof-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 12px; font-weight: 700; color: var(--teal-700); text-decoration: none; }
+    .history-amount { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 800; color: #222222; }
+    .history-meta { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 8px; font-size: 12px; color: #717171; }
+    .history-note { margin-top: 10px; padding: 10px 12px; background: #ffffff; border: 1px solid #ebebeb; border-radius: 10px; font-size: 12.5px; color: #333333; }
+    .history-item.rejected .history-note { background: #fee2e2; border-color: #fecaca; color: #991b1b; }
+    .proof-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 700; color: #ff385c; text-decoration: none; }
     .proof-link:hover { text-decoration: underline; }
-    .empty-note { border: 1px dashed var(--slate-300); border-radius: 12px; padding: 22px; text-align: center; font-size: 12.5px; color: var(--slate-500); }
+    .empty-note { border: 1px dashed #dddddd; border-radius: 14px; padding: 28px; text-align: center; font-size: 13px; color: #717171; }
 
     @media (max-width: 980px) {
         .detail-grid { grid-template-columns: 1fr; }
@@ -77,7 +77,7 @@
                     <div class="panel-head">
                         <div>
                             <h1>Detail Pemesanan</h1>
-                            <p>Kode pesanan <strong style="color:var(--teal-700);">{{ $pemesanan->kode_pemesanan }}</strong></p>
+                            <p>Kode pesanan <strong style="color:#222222;">{{ $pemesanan->kode_pemesanan }}</strong></p>
                         </div>
                         <span class="status status-{{ $status }}">{{ $pemesanan->labelStatus() }}</span>
                     </div>
@@ -181,11 +181,11 @@
 
                     @if ($pemesanan->bisaBayar())
                         @if ($snapToken)
-                            <button type="button" id="pay-button" class="btn btn-amber btn-block" style="font-size:14px; margin-bottom: 8px;">
+                            <button type="button" id="pay-button" class="btn btn-primary btn-block" style="font-size:14px; margin-bottom: 8px;">
                                 ⚡ Bayar Sekarang via Midtrans
                             </button>
                         @endif
-                        <a href="{{ route('konsumen.pemesanan.bayar', $pemesanan) }}" class="btn btn-primary btn-block">
+                        <a href="{{ route('konsumen.pemesanan.bayar', $pemesanan) }}" class="btn btn-outline btn-block">
                             Halaman Pembayaran
                         </a>
                         <p class="note">

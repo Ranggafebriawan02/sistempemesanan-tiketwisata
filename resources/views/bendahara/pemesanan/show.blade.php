@@ -126,9 +126,9 @@
                                 </div>
 
                                 <div class="history-meta">
-                                    <span>Metode: <strong style="color:var(--slate-700);">{{ ucfirst($trx->alat_pembayaran) }}</strong></span>
-                                    <span>Tanggal bayar: <strong style="color:var(--slate-700);">{{ $trx->tanggal_bayar?->translatedFormat('d M Y') ?? '-' }}</strong></span>
-                                    <span>Diunggah: <strong style="color:var(--slate-700);">{{ $trx->created_at->translatedFormat('d M Y H:i') }}</strong></span>
+                                    <span>Metode: <strong style="color:#222222;">{{ ucfirst($trx->alat_pembayaran) }}</strong></span>
+                                    <span>Tanggal bayar: <strong style="color:#222222;">{{ $trx->tanggal_bayar?->translatedFormat('d M Y') ?? '-' }}</strong></span>
+                                    <span>Diunggah: <strong style="color:#222222;">{{ $trx->created_at->translatedFormat('d M Y H:i') }}</strong></span>
                                 </div>
 
                                 @if ($trx->catatan)
@@ -169,10 +169,10 @@
                 <div class="card-body">
                     <div style="text-align:center; padding: 6px 0 14px;">
                         <span class="status status-{{ $status }}">{{ $pemesanan->labelStatus() }}</span>
-                        <div style="font-size: 26px; font-weight: 800; color: var(--teal-800); letter-spacing: -.03em; margin-top: 10px;">
+                        <div style="font-size: 26px; font-weight: 800; color: #222222; letter-spacing: -.03em; margin-top: 10px;">
                             Rp {{ number_format((float) $pemesanan->harga, 0, ',', '.') }}
                         </div>
-                        <div style="font-size: 11.5px; color: var(--slate-500);">Total tagihan</div>
+                        <div style="font-size: 11.5px; color: #717171;">Total tagihan</div>
                     </div>
 
                     @if ($latest)

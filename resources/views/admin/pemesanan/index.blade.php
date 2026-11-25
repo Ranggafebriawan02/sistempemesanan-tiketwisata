@@ -19,20 +19,20 @@
         font-size: 13px;
         font-weight: 600;
         text-decoration: none;
-        color: var(--slate-600);
-        background: var(--slate-100);
-        border: 1px solid var(--slate-200);
+        color: #555555;
+        background: #f7f7f7;
+        border: 1px solid #ebebeb;
         transition: all 0.2s;
     }
     .filter-tab:hover {
-        background: var(--slate-200);
-        color: var(--slate-900);
+        background: #ebebeb;
+        color: #222222;
     }
     .filter-tab.active {
-        background: var(--teal-700);
+        background: #222222;
         color: #fff;
-        border-color: var(--teal-700);
-        box-shadow: 0 4px 12px rgba(15, 118, 110, 0.25);
+        border-color: #222222;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
     .filter-tab .count {
         background: rgba(0, 0, 0, 0.08);
@@ -52,7 +52,7 @@
         align-items: center;
     }
     .search-box input {
-        border: 1px solid var(--slate-300);
+        border: 1px solid #dddddd;
         border-radius: 9px;
         padding: 8px 14px;
         font-size: 13px;
@@ -61,7 +61,7 @@
         transition: border-color 0.2s;
     }
     .search-box input:focus {
-        border-color: var(--teal-600);
+        border-color: #ff385c;
     }
 
     /* Status Pill Badges */
@@ -87,20 +87,20 @@
         font-size: 13px;
     }
     .table-order th {
-        background: var(--slate-50);
+        background: #fafafa;
         padding: 12px 16px;
         text-align: left;
         font-size: 11px;
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: .06em;
-        color: var(--slate-500);
-        border-bottom: 1px solid var(--slate-200);
+        color: #717171;
+        border-bottom: 1px solid #ebebeb;
         white-space: nowrap;
     }
     .table-order td {
         padding: 14px 16px;
-        border-bottom: 1px solid var(--slate-100);
+        border-bottom: 1px solid #f7f7f7;
         vertical-align: middle;
     }
     .table-order tr:hover td {
@@ -175,20 +175,20 @@
                         @php $st = $p->statusPembayaran(); @endphp
                         <tr>
                             <td>
-                                <strong style="color: var(--teal-800); font-size: 13px;">{{ $p->kode_pemesanan }}</strong>
-                                <small style="display:block; color:var(--slate-400); font-size: 11px; margin-top: 3px;">
+                                <strong style="color: #222222; font-size: 13px;">{{ $p->kode_pemesanan }}</strong>
+                                <small style="display:block; color:#888888; font-size: 11px; margin-top: 3px;">
                                     {{ $p->created_at->translatedFormat('d M Y, H:i') }}
                                 </small>
                             </td>
                             <td>
-                                <strong style="display:block; color:var(--slate-800);">{{ $p->user->nama ?? '-' }}</strong>
-                                <small style="display:block; color:var(--slate-500); font-size: 11.5px; margin-top: 2px;">
+                                <strong style="display:block; color:#222222;">{{ $p->user->nama ?? '-' }}</strong>
+                                <small style="display:block; color:#717171; font-size: 11.5px; margin-top: 2px;">
                                     📞 {{ $p->no_hp }}
                                 </small>
                             </td>
                             <td>
-                                <strong style="display:block; color:var(--slate-900);">{{ $p->paket->judul ?? '-' }}</strong>
-                                <small style="display:block; color:var(--slate-500); font-size: 11.5px; margin-top: 3px;">
+                                <strong style="display:block; color:#222222;">{{ $p->paket->judul ?? '-' }}</strong>
+                                <small style="display:block; color:#717171; font-size: 11.5px; margin-top: 3px;">
                                     📍 {{ $p->nama_rombongan ? 'Rombongan: '.$p->nama_rombongan : ($p->paket->destinasi ?? '-') }}
                                 </small>
                             </td>
@@ -196,12 +196,12 @@
                                 {{ $p->tanggal_berangkat->translatedFormat('d M Y') }}
                             </td>
                             <td style="text-align: center; white-space: nowrap;">
-                                <span style="background: var(--slate-100); padding: 3px 8px; border-radius: 6px; font-weight: 700; font-size: 12px;">
+                                <span style="background: #f7f7f7; padding: 3px 8px; border-radius: 6px; font-weight: 700; font-size: 12px;">
                                     {{ $p->jumlah_pax }} orang
                                 </span>
                             </td>
                             <td style="white-space: nowrap;">
-                                <strong style="color: var(--teal-900); font-size: 13.5px;">
+                                <strong style="color: #222222; font-size: 13.5px;">
                                     Rp {{ number_format((float) $p->harga, 0, ',', '.') }}
                                 </strong>
                             </td>
@@ -226,7 +226,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="empty" style="padding: 40px; text-align: center; color: var(--slate-400);">
+                            <td colspan="8" class="empty" style="padding: 40px; text-align: center; color: #888888;">
                                 Tidak ada data pemesanan yang cocok dengan filter atau pencarian.
                             </td>
                         </tr>
@@ -236,7 +236,7 @@
         </div>
 
         @if ($pemesanan->hasPages())
-            <div style="padding: 16px 20px; border-top: 1px solid var(--slate-200);">
+            <div style="padding: 16px 20px; border-top: 1px solid #ebebeb;">
                 {{ $pemesanan->links() }}
             </div>
         @endif
