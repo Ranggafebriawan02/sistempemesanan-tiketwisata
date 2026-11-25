@@ -66,6 +66,9 @@
         border-radius: var(--radius-full);
         border: none;
         cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         box-shadow: 0 4px 16px rgba(255, 56, 92, 0.35);
         transition: all .2s;
     }
@@ -73,26 +76,6 @@
         background: #e00b41;
         transform: translateY(-2px);
         box-shadow: 0 8px 24px rgba(255, 56, 92, 0.45);
-    }
-        background: #f59e0b;
-        color: #78350f;
-        font-weight: 800;
-        font-size: 16px;
-        padding: 16px 36px;
-        border-radius: 12px;
-        border: none;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        box-shadow: 0 6px 20px rgba(245, 158, 11, .45);
-        transition: all 0.2s;
-    }
-    .btn-pay-midtrans:hover {
-        background: #d97706;
-        color: #fff;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(245, 158, 11, .55);
     }
 
     @media (max-width: 980px) {
@@ -211,26 +194,41 @@
         }
     }
 
-    const payBtn = document.getElementById('pay-button');
-    if (payBtn) {
-        payBtn.onclick = function () {
-            snap.pay('{{ $snapToken }}', {
-                onSuccess: function (result) {
-                    kirimStatusKeServer(result);
-                },
-                onPending: function (result) {
-                    kirimStatusKeServer(result);
-                },
-                onError: function (result) {
-                    kirimStatusKeServer(result);
-                },
-                onClose: function () {
-                    // Konsumen menutup pop-up, cek apakah di simulator sudah dibayar
-                    kirimStatusKeServer({ transaction_status: 'check' });
-                }
-            });
-        };
-    }
+    document.addEventListener('DOMContentLoaded', function () {
+        const payBtn = document.getElementById('pay-button');
+        if (!payBtn) return;
+
+        payBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            if (typeof snap === 'undefined') {
+                alert('Modul pembayaran Midtrans sedang dimuat atau koneksi terhalang ad-blocker. Mohon refresh halaman dan coba kembali.');
+                return;
+            }
+
+            try {
+                snap.pay('{{ $snapToken }}', {
+                    onSuccess: function (result) {
+                        kirimStatusKeServer(result);
+                    },
+                    onPending: function (result) {
+                        kirimStatusKeServer(result);
+                    },
+                    onError: function (result) {
+                        alert('Pembayaran gagal atau terjadi kesalahan dari Midtrans: ' + (result?.status_message || ''));
+                        kirimStatusKeServer(result);
+                    },
+                    onClose: function () {
+                        // Konsumen menutup pop-up, sinkronkan status terkini (misal sudah bayar via simulator)
+                        kirimStatusKeServer({ transaction_status: 'check' });
+                    }
+                });
+            } catch (err) {
+                console.error('Snap error:', err);
+                alert('Terjadi kesalahan saat memanggil pop-up pembayaran: ' + err.message);
+            }
+        });
+    });
 </script>
 @endif
 @endpush

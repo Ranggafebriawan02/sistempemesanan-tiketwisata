@@ -257,25 +257,40 @@
                 }
             }
 
-            const payBtn = document.getElementById('pay-button');
-            if (payBtn) {
-                payBtn.onclick = function () {
-                    snap.pay('{{ $snapToken }}', {
-                        onSuccess: function (result) {
-                            kirimStatusKeServer(result);
-                        },
-                        onPending: function (result) {
-                            kirimStatusKeServer(result);
-                        },
-                        onError: function (result) {
-                            kirimStatusKeServer(result);
-                        },
-                        onClose: function () {
-                            kirimStatusKeServer({ transaction_status: 'check' });
-                        }
-                    });
-                };
-            }
+            document.addEventListener('DOMContentLoaded', function () {
+                const payBtn = document.getElementById('pay-button');
+                if (!payBtn) return;
+
+                payBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    if (typeof snap === 'undefined') {
+                        alert('Modul pembayaran Midtrans sedang dimuat atau koneksi terhalang ad-blocker. Mohon refresh halaman dan coba kembali.');
+                        return;
+                    }
+
+                    try {
+                        snap.pay('{{ $snapToken }}', {
+                            onSuccess: function (result) {
+                                kirimStatusKeServer(result);
+                            },
+                            onPending: function (result) {
+                                kirimStatusKeServer(result);
+                            },
+                            onError: function (result) {
+                                alert('Pembayaran gagal atau terjadi kesalahan dari Midtrans: ' + (result?.status_message || ''));
+                                kirimStatusKeServer(result);
+                            },
+                            onClose: function () {
+                                kirimStatusKeServer({ transaction_status: 'check' });
+                            }
+                        });
+                    } catch (err) {
+                        console.error('Snap error:', err);
+                        alert('Terjadi kesalahan saat memanggil pop-up pembayaran: ' + err.message);
+                    }
+                });
+            });
         </script>
     @endif
 @endsection
