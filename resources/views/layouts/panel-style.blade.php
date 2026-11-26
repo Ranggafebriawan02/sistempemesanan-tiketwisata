@@ -596,4 +596,112 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Universal Filter Tabs (Pill Buttons) */
+        .filter-tabs {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .filter-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #555555;
+            background: #ffffff;
+            border: 1px solid #ebebeb;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            box-shadow: var(--shadow-subtle);
+        }
+        .filter-tab:hover {
+            background: #f7f7f7;
+            color: #222222;
+            border-color: #dddddd;
+            transform: translateY(-1px);
+        }
+        .filter-tab.active {
+            background: #222222 !important;
+            color: #ffffff !important;
+            border-color: #222222 !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        }
+        .filter-tab .count {
+            background: rgba(0, 0, 0, 0.08);
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .filter-tab.active .count {
+            background: rgba(255, 255, 255, 0.22);
+            color: #ffffff;
+        }
+
+        /* Search Form (Pill Search Input + Button) */
+        .search-form {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+        .search-form input[type="search"],
+        .search-form input[type="text"] {
+            border: 1.5px solid #dddddd;
+            border-radius: var(--radius-full);
+            padding: 8px 16px;
+            font-family: inherit;
+            font-size: 13px;
+            color: #222222;
+            background: #ffffff;
+            min-width: 260px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .search-form input:focus {
+            border-color: #222222;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+        }
+        .search-form button {
+            border-radius: var(--radius-full);
+            padding: 8px 16px;
+            font-size: 12.5px;
+            font-weight: 700;
+        }
+
+        /* Toolbar Row Container */
+        .toolbar-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            padding: 4px 0;
+        }
+
+        /* Table Action Buttons Formatting */
+        table.data td .actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        table.data td .actions .btn {
+            padding: 5px 12px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: var(--radius-full);
+        }
+
+        /* Status & Level Badges Refinement */
+        .level-tag, .status {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
     </style>

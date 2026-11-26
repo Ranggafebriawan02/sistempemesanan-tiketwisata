@@ -13,9 +13,9 @@
         <div class="card-head">
             <div>
                 <h2>Daftar Pengguna</h2>
-                <p>Menampilkan {{ $users->total() }} dari {{ $total }} akun terdaftar.</p>
+                <p>Menampilkan {{ $users->total() }} dari {{ $total }} akun terdaftar dalam sistem.</p>
             </div>
-            <a href="{{ route('admin.user.create') }}" class="btn btn-primary">+ Tambah User</a>
+            <a href="{{ route('admin.user.create') }}" class="btn btn-primary">+ Tambah Pengguna</a>
         </div>
 
         <div class="card-body" style="padding-bottom: 0;">
@@ -42,7 +42,7 @@
 
         @if ($users->isEmpty())
             <div class="empty">
-                Tidak ada akun yang cocok dengan filter atau kata kunci pencarian.
+                Tidak ada akun pengguna yang cocok dengan filter atau kata kunci pencarian.
             </div>
         @else
             <div class="table-wrap">
@@ -50,11 +50,11 @@
                     <thead>
                         <tr>
                             <th>Pengguna</th>
-                            <th>Level</th>
+                            <th style="width: 140px;">Level</th>
                             <th>Kontak</th>
-                            <th>Status</th>
-                            <th class="text-right">Pesanan</th>
-                            <th style="width: 260px;">Aksi</th>
+                            <th style="width: 100px; text-align: center;">Status</th>
+                            <th style="width: 80px; text-align: center;">Pesanan</th>
+                            <th style="width: 250px; text-align: center;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,7 +64,7 @@
                                     <div class="cell-title">
                                         {{ $item->nama }}
                                         @if ($item->is(auth()->user()))
-                                            <span class="badge">Anda</span>
+                                            <span class="badge" style="margin-left: 4px;">Anda</span>
                                         @endif
                                     </div>
                                     <div class="cell-sub">{{ '@'.$item->username }} &middot; {{ $item->email }}</div>
@@ -74,16 +74,18 @@
                                 </td>
                                 <td>
                                     <div>{{ $item->no_hp ?: '-' }}</div>
-                                    <div class="cell-sub">{{ \Illuminate\Support\Str::limit($item->alamat, 42) ?: 'Alamat belum diisi' }}</div>
+                                    <div class="cell-sub">{{ \Illuminate\Support\Str::limit($item->alamat, 38) ?: 'Alamat belum diisi' }}</div>
                                 </td>
-                                <td>
+                                <td style="text-align: center;">
                                     <span class="status status-{{ $item->aktif ? 'aktif' : 'nonaktif' }}">
                                         {{ $item->aktif ? 'Aktif' : 'Nonaktif' }}
                                     </span>
                                 </td>
-                                <td class="text-right">{{ number_format($item->pemesanan_count, 0, ',', '.') }}</td>
+                                <td style="text-align: center; font-weight: 700; color: #222;">
+                                    {{ number_format($item->pemesanan_count, 0, ',', '.') }}
+                                </td>
                                 <td>
-                                    <div class="actions">
+                                    <div class="actions" style="justify-content: center;">
                                         <a href="{{ route('admin.user.edit', $item) }}" class="btn btn-outline btn-sm">Edit</a>
 
                                         <form action="{{ route('admin.user.reset-password', $item) }}" method="POST"
@@ -101,14 +103,12 @@
                                                 </button>
                                             </form>
 
-                                            @if ($item->pemesanan_count === 0)
-                                                <form action="{{ route('admin.user.destroy', $item) }}" method="POST"
-                                                      onsubmit="return confirm('Yakin ingin menghapus akun {{ $item->username }}? Tindakan ini tidak dapat dibatalkan.');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                                </form>
-                                            @endif
+                                            <form action="{{ route('admin.user.destroy', $item) }}" method="POST"
+                                                  onsubmit="return confirm('Hapus permanen akun {{ $item->username }}?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                            </form>
                                         @endunless
                                     </div>
                                 </td>
@@ -118,7 +118,7 @@
                 </table>
             </div>
 
-            <div class="card-body" style="padding-top: 0;">
+            <div class="card-body" style="padding-top:0;">
                 {{ $users->links('pagination.simple') }}
             </div>
         @endif
