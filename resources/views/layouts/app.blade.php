@@ -37,10 +37,10 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: auto; }
+        html { scroll-behavior: auto; overflow-x: hidden; }
 
         /* Lenis Recommended CSS */
-        html.lenis, html.lenis body {
+        html.lenis, html.lenis body { overflow-x: hidden; width: 100%; position: relative;
             height: auto;
         }
         .lenis.lenis-smooth {
@@ -297,18 +297,27 @@
         @media (max-width: 960px) {
             .nav-links { display: none; }
             .mobile-toggle { display: grid; place-items: center; }
+            .nav-dashboard-link { display: none !important; }
+            .user-pill .user-meta { display: none !important; }
+            .user-pill { padding: 4px; gap: 4px; }
+            .user-pill form .btn { padding: 4px 8px; font-size: 11px; }
             .nav-links.open {
                 display: flex;
                 position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
+                top: calc(100% + 8px);
+                left: 16px;
+                right: 16px;
                 flex-direction: column;
-                background: #fff;
-                padding: 16px 24px;
-                border-radius: 0 0 20px 20px;
-                border-bottom: 1px solid var(--neutral-200);
-                box-shadow: var(--shadow-float);
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 20px;
+                border: 1px solid #ebebeb;
+                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+                z-index: 100;
+            }
+            .nav-links.open a {
+                padding: 10px 16px;
+                width: 100%;
             }
         }
 
@@ -412,6 +421,88 @@
                 margin: 12px 16px 0;
                 padding: 10px 14px;
                 font-size: 12.5px;
+            }
+        }
+
+        /* Ultra Clean Mobile & Tablet Fit */
+        * { max-width: 100%; }
+        html, body {
+            overflow-x: hidden !important;
+            width: 100% !important;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1240px;
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding-left: 14px !important;
+                padding-right: 14px !important;
+            }
+            .site-header {
+                padding: 10px 0 !important;
+            }
+            .navbar {
+                padding: 8px 12px !important;
+                border-radius: 18px !important;
+            }
+            .brand strong {
+                font-size: 14px !important;
+            }
+            .brand-info span {
+                font-size: 9.5px !important;
+            }
+            .brand-icon {
+                width: 34px !important;
+                height: 34px !important;
+            }
+            .brand-icon svg {
+                width: 18px !important;
+                height: 18px !important;
+            }
+            .hero-badge {
+                padding: 6px 12px !important;
+                font-size: 11px !important;
+                white-space: normal !important;
+                text-align: center;
+                line-height: 1.3;
+            }
+            h1.reveal-words {
+                font-size: 26px !important;
+                line-height: 1.25 !important;
+            }
+            .filter-pills {
+                overflow-x: auto;
+                justify-content: flex-start !important;
+                flex-wrap: nowrap !important;
+                padding: 0 4px 10px;
+                -webkit-overflow-scrolling: touch;
+            }
+            .pill-btn {
+                white-space: nowrap !important;
+                flex-shrink: 0;
+                padding: 7px 14px !important;
+                font-size: 12px !important;
+            }
+            .search-clean-bar {
+                border-radius: 18px !important;
+                padding: 14px !important;
+            }
+            .btn-clean-search {
+                width: 100% !important;
+                border-radius: 12px !important;
+                height: 44px !important;
             }
         }
     </style>
