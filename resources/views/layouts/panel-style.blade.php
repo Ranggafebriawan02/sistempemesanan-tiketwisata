@@ -475,4 +475,125 @@
                 display: block;
             }
         }
+
+        /* General Status Badges */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .03em;
+            text-transform: capitalize;
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            border: 1px solid transparent;
+            white-space: nowrap;
+        }
+        .status-belum_bayar { background: #f5f5f5; color: #555555; border-color: #dddddd; }
+        .status-menunggu { background: #fffbeb; color: #b45309; border-color: #fde68a; }
+        .status-valid { background: #ecfdf5; color: #047857; border-color: #a7f3d0; }
+        .status-ditolak { background: #fef2f2; color: #b91c1c; border-color: #fecaca; }
+
+        /* Detail 2 Columns Layout for Show Pages */
+        .detail-columns {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* Detail List Grid */
+        .detail-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px 24px;
+        }
+        .detail-list .full {
+            grid-column: 1 / -1;
+        }
+        .detail-list .label {
+            display: block;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: #717171;
+            margin-bottom: 4px;
+        }
+        .detail-list .value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #222222;
+        }
+        .detail-list p.value {
+            font-weight: 500;
+            color: #333333;
+            line-height: 1.5;
+            margin-top: 4px;
+        }
+
+        /* Decision Box for Validation */
+        .decision-box {
+            background: #fafafa;
+            border: 1px solid #ebebeb;
+            border-radius: 14px;
+            padding: 18px;
+        }
+        .decision-box h3 {
+            font-size: 14px;
+            font-weight: 800;
+            color: #222222;
+            margin-bottom: 4px;
+        }
+        .decision-box p {
+            font-size: 12.5px;
+            color: #717171;
+        }
+        .decision-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        /* Proof File / Image Box */
+        .proof-box {
+            border: 1px solid #ebebeb;
+            border-radius: 12px;
+            padding: 12px;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .proof-box img {
+            max-width: 100%;
+            max-height: 320px;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 1px solid #ebebeb;
+        }
+        .proof-file {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #ff385c;
+            text-decoration: none;
+        }
+        .proof-file:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1024px) {
+            .detail-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 600px) {
+            .detail-list {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
