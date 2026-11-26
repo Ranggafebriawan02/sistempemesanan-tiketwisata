@@ -20,38 +20,110 @@ class PembayaranController extends Controller
         Transaksi::STATUS_DITOLAK,
     ];
 
-    public function index(Request $request): View
+    public function index(Request $request): View|\Illuminate\Http\JsonResponse
     {
         $status = (string) $request->query('status', 'semua');
+        $periode = (string) $request->query('periode', 'semua');
+        $dari = (string) $request->query('dari', '');
+        $sampai = (string) $request->query('sampai', '');
+        $bulan = (string) $request->query('bulan', '');
+        $tahun = (string) $request->query('tahun', '');
         $q = trim((string) $request->query('q', ''));
 
         if (! in_array($status, self::VALID_STATUSES, true)) {
             $status = 'semua';
         }
 
-        $pemesanan = Pemesanan::query()
-            ->with(['user', 'paket', 'transaksiTerakhir'])
-            ->when($q !== '', function (Builder $query) use ($q) {
-                $query->where(function (Builder $sub) use ($q) {
-                    $sub->where('kode_pemesanan', 'like', "%{$q}%")
-                        ->orWhereHas('user', fn (Builder $user) => $user->where('nama', 'like', "%{$q}%"))
-                        ->orWhereHas('paket', fn (Builder $paket) => $paket->where('judul', 'like', "%{$q}%"));
-                });
+        $baseQuery = Pemesanan::query()
+            ->with(['user', 'paket', 'transaksiTerakhir']);
+
+        // Filter status
+        $this->applyStatusFilter($baseQuery, $status);
+
+        // Filter periode
+        $this->applyPeriodeFilter($baseQuery, $periode, $dari, $sampai, $bulan, $tahun);
+
+        // Pencarian q
+        if ($q !== '') {
+            $baseQuery->where(function (Builder $sub) use ($q) {
+                $sub->where('kode_pemesanan', 'like', "%{$q}%")
+                    ->orWhereHas('user', fn (Builder $user) => $user->where('nama', 'like', "%{$q}%"))
+                    ->orWhereHas('paket', fn (Builder $paket) => $paket->where('judul', 'like', "%{$q}%"));
             });
+        }
 
-        $this->applyStatusFilter($pemesanan, $status);
+        $pemesanan = $baseQuery->latest()->paginate(10)->withQueryString();
 
-        $pemesanan = $pemesanan->latest()->paginate(10)->withQueryString();
+        // Hitung counts per status dengan mempertimbangkan filter periode yang aktif
+        $countQuery = function (string $st) use ($periode, $dari, $sampai, $bulan, $tahun) {
+            $q = Pemesanan::query();
+            $this->applyStatusFilter($q, $st);
+            $this->applyPeriodeFilter($q, $periode, $dari, $sampai, $bulan, $tahun);
+            return $q->count();
+        };
 
         $counts = [
-            'semua' => Pemesanan::count(),
-            'belum_bayar' => $this->applyStatusFilter(Pemesanan::query(), 'belum_bayar')->count(),
-            'menunggu' => $this->applyStatusFilter(Pemesanan::query(), Transaksi::STATUS_MENUNGGU)->count(),
-            'valid' => $this->applyStatusFilter(Pemesanan::query(), Transaksi::STATUS_VALID)->count(),
-            'ditolak' => $this->applyStatusFilter(Pemesanan::query(), Transaksi::STATUS_DITOLAK)->count(),
+            'semua' => $countQuery('semua'),
+            'belum_bayar' => $countQuery('belum_bayar'),
+            'menunggu' => $countQuery(Transaksi::STATUS_MENUNGGU),
+            'valid' => $countQuery(Transaksi::STATUS_VALID),
+            'ditolak' => $countQuery(Transaksi::STATUS_DITOLAK),
         ];
 
-        return view('bendahara.pemesanan.index', compact('pemesanan', 'status', 'q', 'counts'));
+        // Daftar tahun yang ada pemesanannya untuk dropdown
+        $daftarTahun = Pemesanan::selectRaw('YEAR(created_at) as thn')
+            ->distinct()
+            ->orderByDesc('thn')
+            ->pluck('thn')
+            ->toArray();
+        if (empty($daftarTahun)) {
+            $daftarTahun = [(int) date('Y')];
+        }
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'html_table' => view('bendahara.pemesanan.partials.table', compact('pemesanan'))->render(),
+                'html_pagination' => $pemesanan->links('pagination.simple')->render(),
+                'total' => $pemesanan->total(),
+                'counts' => $counts,
+            ]);
+        }
+
+        return view('bendahara.pemesanan.index', compact(
+            'pemesanan', 'status', 'periode', 'dari', 'sampai', 'bulan', 'tahun', 'q', 'counts', 'daftarTahun'
+        ));
+    }
+
+    private function applyPeriodeFilter(Builder $query, string $periode, string $dari, string $sampai, string $bulan, string $tahun): Builder
+    {
+        switch ($periode) {
+            case 'hari_ini':
+                $query->whereDate('created_at', now()->toDateString());
+                break;
+            case 'seminggu':
+                $query->whereDate('created_at', '>=', now()->subDays(7)->toDateString())
+                      ->whereDate('created_at', '<=', now()->toDateString());
+                break;
+            case 'bulan':
+                $bln = (int) ($bulan ?: date('m'));
+                $thn = (int) ($tahun ?: date('Y'));
+                $query->whereMonth('created_at', $bln)->whereYear('created_at', $thn);
+                break;
+            case 'tahun':
+                $thn = (int) ($tahun ?: date('Y'));
+                $query->whereYear('created_at', $thn);
+                break;
+            case 'kustom':
+                if ($dari !== '') {
+                    $query->whereDate('created_at', '>=', $dari);
+                }
+                if ($sampai !== '') {
+                    $query->whereDate('created_at', '<=', $sampai);
+                }
+                break;
+        }
+
+        return $query;
     }
 
     public function show(Pemesanan $pemesanan, MidtransService $midtrans): View

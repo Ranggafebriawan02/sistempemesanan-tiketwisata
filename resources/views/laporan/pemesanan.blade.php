@@ -20,15 +20,16 @@
         </div>
     @endif
 
-    <div class="card" style="margin-bottom: 18px;">
+    <!-- Card Filter Laporan -->
+    <div class="card" style="margin-bottom: 22px;">
         <div class="card-head">
             <div>
                 <h2>Filter Laporan Pemesanan</h2>
-                <p>Data dihitung berdasarkan tanggal pemesanan dibuat.</p>
+                <p>Sesuaikan rentang tanggal dan status untuk merekap data pemesanan paket wisata.</p>
             </div>
             <a href="{{ route('laporan.pemesanan.cetak', request()->only(['dari', 'sampai', 'status', 'paket_id'])) }}"
                target="_blank" rel="noopener" class="btn btn-primary btn-sm">
-                Cetak / PDF
+                🖨️ Cetak / Unduh PDF
             </a>
         </div>
         <div class="card-body">
@@ -66,21 +67,22 @@
         </div>
     </div>
 
+    <!-- Ringkasan Statistik Laporan -->
     <div class="report-stats">
         <div class="stat-card">
             <div class="label">Total Pemesanan</div>
             <div class="value">{{ number_format($ringkasan['jumlah'], 0, ',', '.') }}</div>
-            <div class="sub">Transaksi pemesanan pada periode ini</div>
+            <div class="sub">Transaksi pada periode ini</div>
         </div>
         <div class="stat-card">
             <div class="label">Total Peserta</div>
-            <div class="value">{{ number_format($ringkasan['pax'], 0, ',', '.') }}</div>
-            <div class="sub">Orang yang dijadwalkan berangkat</div>
+            <div class="value">{{ number_format($ringkasan['pax'], 0, ',', '.') }} orang</div>
+            <div class="sub">Dijadwalkan berangkat</div>
         </div>
         <div class="stat-card">
             <div class="label">Nilai Pemesanan</div>
             <div class="value">Rp {{ number_format($ringkasan['nilai'], 0, ',', '.') }}</div>
-            <div class="sub">Total tagihan seluruh pemesanan</div>
+            <div class="sub">Akumulasi seluruh tagihan</div>
         </div>
         <div class="stat-card">
             <div class="label">Sudah Lunas</div>
@@ -89,13 +91,14 @@
         </div>
     </div>
 
+    <!-- Tabel Rekap Data -->
     <div class="card">
         <div class="card-head">
             <div>
                 <h2>Rekap Pemesanan</h2>
                 <p>Periode {{ $periode['dari'] }} &ndash; {{ $periode['sampai'] }} &middot; {{ $statusLabels[$filter['status']] ?? 'Semua Status' }}</p>
             </div>
-            <span class="badge">{{ $pemesanan->total() }} data</span>
+            <span class="badge">{{ $pemesanan->total() }} DATA</span>
         </div>
 
         @if ($pemesanan->isEmpty())
@@ -105,41 +108,51 @@
                 <table class="data">
                     <thead>
                         <tr>
-                            <th style="width:44px;">No</th>
-                            <th>Kode / Pemesan</th>
+                            <th style="width:44px; text-align: center;">No</th>
+                            <th style="width: 140px;">Kode Pesanan</th>
+                            <th>Pemesan</th>
                             <th>Paket Wisata</th>
-                            <th>Tgl. Pesan</th>
-                            <th>Keberangkatan</th>
-                            <th class="text-right">Pax</th>
-                            <th class="text-right">Total Tagihan</th>
-                            <th>Status</th>
+                            <th style="width: 100px;">Tgl. Pesan</th>
+                            <th style="width: 100px;">Berangkat</th>
+                            <th style="width: 70px; text-align: center;">Pax</th>
+                            <th style="width: 130px; text-align: right;">Total Tagihan</th>
+                            <th style="width: 120px; text-align: center;">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($pemesanan as $index => $item)
                             @php $status = $item->statusPembayaran(); @endphp
                             <tr>
-                                <td>{{ $pemesanan->firstItem() + $index }}</td>
+                                <td style="text-align: center; color: #717171;">{{ $pemesanan->firstItem() + $index }}</td>
                                 <td>
-                                    <div class="cell-title">{{ $item->kode_pemesanan }}</div>
-                                    <div class="cell-sub">{{ $item->user->nama ?? '-' }} &middot; {{ $item->no_hp }}</div>
+                                    <strong style="color: #222222;">{{ $item->kode_pemesanan }}</strong>
                                 </td>
                                 <td>
-                                    <div class="cell-title" style="font-weight:600;">{{ $item->paket->judul ?? '-' }}</div>
-                                    <div class="cell-sub">{{ $item->nama_rombongan ?: 'Tanpa rombongan' }}</div>
+                                    <div class="cell-title">{{ $item->user->nama ?? '-' }}</div>
+                                    <div class="cell-sub">📞 {{ $item->no_hp }}</div>
+                                </td>
+                                <td>
+                                    <div class="cell-title">{{ $item->paket->judul ?? '-' }}</div>
+                                    <div class="cell-sub">{{ $item->nama_rombongan ? 'Rombongan: '.$item->nama_rombongan : 'Tanpa rombongan' }}</div>
                                 </td>
                                 <td>{{ $item->created_at->translatedFormat('d M Y') }}</td>
                                 <td>{{ $item->tanggal_berangkat->translatedFormat('d M Y') }}</td>
-                                <td class="text-right">{{ number_format($item->jumlah_pax, 0, ',', '.') }}</td>
+                                <td style="text-align: center;">
+                                    <span style="background: #f7f7f7; padding: 3px 8px; border-radius: 6px; font-weight: 700; font-size: 12px;">
+                                        {{ $item->jumlah_pax }}
+                                    </span>
+                                </td>
                                 <td class="text-right money">Rp {{ number_format((float) $item->harga, 0, ',', '.') }}</td>
-                                <td><span class="status status-{{ $status }}">{{ $item->labelStatus() }}</span></td>
+                                <td style="text-align: center;">
+                                    <span class="status status-{{ $status }}">{{ $item->labelStatus() }}</span>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="5" class="text-right">Total halaman ini</th>
-                            <th class="text-right">{{ number_format($pemesanan->sum('jumlah_pax'), 0, ',', '.') }}</th>
+                            <th colspan="6" class="text-right">Total Halaman Ini</th>
+                            <th class="text-center">{{ number_format($pemesanan->sum('jumlah_pax'), 0, ',', '.') }} pax</th>
                             <th class="text-right money">Rp {{ number_format((float) $pemesanan->sum('harga'), 0, ',', '.') }}</th>
                             <th></th>
                         </tr>

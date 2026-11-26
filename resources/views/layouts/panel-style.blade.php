@@ -306,4 +306,76 @@
             .content { padding: 20px; }
             .topbar { padding: 14px 20px; }
         }
+
+        /* Report Filter Grid (4 Columns + Actions) */
+        .report-filter {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr) auto;
+            gap: 16px;
+            align-items: flex-end;
+        }
+        .report-filter .field {
+            margin-bottom: 0;
+        }
+        .report-filter .filter-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            padding-top: 0;
+            border-top: none;
+            margin-top: 0;
+        }
+
+        /* Report Stats Row (Airbnb Scandinavian Cards) */
+        .report-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+        .stat-card {
+            background: #ffffff;
+            border: 1px solid #ebebeb;
+            border-radius: var(--radius-lg);
+            padding: 20px 22px;
+            box-shadow: var(--shadow-subtle);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        .stat-card .label {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: #717171;
+            margin-bottom: 6px;
+        }
+        .stat-card .value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: #222222;
+            letter-spacing: -.02em;
+            line-height: 1.2;
+        }
+        .stat-card .sub {
+            font-size: 12px;
+            color: #888888;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 1024px) {
+            .report-filter { grid-template-columns: repeat(2, 1fr); }
+            .report-stats { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .report-filter { grid-template-columns: 1fr; }
+            .report-stats { grid-template-columns: 1fr; }
+        }
     </style>
