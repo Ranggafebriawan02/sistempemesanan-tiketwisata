@@ -21,8 +21,17 @@ putenv("CACHE_STORE=array");
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$app = require_once __DIR__ . '/../bootstrap/app.php';
+try {
+    $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-$app->useStoragePath($storagePath);
+    $app->useStoragePath($storagePath);
 
-$app->handleRequest(Request::capture());
+    $app->handleRequest(Request::capture());
+} catch (\Throwable $e) {
+    http_response_code(500);
+    header('Content-Type: text/plain; charset=utf-8');
+    echo "=== LARAVEL VERCEL ERROR DIAGNOSTIC ===\n";
+    echo "Message: " . $e->getMessage() . "\n";
+    echo "File: " . $e->getFile() . ":" . $e->getLine() . "\n\n";
+    echo "Trace:\n" . $e->getTraceAsString() . "\n";
+}
