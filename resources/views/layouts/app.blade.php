@@ -359,6 +359,61 @@
 
         /* Page shell */
         main { flex: 1; }
+
+        /* Enhanced Mobile & Desktop Fit for Public App */
+        @media (max-width: 960px) {
+            .navbar {
+                padding: 12px 18px;
+            }
+            .brand strong {
+                font-size: 15px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 16px;
+            }
+            .navbar {
+                border-radius: 0 0 16px 16px;
+                padding: 10px 14px;
+            }
+            .user-pill {
+                padding: 4px 10px 4px 6px;
+                font-size: 11px;
+            }
+            .user-avatar {
+                width: 24px;
+                height: 24px;
+                font-size: 10px;
+            }
+            .btn {
+                padding: 8px 14px;
+                font-size: 12.5px;
+            }
+            .btn-sm {
+                padding: 6px 12px;
+                font-size: 11.5px;
+            }
+            .btn-lg {
+                padding: 11px 20px;
+                font-size: 13.5px;
+            }
+            .flash {
+                margin: 12px 16px 0;
+                padding: 10px 14px;
+                font-size: 12.5px;
+            }
+        }
     </style>
     @stack('styles')
 </head>

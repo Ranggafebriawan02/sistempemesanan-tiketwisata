@@ -704,4 +704,104 @@
         .level-tag, .status {
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
         }
+
+        /* Comprehensive Mobile-Friendly Adjustments */
+        @media (max-width: 900px) {
+            .topbar {
+                padding: 12px 16px !important;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .topbar h1 {
+                font-size: 16px !important;
+            }
+            .topbar .crumb {
+                font-size: 11px !important;
+            }
+            .topbar-actions {
+                width: 100%;
+                justify-content: space-between;
+                order: 3;
+                padding-top: 8px;
+                border-top: 1px solid #f0f0f0;
+            }
+            .content {
+                padding: 16px 14px !important;
+            }
+            .card-head {
+                padding: 16px 18px !important;
+                flex-direction: column;
+                align-items: flex-start !important;
+                gap: 12px !important;
+            }
+            .card-head .btn,
+            .card-head .badge {
+                align-self: flex-start;
+            }
+            .card-body {
+                padding: 16px !important;
+            }
+            .toolbar-row {
+                flex-direction: column;
+                align-items: stretch !important;
+                gap: 12px !important;
+            }
+            .search-form {
+                width: 100%;
+            }
+            .search-form input[type="search"],
+            .search-form input[type="text"] {
+                width: 100%;
+                min-width: 0 !important;
+                flex: 1;
+            }
+            .filter-tabs {
+                width: 100%;
+                overflow-x: auto;
+                flex-wrap: nowrap !important;
+                padding-bottom: 6px;
+                -webkit-overflow-scrolling: touch;
+            }
+            .filter-tab {
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+            .table-wrap {
+                margin: 0 -16px;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+                -webkit-overflow-scrolling: touch;
+            }
+            table.data {
+                min-width: 650px;
+            }
+            .form-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .form-actions {
+                flex-direction: column-reverse;
+                gap: 8px;
+            }
+            .form-actions .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .user-chip {
+                padding: 4px 6px 4px 10px;
+                gap: 8px;
+            }
+            .user-chip .meta strong {
+                font-size: 11.5px;
+            }
+            .user-chip .meta small {
+                font-size: 9px;
+            }
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
     </style>
