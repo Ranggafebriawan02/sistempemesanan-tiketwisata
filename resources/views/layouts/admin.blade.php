@@ -8,9 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     @include('layouts.panel-style')
+    @stack('styles')
 </head>
 <body>
-    <aside class="sidebar">
+    <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleSidebar()"></div>
+
+    <aside class="sidebar" id="appSidebar">
         <a href="{{ route('dashboard') }}" class="sidebar-brand">
             <span class="brand-mark" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -26,19 +29,19 @@
 
         <div class="sidebar-section">
             <div class="sidebar-label">Utama</div>
-            <a href="{{ route('dashboard') }}" class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+            <a href="{{ route('dashboard') }}" class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}" title="Dashboard">
                 <span class="dot"></span> Dashboard
             </a>
-            <a href="{{ route('admin.paket.index') }}" class="nav-item {{ request()->routeIs('admin.paket.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.paket.index') }}" class="nav-item {{ request()->routeIs('admin.paket.*') ? 'active' : '' }}" title="Paket Wisata">
                 <span class="dot"></span> Paket Wisata
             </a>
-            <a href="{{ route('admin.user.index') }}" class="nav-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.user.index') }}" class="nav-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}" title="Manajemen User">
                 <span class="dot"></span> Manajemen User
             </a>
-            <a href="{{ route('admin.pemesanan.index') }}" class="nav-item {{ request()->routeIs('admin.pemesanan.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.pemesanan.index') }}" class="nav-item {{ request()->routeIs('admin.pemesanan.*') ? 'active' : '' }}" title="Data Pemesanan">
                 <span class="dot"></span> Data Pemesanan
             </a>
-            <a href="{{ route('laporan.pemesanan') }}" class="nav-item {{ request()->routeIs('laporan.*') ? 'active' : '' }}">
+            <a href="{{ route('laporan.pemesanan') }}" class="nav-item {{ request()->routeIs('laporan.*') ? 'active' : '' }}" title="Laporan">
                 <span class="dot"></span> Laporan
             </a>
         </div>
@@ -51,10 +54,20 @@
 
     <div class="main">
         <header class="topbar">
-            <div>
-                <h1>@yield('title', 'Dashboard')</h1>
-                <div class="crumb">@yield('breadcrumb', 'Panel Admin')</div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <button type="button" class="btn-toggle-sidebar" onclick="toggleSidebar()" title="Buka/Tutup Sidebar" aria-label="Toggle Sidebar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <div>
+                    <h1>@yield('title', 'Dashboard')</h1>
+                    <div class="crumb">@yield('breadcrumb', 'Panel Admin')</div>
+                </div>
             </div>
+
             <div class="topbar-actions">
                 <a href="{{ route('home') }}" class="btn btn-outline btn-sm" target="_blank" rel="noopener">Lihat Situs</a>
                 <div class="user-chip">
@@ -85,6 +98,20 @@
         </main>
     </div>
 
+    <script>
+        function toggleSidebar() {
+            if (window.innerWidth <= 900) {
+                document.body.classList.toggle('sidebar-open');
+            } else {
+                document.body.classList.toggle('sidebar-collapsed');
+                localStorage.setItem('psj_sidebar_collapsed', document.body.classList.contains('sidebar-collapsed') ? '1' : '0');
+            }
+        }
+
+        if (window.innerWidth > 900 && localStorage.getItem('psj_sidebar_collapsed') === '1') {
+            document.body.classList.add('sidebar-collapsed');
+        }
+    </script>
     @stack('scripts')
 </body>
 </html>
