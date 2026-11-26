@@ -23,6 +23,11 @@
     }
   ],
   "env": {
+    "APP_NAME": "Puma Star Jaya",
+    "APP_ENV": "production",
+    "APP_KEY": "base64:Wj/HwiIG6e68SqBcr2Gy1d+E+GUVbYcM9d6I4w77mEM=",
+    "APP_DEBUG": "true",
+    "APP_URL": "https://sistempemesanan-tiketwisata.vercel.app",
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_EVENTS_CACHE": "/tmp/events.php",
     "APP_PACKAGES_CACHE": "/tmp/packages.php",
@@ -30,6 +35,12 @@
     "APP_SERVICES_CACHE": "/tmp/services.php",
     "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
     "CACHE_STORE": "array",
-    "SESSION_DRIVER": "cookie"
+    "SESSION_DRIVER": "cookie",
+    "DB_CONNECTION": "mysql",
+    "DB_HOST": "gateway01.ap-northeast-1.prod.aws.tidbcloud.com",
+    "DB_PORT": "4000",
+    "DB_DATABASE": "test",
+    "DB_USERNAME": "2TFaFUtP4xQetbZ.root",
+    "DB_PASSWORD": "rangga02022005"
   }
 }
